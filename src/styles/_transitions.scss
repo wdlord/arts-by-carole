@@ -1,0 +1,86 @@
+@mixin tail-fade($normal, $hover, $properties: all) {
+  transition: $properties $normal ease;
+
+  &:hover {
+    transition: $properties $hover ease;
+  }
+}
+
+%tail-fade {
+  @include tail-fade(0.3s, 0.1s);
+}
+
+%tail-fade-long {
+  @include tail-fade(0.5s, 0.3s);
+}
+
+.tail-fade {
+  @extend %tail-fade;
+}
+
+.tail-fade-long {
+  @extend %tail-fade-long;
+}
+
+.image-zoom img {
+  transition: 0.5s ease;
+}
+
+.image-zoom:hover img {
+  transform: scale(1.1);
+}
+
+@mixin underscore($height) {
+  position: relative;
+  padding-inline: 4px;
+
+  &::after {
+    transition: 0.5s ease;
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: $height;
+    background-color: var(--scheme-text-color);
+    bottom: -4px;
+    border-radius: 4px;
+    left: 0;
+    transform: scaleY(0.5);
+    transform-origin: bottom;
+  }
+}
+
+.underscore {
+  @include underscore(4px);
+}
+
+footer .underscore, .underscore.accent {
+  @include underscore(4px);
+
+  &::after {
+    opacity: 0.8;
+  }
+}
+
+.underscore-trigger:hover .underscore::after,
+.underscore-trigger.underscore:hover::after,
+.active .underscore::after,
+.active.underscore::after {
+  width: calc(100% + 4px);
+  transition: 0.4s ease;
+}
+
+@mixin float($height) {
+  @extend %tail-fade-long;
+
+  &:hover {
+    transform: translateY($height);
+  }
+}
+
+@mixin zoom($scale) {
+  @extend %tail-fade-long;
+
+  &:hover {
+    transform: scale($scale);
+  }
+}

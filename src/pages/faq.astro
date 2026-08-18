@@ -1,0 +1,123 @@
+---
+import NavbarSiteLayout from "../layouts/NavbarSiteLayout.astro";
+import FaqAccordion from "../components/faq-accordion.astro";
+---
+
+<NavbarSiteLayout
+  title="FAQ"
+  description="Find answers to frequently asked questions about our services."
+>
+  <div class="content-chapter">
+    <div class="content-container">
+      <header class="faq-overview">
+        <h1>Frequent Questions</h1>
+        <p>Find answers to questions about our services, process, and more!</p>
+      </header>
+
+      <article>
+        <section class="general">
+          <h3>General Questions</h3>
+
+          <FaqAccordion
+            question="How long does a typical painting project take?"
+            answer="Most residential interior projects take 1–3 days depending on room size, prep work, and the number of coats. Exterior projects can take 3–7 days depending on weather and surface conditions."
+          />
+          <FaqAccordion
+            question="Do I need to move my furniture?"
+            answer="We ask that small items and fragile belongings be moved beforehand. Our team will carefully move and cover larger furniture to protect it during the project."
+          />
+          <FaqAccordion
+            question="Are estimates free?"
+            answer="Yes. We provide free, no-obligation estimates and can usually schedule them within 24–48 hours."
+          />
+        </section>
+
+        <section class="services">
+          <h3>Services</h3>
+
+          <FaqAccordion
+            question="What types of painting do you offer?"
+            answer="We provide interior and exterior painting, trim and baseboard painting, cabinet refinishing, drywall repair, and color consultations."
+          />
+          <FaqAccordion
+            question="Do you offer cabinet painting?"
+            answer="Yes. We specialize in multi-step cabinet refinishing using durable, factory-style finishes that hold up to daily use."
+          />
+          <FaqAccordion
+            question="Can you match existing colors?"
+            answer="Absolutely. We can match nearly any paint color using professional color-matching tools."
+          />
+          <FaqAccordion
+            question="Do you handle drywall or surface repairs?"
+            answer="Yes. We repair cracks, holes, dents, and texture inconsistencies before painting to ensure a smooth, long-lasting finish."
+          />
+        </section>
+
+        <section class="prep">
+          <h3>Preparation & Process</h3>
+
+          <FaqAccordion
+            question="What prep work do you include?"
+            answer="We handle patching, sanding, caulking, cleaning surfaces, and protecting floors and furniture. Proper prep is a major part of our process."
+          />
+          <FaqAccordion
+            question="Do you sand between coats?"
+            answer="Yes. Light sanding between coats ensures a smoother finish and proper adhesion—especially for trim, doors, and cabinets."
+          />
+          <FaqAccordion
+            question="What paint brands do you use?"
+            answer="We primarily use premium paints from Sherwin-Williams and Benjamin Moore, but we're happy to use another brand if you prefer."
+          />
+        </section>
+
+        <section class="legal">
+          <h3>Legal & Policies</h3>
+
+          <FaqAccordion
+            question="Are you licensed and insured?"
+            answer="Yes. We are fully licensed and carry liability insurance to protect both our clients and our crew."
+          />
+          <FaqAccordion
+            question="Do you offer any warranties?"
+            answer="We provide a 2-year workmanship warranty on most projects, covering peeling, blistering, or adhesion issues caused by our work."
+          />
+          <FaqAccordion
+            question="What is your cancellation policy?"
+            answer="We ask for at least 48 hours’ notice for cancellations or rescheduling so we can adjust our crew’s schedule."
+          />
+          <FaqAccordion
+            question="How do payments work?"
+            answer="For most projects, we require a small deposit to secure the start date, with the remaining balance due upon completion and satisfaction."
+          />
+        </section>
+      </article>
+    </div>
+  </div>
+</NavbarSiteLayout>
+
+<style>
+  section {
+    padding-block: 0;
+    margin-bottom: 4rem;
+  }
+
+  h1 {
+    font-size: var(--size-h2);
+  }
+
+  article {
+    max-width: calc(2 * var(--third-width));
+  }
+
+  h3 {
+    margin-bottom: 16px;
+  }
+
+  .faq-overview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-block: 128px;
+  }
+</style>

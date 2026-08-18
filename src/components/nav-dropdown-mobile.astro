@@ -1,0 +1,71 @@
+---
+import { type NavLink, containsCurrentPath } from "../scripts/navigation";
+import Icon from "./icon.astro";
+import { chevronLeft } from "../data/standard-icons";
+
+interface Props {
+  label: string;
+  children: NavLink[];
+}
+const { label, children } = Astro.props;
+
+const currentPath = Astro.url.pathname;
+---
+
+<div
+  class:list={[
+    "underscore-trigger drawer-trigger nav-item-mobile",
+    { active: containsCurrentPath(currentPath, children) },
+  ]}
+  onclick="toggleDrawer(this)"
+>
+  <div class="drawer-item">
+    <span class="underscore">{label}</span><Icon
+      class="chevron tail-fade"
+      src={chevronLeft}
+    />
+  </div>
+</div>
+<div class="submenu nav-item-mobile tail-fade-long">
+  <div class="intermediary">
+    <div class="submenu-items">
+      {
+        children.map((childLink) => (
+          <a class="single-item underscore-trigger" href={childLink.href}>
+            <span class="underscore">{childLink.label}</span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  function toggleDrawer(el) {
+    const drawer = el.nextElementSibling;
+    const icon = el.querySelector(".chevron");
+    drawer.classList.toggle("open");
+    icon.classList.toggle("open");
+  }
+</script>
+
+<style lang="scss">
+  @use "../styles/drawers" as *;
+
+  .submenu {
+    @include drawer;
+  }
+
+  .drawer-item {
+    gap: 8px;
+  }
+
+  .submenu-items {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .single-item {
+    padding: 1rem;
+  }
+</style>

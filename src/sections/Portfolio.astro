@@ -1,0 +1,128 @@
+---
+import Image from "astro/components/Image.astro";
+import exampleImage from "../images/contact-bg.jpg";
+import Icon from "../components/icon.astro";
+import {arrowRight} from "../data/standard-icons";
+
+const portfolioData = [
+  {
+    title: "City of Tampa | City Hall Redesign",
+    description: "Redesign and construction of City Hall in Tampa, FL.",
+    img: exampleImage,
+    imgAlt: "",
+  },
+  {
+    title: "City of Tampa | City Hall Redesign",
+    description: "Redesign and construction of City Hall in Tampa, FL.",
+    img: exampleImage,
+    imgAlt: "",
+  },
+  {
+    title: "City of Tampa | City Hall Redesign",
+    description: "Redesign and construction of City Hall in Tampa, FL.",
+    img: exampleImage,
+    imgAlt: "",
+  },
+  {
+    title: "City of Tampa | City Hall Redesign",
+    description: "Redesign and construction of City Hall in Tampa, FL.",
+    img: exampleImage,
+    imgAlt: "",
+  },
+  {
+    title: "City of Tampa | City Hall Redesign",
+    description: "Redesign and construction of City Hall in Tampa, FL.",
+    img: exampleImage,
+    imgAlt: "",
+  },
+  {
+    title: "City of Tampa | City Hall Redesign",
+    description: "Redesign and construction of City Hall in Tampa, FL.",
+    img: exampleImage,
+    imgAlt: "",
+  },
+];
+---
+
+<div class="content-chapter">
+  <div class="content-container">
+    <section class="portfolio">
+      <div class="centered-overview">
+        <span class="subheading">Some of our Work</span>
+        <h2 class="uppercase">Portfolio</h2>
+        <p class="desc subtle-text">
+          This is an example of a text blurb that complements this portfolio
+          section. This is another sentence for the this portfolio section.
+        </p>
+      </div>
+      <div class="portfolio-grid">
+        {
+          portfolioData.map((item) => (
+            <div class="portfolio-item image-zoom">
+              <div class="img-card">
+                <Image
+                  src={item.img}
+                  alt={item.imgAlt}
+                />
+              </div>
+              <div class="title">{item.title}</div>
+              <p class="desc subtle-text">{item.description}</p>
+            </div>
+          ))
+        }
+      </div>
+      <a href="" class="secondary-button"
+        >View All Projects <Icon
+          src={arrowRight}
+          class="body-icon"
+        /></a
+      >
+    </section>
+  </div>
+</div>
+
+<style lang="scss">
+    @use "../styles/breakpoints" as *;
+
+  .portfolio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .portfolio-item {
+    cursor: pointer;
+  }
+
+  .title {
+    letter-spacing: 3%;
+  }
+
+  .desc {
+    letter-spacing: 1%;
+  }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 64px 40px;
+    margin-bottom: 64px;
+  }
+
+  .img-card {
+    margin-bottom: 2rem;
+    box-shadow: var(--card-shadow);
+  }
+
+  @media screen and (max-width: $breakpoint-md) {
+    .portfolio-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 640px) {
+    .portfolio-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

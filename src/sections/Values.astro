@@ -1,0 +1,214 @@
+---
+import Image from "astro/components/Image.astro";
+import valuesImage from "../images/what-we-do-image.webp";
+import Icon from "../components/icon.astro";
+import {speechIcon, trophyIcon, handshakeIcon, headIcon} from "../data/standard-icons";
+
+const values = [
+    {
+        name: "Transparency",
+        icon: speechIcon,
+        details: "We pride ourselves on clear and efficient communication with our customers."
+    },
+    {
+        name: "Efficiency",
+        icon: trophyIcon,
+        details: "Our process is streamlined to ensure the best possible results."
+    },
+    {
+        name: "Professionalism",
+        icon: handshakeIcon,
+        details: "Our team of experts is vetted and trustworthy, able to handle all challenges."
+    },
+    {
+        name: "Expertise",
+        icon: headIcon,
+        details: "We specialize in our craft and use our 25+ years of experience to deliver an exceptional result."
+    },
+
+]
+---
+
+<div class="content-chapter secondary-scheme">
+    <div class="content-container">
+        <section class="values">
+            <div class="img-card">
+                <div class="img-card">
+                <Image src={valuesImage} alt="" />
+            </div>
+            </div>
+            <div class="text-content">
+                <div class="overview">
+                    <span class="subheading">Our Values</span>
+                    <h2>We believe in high quality construction</h2>
+                </div>
+                <div class="value-layout">
+                    {
+                        values.map(value => (
+                            <div class="value-item">
+                                <div class="icon-container">
+                                    <div class="icon-bg tail-fade-long"></div>
+                                    <Icon class="value-icon" src={value.icon} />
+                                </div>
+                                <span class="value-name">{value.name}</span>
+                                <p class="subtle-text">{value.details}</p>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<style lang="scss">
+    @use "../styles/breakpoints" as *;
+    
+    .values {
+        display: flex;
+        gap: 80px;
+        align-items: center;
+    }
+
+    .img-card {
+        max-width: var(--third-width);
+    }
+
+    h2 {
+        max-width: var(--half-width);
+    }
+
+    .value-layout {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 48px 24px;
+        max-width: var(--half-width);
+    }
+
+    .value-item:hover {
+        .icon-bg {
+            border-radius: 30%;
+            transform: rotate(135deg);
+        }
+    }
+
+    .value-name {
+        display: block;
+        margin-bottom: 8px;
+        font-family: var(--font-accent);
+        font-size: 1.25rem;
+        color: var(--dark-heading);
+    }
+
+    .icon-container {
+        width: 48px;
+        aspect-ratio: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 16px;
+        position: relative;
+    }
+
+    .icon-bg {
+        width: 48px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background-color: var(--accent-1-color);
+        position: absolute;
+        transform: rotate(45deg);
+    }
+
+    .value-icon {
+        width: 32px;
+        height: 32px;
+        fill: var(--accent-1-text);
+        z-index: 1;
+    }
+
+    @media screen and (max-width: $breakpoint-lg) {
+        .values {
+            gap: 64px;
+        }
+        .img-card {
+            max-width: 304px;
+        }
+    }
+
+    @media screen and (max-width: 1080px) {
+        .values {
+            flex-direction: column;
+        }
+        .value-item {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .overview {
+            text-align: center;
+        }
+    }
+
+    @media screen and (max-width: 984px) {
+        .values {
+            gap: 48px;
+        }
+    }
+
+    @media screen and (max-width: $breakpoint-md) {
+        .values {
+            gap: 32px;
+        }
+    }
+
+    @media screen and (max-width: 640px) {
+        .values {
+            gap: 64px;
+        }
+        .value-layout {
+            grid-template-columns: 1fr;
+            max-width: var(--quarter-width);
+        }
+        .text-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .img-card {
+            max-width: var(--quarter-width);
+        }
+        .icon-container, .icon-bg {
+            max-width: 40px;
+        }
+        .value-icon {
+            max-width: 24px;
+        }
+    }
+
+    @media screen and (max-width: $breakpoint-sm) {
+        .overview {
+            text-align: left;
+        }
+        .value-layout {
+            max-width: none;
+        }
+        .img-card {
+            max-width: 100%;
+        }
+        .value-name {
+            font-size: 1.15rem;
+        }
+        .icon-container,  .icon-bg {
+            max-width: 32px;
+        }
+        .value-icon {
+            max-width: 20px;
+        }
+        
+        .value-item {
+            align-items: start;
+            text-align: left;
+        }
+    }
+</style>

@@ -1,0 +1,188 @@
+---
+import heroImg from "../images/contact-bg.jpg";
+import CtaButton from "../components/cta-button.astro";
+import Icon from "../components/icon.astro";
+import {arrowRight, check, starIcon} from "../data/standard-icons";
+import { mainLocation, yoe } from "../data/constants";
+import Picture from "astro/components/Picture.astro";
+---
+
+<div class="hero-container hero-height">
+  <div class="content-chapter hero">
+  <Picture
+    class="centered-bg"
+    src={heroImg}
+    formats={['avif', 'webp', 'jpg']}
+    widths={[1920, 1200, 640, 400]}
+    alt={`picture of a house painted in ${mainLocation}`}
+  />
+  <div class="content-container">
+    <section class="hero-section">
+      <div class="sh-container">
+        <div class="stars">
+          {
+            Array.from({length: 5}).map(_ => (
+              <Icon class="star" src={starIcon}/>
+            ))
+          }
+        </div>
+        <span class="subheading">5.0 stars on Google (10+ reviews)</span>
+      </div>
+      <h1 class="title">
+        {mainLocation} Painting That's Clean, on Time, and Stress Free
+      </h1>
+      <p class="desc">
+        Licensed & insured painters serving {mainLocation} and surround areas. Interior, exterior, and cabinet painting with clear pricing and consistent communication.
+      </p>
+
+      <div class="button-row">
+        <CtaButton text="Get a FREE Estimate" />
+        <a href="/services" class="site-button">
+          View Services
+          <Icon src={arrowRight} class="body-icon" />
+        </a>
+      </div>
+    </section>
+  </div>
+</div>
+<!-- info banner -->
+<div class="content-chapter tertiary-scheme info-banner-container">
+  <div class="content-container info-banner">
+    <div class="info-item">
+      <Icon src={check} class="body-icon"/>
+      {yoe}+ years of experience
+    </div>
+    <div class="info-item">
+      <Icon src={check} class="body-icon"/>
+      Locally owned & operated
+    </div>
+    <div class="info-item">
+      <Icon src={check} class="body-icon"/>
+      Licensed, bonded, & insured
+    </div>
+  </div>
+</div>
+</div>
+
+<style lang="scss">
+  @use "../styles/font-system" as *;
+  @use "../styles/breakpoints" as *;
+
+  .hero-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr min-content;
+  }
+
+  .hero {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.07));
+    position: relative;
+    overflow: hidden;
+    color: var(--hero-text);
+  }
+
+  .site-button:last-of-type {
+    --bg-color: white;
+    --text-color: var(--base-text);
+  }
+
+  .site-button {
+    --hover-color: white;
+  }
+
+  .sh-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.875rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .sh-line {
+    background-color: var(--hero-text);
+    height: 1.5rem;
+    width: 0.25rem;
+  }
+
+  .stars {
+    display: flex;
+    gap: 4px;
+  }
+
+  .star {
+    --size: 1.5rem;
+    fill: #FBB004;
+  }
+
+  .title {
+    max-width: var(--half-width);
+  }
+
+  .subheading {
+    font-style: italic;
+    text-transform: unset;
+    letter-spacing: 0.03em;
+    margin-bottom: 0;
+  }
+
+  .content-container {
+    display: flex;
+    justify-content: left;
+  }
+
+  .hero-section {
+    padding-block: 96px;
+    max-width: var(--half-width);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .subheading {
+    color: var(--light-heading);
+  }
+
+  .desc {
+    margin-bottom: 40px;
+    max-width: var(--half-width);
+  }
+
+  .info-banner-container {
+    align-self: start;
+  }
+
+  .info-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 104px;
+    padding-block: 1rem;
+    flex-direction: row;
+  }
+
+  .info-item {
+    @extend %accent-font;
+    font-size: 1.15rem;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  @media screen and (max-width: $breakpoint-sm) {
+    .hero {
+      background: linear-gradient(to right,rgba(0,0,0,0.7),rgba(0,0,0, 0.4));
+      text-align: center;
+    }
+    .info-item {
+      font-size: 1rem;
+    }
+    .button-row {
+      justify-content: center;
+    }
+    .sh-container {
+      justify-content: center;
+    }
+  }
+</style>

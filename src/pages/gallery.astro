@@ -1,0 +1,68 @@
+---
+import NavbarSiteLayout from "../layouts/NavbarSiteLayout.astro";
+import PageHeading from "../layouts/PageHeading.astro";
+import GallerySection from "../sections/GallerySection.astro";
+import { galleryData } from "../data/gallery";
+import GalleryModal from "../components/gallery-modal.astro";
+import StatBanner from "../sections/StatBanner.astro";
+import CTA from "../sections/CTA.astro";
+
+---
+
+<NavbarSiteLayout
+  title="Portfolio Gallery"
+  description="View high quality images of our work categorized by service. We take pride in our work and we're not afraid to show off our superior craftsmanship."
+>
+  <GalleryModal />
+
+  <PageHeading>
+    <div class="centered-overview">
+      <h1>Gallery</h1>
+      <p>
+        Take a look at our image gallery of completed projects. Select any of
+        the services below to jump to the relevant category.
+      </p>
+    </div>
+    <nav class="gallery-sections">
+      {
+        galleryData.map(gallery => (
+          <a class="tail-fade-long" href={`/gallery#${gallery.id}`}>
+            {gallery.name}
+          </a>
+        ))
+      }
+    </nav>
+  </PageHeading>
+
+  {
+    galleryData.map(gallery => (
+      <GallerySection
+        name={gallery.name}
+        description={gallery.description}
+      />
+    ))
+  }
+
+  <StatBanner/>
+  <CTA/>
+</NavbarSiteLayout>
+
+<style lang="scss">
+  @use "../styles/font-system" as *;
+  .gallery-sections {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem 40px;
+  }
+
+  .gallery-sections a {
+    @extend %accent-font;
+    font-size: 1rem;
+    color: inherit;
+
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+</style>

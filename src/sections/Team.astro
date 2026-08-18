@@ -1,0 +1,71 @@
+---
+import TeamMember from "../components/team-member.astro";
+import johnathanMcdavis from "../images/team/johnathan-mcdavis.webp";
+import chadwickBronson from "../images/team/chadwick-bronson.webp";
+import danielMasterson from "../images/team/daniel-masterson.webp";
+import karolinaGrabowski from "../images/team/karolina-grabowski.webp";
+---
+
+<div class="content-chapter">
+  <div class="content-container">
+    <section class="team">
+      <div class="centered-overview">
+        <span class="subheading">What We Do</span>
+        <h2 class="uppercase">Our Team</h2>
+        <p class="desc subtle-text">
+          At Good Quality Construction, we provide the best construction
+          services in Los Angles county. At Good Quality Construction, we
+          provide the best construction services in Los Angles county.
+        </p>
+      </div>
+
+        <div class="team-layout">
+            <TeamMember 
+            name="Johnathan McDavis"
+            title="Founder"
+            img={johnathanMcdavis}
+            />
+            <TeamMember 
+            name="Chadwick Bronson"
+            title="Head of Sales"
+            img={chadwickBronson}
+            /><TeamMember 
+            name="Daniel Masterson"
+            title="Regional Sales Associate"
+            img={danielMasterson}
+            /><TeamMember 
+            name="Karolina Grabowski"
+            title="Head of Finance"
+            img={karolinaGrabowski}
+            />
+        </div>
+    </section>
+  </div>
+</div>
+
+<style lang="scss">
+  @use "../styles/breakpoints" as *;
+
+  .team-layout {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 64px 40px;
+  }
+
+  @media screen and (max-width: $breakpoint-md) {
+    .team-layout {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: $breakpoint-sm) {
+    .team-layout {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .centered-overview {
+      text-align: left;
+      align-items: start;
+    }
+  }
+</style>

@@ -1,0 +1,69 @@
+---
+import Icon from "../components/icon.astro";
+import bgImage from "../images/locations-image.jpg";
+import { siteName, locationsServed, mainLocation } from "../data/constants";
+import { pinIcon } from "../data/standard-icons";
+import CallNowButton from "../components/call-now-button.astro";
+import LandscapeImage from "../components/landscape-image.astro";
+---
+
+<div class="content-chapter">
+  <div class="content-container">
+    <section class="landscape-section">
+      <div class="img-card">
+        <LandscapeImage src={bgImage} alt="Exterior shot of a newly painted single-family home" />
+      </div>
+      <div class="text-content">
+        <div class="overview">
+          <h2>Local Expertise Across North County San Diego</h2>
+          <p class="desc subtle-text">
+            We provide painting services throughout {mainLocation}, with reliable scheduling and consistent quality across every job.
+          </p>
+        </div>
+        <ul class="location-layout">
+          {
+            locationsServed.map((location) => (
+              <li class="location-item subtle-text">
+                <Icon src={pinIcon} class="pin-icon" />
+                {location}
+              </li>
+            ))
+          }
+        </ul>
+        <CallNowButton class="site-button" text="Call Now!" />
+      </div>
+    </section>
+  </div>
+</div>
+
+<style lang="scss">
+  @use "../styles/landscape-section" as *;
+  @use "../styles/breakpoints" as *;
+
+  .location-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem 64px;
+
+    margin-bottom: 4rem;
+  }
+
+  .location-item {
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--size-body);
+  }
+
+  .pin-icon {
+    --size: 1.5rem;
+    fill: var(--accent-1-color);
+  }
+
+  @media screen and (max-width: $breakpoint-sm) {
+    .location-layout {
+      gap: 1.5rem 32px;
+    }
+  }
+</style>

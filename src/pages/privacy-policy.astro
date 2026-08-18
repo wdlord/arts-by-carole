@@ -1,0 +1,81 @@
+---
+import { contactEmail, siteName } from "../data/constants";
+import NavbarSiteLayout from "../layouts/NavbarSiteLayout.astro";
+import ArticleLayout from "../layouts/ArticleLayout.astro";
+
+const effectiveDate = "November 3, 2025";
+
+---
+<NavbarSiteLayout
+  title="Privacy Policy"
+  description="This policy explains what information we collect, how we use it, and how we keep it secure."
+>
+  <ArticleLayout>
+    <h1>Privacy Policy</h1>
+    <p><strong>Effective Date:</strong> {effectiveDate}</p>
+
+    <p>
+      At <strong>{siteName}</strong>, your privacy is important to us.
+      This policy explains what information we collect, how we use it, and how we keep it secure.
+    </p>
+
+    <h2>1. Information We Collect</h2>
+    <ul>
+      <li>
+        When you contact us through our website, we collect the information you
+        provide (such as your name, email address, and message).
+      </li>
+      <li>
+        We may collect anonymous analytics data (such as page views, browser
+        type, and time spent on pages) to help improve our website.
+      </li>
+    </ul>
+
+    <h2>2. How We Use Information</h2>
+    <p>We use your information to:</p>
+    <ul>
+      <li>Respond to your inquiries or requests.</li>
+      <li>Analyze website performance and improve our services.</li>
+    </ul>
+    <p>
+      We do <strong>not</strong> sell, trade, or rent users’ personal information to others.
+    </p>
+
+    <h2>3. Cookies</h2>
+    <p>
+      Our site may use cookies to improve your browsing experience and collect
+      anonymous usage data through services such as Google Analytics. You can
+      disable cookies in your browser settings if you prefer.
+    </p>
+
+    <h2>4. Data Security</h2>
+    <p>
+      We take reasonable steps to protect your information from unauthorized
+      access or disclosure. However, no online transmission or storage system is
+      completely secure.
+    </p>
+
+    <h2>5. Your Rights</h2>
+    <p>
+      If you’d like to request deletion of your personal information or have
+      questions about this policy, contact us at:
+      <br />
+      <a class="mail-link tail-fade-long" href={`mailto:${contactEmail}`}>{contactEmail}</a>
+    </p>
+
+    <h2>6. Updates</h2>
+    <p>
+      We may update this policy occasionally. The date at the top indicates the
+      latest revision.
+    </p>
+  </ArticleLayout>
+</NavbarSiteLayout>
+
+<style>
+  .mail-link {
+    color: inherit;
+    &:hover {
+      opacity: 0.65;
+    }
+  }
+</style>

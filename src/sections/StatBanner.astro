@@ -1,0 +1,82 @@
+---
+import { yoe } from "../data/constants";
+
+const stats = [
+  {
+    stat: `${yoe}+`,
+    label: ["years of", "experience"],
+  },
+  {
+    stat: "15+",
+    label: ["years in", "business"],
+  },
+  {
+    stat: "5/5",
+    label: ["perfect", "reviews"],
+  },
+  {
+    stat: "200+",
+    label: ["jobs", "completed"],
+  },
+];
+---
+
+<div class="content-chapter accent-1-scheme">
+  <div class="content-container">
+    <section class="half-section stats">
+      <div class="stat-container">
+        {
+          stats.map((data) => (
+            <div class="stat tail-fade-long underscore-trigger accent underscore">
+              <span class="stat-heading">{data.stat}</span>
+              {data.label[0]}
+              <span class="second-line">{data.label[1]}</span>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+  </div>
+</div>
+
+<style lang="scss">
+  @use "../styles/breakpoints" as *;
+  @use "../styles/font-system" as *;
+
+  .stats {
+    display: flex;
+    justify-content: center;
+  }
+  .stat-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 48px 96px;
+  }
+  .stat {
+    @extend %accent-font;
+    line-height: 1.4;
+    padding-block: 0.5rem;
+    font-size: 1rem;
+  }
+  .stat-heading {
+    @extend %heading-font;
+    font-size: var(--size-h2);
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  @media screen and (max-width: $breakpoint-md) {
+    .stat-container {
+      // grid-template-columns: repeat(2, 1fr);
+      gap: 32px 64px;
+    }
+  }
+
+  @media screen and (max-width: $breakpoint-sm) {
+    .stat-container {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 48px;
+    }
+  }
+</style>

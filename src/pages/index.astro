@@ -1,0 +1,76 @@
+---
+import NavbarSiteLayout from "../layouts/NavbarSiteLayout.astro";
+import Hero from "../sections/Hero.astro";
+import Services from "../sections/Services.astro";
+import About from "../sections/About.astro";
+import MiniGallery from "../sections/MiniGallery.astro";
+import Locations from "../sections/Locations.astro";
+import Reviews from "../sections/Reviews.astro";
+import Contact from "../sections/Contact.astro";
+import MapEmbed from "../components/map-embed.astro";
+import {mainLocation} from "../data/constants";
+import FaqLayout from "../layouts/FaqLayout.astro";
+import FaqAccordionBig from "../components/faq-accordion-big.astro";
+---
+
+<NavbarSiteLayout
+	title=`Painting Company ${mainLocation}`
+	description="Get an affordable, high quality paint job from a team of experienced local professionals."
+>
+	<Hero/>
+
+	<Services />
+
+	<About />
+
+	<MiniGallery />
+
+	<Locations />
+
+	<Reviews />
+
+  <FaqLayout>
+    <FaqAccordionBig 
+      question="How much does a painting project usually cost?"
+      answer="Every project is a bit different depending on the size, surfaces, and prep work involved. We provide free estimates so you know exactly what to expect before any work begins."
+    />
+    <FaqAccordionBig 
+      question="How long will my project take?"
+      answer="Most residential projects are completed within a few days, but timing depends on the size and scope of the job. We'll give you a clear timeline during your estimate."
+    />
+    <FaqAccordionBig 
+      question="Do I need to move furniture or prepare the space?"
+      answer="We handle most of the prep, including covering and protecting surfaces. We may ask you to move smaller personal items, but we'll walk you through everything ahead of time."
+    />
+    <FaqAccordionBig 
+      question="Do you offer free estimates?"
+      answer="Yes—estimates are always free. We'll take a look at your project and provide clear pricing and next steps with no obligation."
+    />
+  </FaqLayout>
+
+	<div class="map-embed-container secondary-scheme">
+		<MapEmbed class="contact-map-embed" />
+	</div>
+
+	<Contact/>
+  
+</NavbarSiteLayout>
+
+<style>
+	.map-embed-container {
+    border-right: var(--border);
+    height: 300px;
+  }
+
+  .contact-map-embed {
+    overflow: hidden;
+    border-radius: var(--standard-radius);
+    border: var(--border);
+  }
+
+  .map-embed img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>

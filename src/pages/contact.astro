@@ -1,0 +1,268 @@
+---
+import NavbarSiteLayout from "../layouts/NavbarSiteLayout.astro";
+import {
+  contactEmail,
+  contactPhone,
+  contactAddress,
+  formKey,
+} from "../data/constants";
+import StatBanner from "../sections/StatBanner.astro";
+import Icon from "../components/icon.astro";
+import {
+  mailIcon,
+  phoneIcon,
+  locationIcon,
+  paperPlane,
+} from "../data/standard-icons";
+import CallNowButton from "../components/call-now-button.astro";
+import MapEmbed from "../components/map-embed.astro";
+import TemplateFormRedirect from "../components/template-form-redirect.astro";
+---
+
+<NavbarSiteLayout
+  title="Contact"
+  description="Get in touch with us today for a free quote and get started transforming your space!"
+>
+  <StatBanner />
+
+  <div class="content-chapter">
+    <section>
+      <div class="contact-card secondary-scheme">
+        <!-- Contact Card -->
+        <div class="text-content">
+          <div class="card-title">We Value Our Customers</div>
+          <p class="subtle-text">
+            Reach out to our excellent team
+            and we'll get back to you as soon as we can.
+          </p>
+        </div>
+        <hr />
+        <div class="bullet-container">
+          <div class="contact-bullet">
+            <div class="contact-icon-container accent-1-scheme">
+              <Icon src={mailIcon} class="contact-icon accent-1-scheme" />
+            </div>
+            <div class="contact-info">
+              <div class="contact-type">Email</div>
+              <a class="tail-fade" href={`mailto:${contactEmail}`}
+                >{contactEmail}</a
+              >
+            </div>
+          </div>
+          <div class="contact-bullet">
+            <div class="contact-icon-container accent-1-scheme">
+              <Icon src={phoneIcon} class="contact-icon accent-1-scheme" />
+            </div>
+            <div class="contact-info">
+              <div class="contact-type">Phone</div>
+              <a class="tail-fade" href={`tel:${contactPhone}`}
+                >{contactPhone}</a
+              >
+            </div>
+          </div>
+          <div class="contact-bullet">
+            <div class="contact-icon-container accent-1-scheme">
+              <Icon src={locationIcon} class="contact-icon accent-1-scheme" />
+            </div>
+            <div class="contact-info">
+              <div class="contact-type">Address</div>
+              <a class="tail-fade" href="">{contactAddress}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="map-embed-container secondary-scheme">
+        <MapEmbed class="contact-map-embed" />
+      </div>
+
+      <div class="form-section">
+        <div class="overview">
+          <h1 class="section-title">Contact Us</h1>
+          <p class="subtle-text">
+            Not sure where to start? Send us a quick message and we'll help you figure out the next steps.
+          </p>
+        </div>
+        <form action="" id="contact-form">
+          <input type="hidden" name="access_key" value={formKey} />
+
+          <input
+            class="tail-fade"
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Name"
+            required
+          />
+          <input
+            class="tail-fade"
+            type="text"
+            id="email"
+            name="email"
+            placeholder="Email"
+            required
+          />
+          <input
+            class="tail-fade"
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="Phone"
+            required
+          />
+          <textarea
+            class="tail-fade"
+            id="message"
+            name="message"
+            rows="5"
+            placeholder="Message"
+            required></textarea>
+        </form>
+
+        <div class="button-row">
+          <button class="site-button" type="submit" form="contact-form">
+            Send Message
+            <Icon src={paperPlane} class="body-icon-sm" />
+          </button>
+          <CallNowButton />
+        </div>
+      </div>
+    </section>
+  </div>
+</NavbarSiteLayout>
+
+<TemplateFormRedirect />
+
+<style lang="scss">
+  @use "../styles/breakpoints" as *;
+  @use "../styles/font-system" as *;
+  @use "../styles/column-layouts" as *;
+
+  section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-block: 0;
+  }
+
+  /* Form Section */
+
+  form {
+    align-items: start;
+    margin-bottom: 80px;
+  }
+
+  .form-section {
+    width: 100%;
+    padding-block: var(--section-padding);
+    padding-right: var(--side-margin);
+    padding-left: var(--section-gap);
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+
+  h1 {
+    font-size: var(--size-h2);
+  }
+
+  /* Contact Card */
+  .contact-card {
+    padding-left: var(--side-margin);
+    padding-right: var(--section-gap);
+    padding-top: var(--section-padding);
+    padding-bottom: 104px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: var(--border);
+  }
+
+  .card-title {
+    @extend %accent-font;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .bullet-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px 48px;
+  }
+
+  .contact-bullet {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .contact-icon-container {
+    border-radius: 50%;
+    width: 40px;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .contact-icon {
+    --size: 1.25rem;
+  }
+
+  .contact-info {
+    color: var(--subtle-text);
+  }
+
+  .contact-info a {
+    color: var(--subtle-text);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--dark-heading);
+    }
+  }
+
+  .contact-type {
+    @extend %accent-font;
+    font-size: 1rem;
+    color: var(--base-text);
+  }
+
+  // Map embed
+  .map-embed-container {
+    border-right: var(--border);
+    padding-left: var(--side-margin);
+    height: 500px;
+  }
+
+  .contact-map-embed {
+    overflow: hidden;
+    border-radius: var(--standard-radius);
+    border: var(--border);
+  }
+
+  .map-embed img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .contact-info a:hover {
+    opacity: 0.65;
+  }
+
+  @media screen and (max-width: $breakpoint-md) {
+    section {
+      grid-template-columns: 1fr;
+    }
+    .form-section {
+      grid-row: 1;
+      grid-column: auto;
+    }
+    .form-section,
+    .contact-card {
+      padding-inline: var(--side-margin);
+    }
+    .map-embed-container {
+      padding-left: 0;
+    }
+  }
+</style>

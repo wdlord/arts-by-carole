@@ -1,0 +1,37 @@
+
+// Generalizes accordion-like behavior
+@mixin drawer($appearsAt: null) {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+
+  // Hidden by default if $appearsAt is set
+  @if $appearsAt != null {
+    display: none;
+
+    @media screen and (max-width: $appearsAt) {
+      display: grid;
+    }
+  }
+
+  &.open {
+    grid-template-rows: 1fr;
+  }
+
+  // smooth collapse content wrapper
+  .intermediary {
+    overflow: hidden;
+  }
+}
+
+.chevron {
+  --size: 1rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(-90deg);
+
+  &.open {
+    transform: rotate(90deg);
+  }
+}

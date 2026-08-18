@@ -1,0 +1,29 @@
+---
+import { Image } from "astro:assets";
+import logo from "../images/logos/pilot-painting-wordmark.svg";
+import { siteName } from "../data/constants";
+
+interface Props {
+  height?: number;
+}
+
+const {height = 40 } = Astro.props;
+---
+
+<div>
+  <Image
+    src={logo}
+    alt={`${siteName} logo`}
+    class="logo"
+    draggable="false"
+  />
+</div>
+
+<style
+  define:vars={{"logo-height": `${height}px` }}
+>
+  .logo {
+    width: auto;
+    height: var(--logo-height);
+  }
+</style>

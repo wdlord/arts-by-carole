@@ -1,0 +1,273 @@
+---
+import Logo from "./logo.astro";
+import {
+  contactAddress,
+  contactEmail,
+  contactPhone,
+  quickLinks,
+  businessHours,
+  mainLocation,
+  ctaLink,
+  ctaTarget
+} from "../data/constants";
+import { isCurrentPath } from "../scripts/navigation";
+import { mailIcon, phoneIcon, locationIcon, clockIcon, arrowRight } from "../data/standard-icons";
+import Icon from "./icon.astro";
+
+const currentYear = new Date().getFullYear();
+const currentPath = Astro.url.pathname;
+---
+
+<footer class="generic-nav">
+  <div class="nav-chapter">
+    <div class="main-content">
+      <div class="logo-and-description">
+        <a href="/">
+          <Logo height={40}/>
+        </a>
+        <div class="description">
+          We provide residential and commercial painting throughout {mainLocation}, focusing on clean work, clear communication, and jobs done on time.
+        </div>
+        <a href={ctaLink} target={ctaTarget} class="site-button">
+          Get a Quote
+          <Icon src={arrowRight} class="body-icon-sm"/>
+        </a>
+      </div>
+
+      <div class="contact-link-col">
+        <span class="footer-heading">Contact</span>
+        <nav class="footer-links" aria-label="Contact Links">
+          <a
+            class="contact-link tail-fade underscore-trigger"
+            href={`mailto:${contactEmail}`}
+          >
+            <Icon src={mailIcon} class="footer-icon tail-fade" />
+            <span class="underscore">
+              {contactEmail}
+            </span>
+          </a>
+          <a
+            class="contact-link tail-fade underscore-trigger"
+            href={`tel:${contactPhone}`}
+          >
+            <Icon src={phoneIcon} class="footer-icon tail-fade" />
+            <span class="underscore">
+              {contactPhone}
+            </span>
+          </a>
+          <a class="contact-link tail-fade underscore-trigger">
+            <Icon src={locationIcon} class="footer-icon tail-fade" />
+            <span class="underscore">
+              {contactAddress}
+            </span>
+          </a>
+          <a class="contact-link tail-fade underscore-trigger">
+            <Icon src={clockIcon} class="footer-icon tail-fade" />
+            <span class="underscore">
+              {businessHours}
+            </span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="quick-links">
+        <span class="footer-heading">Quick Links</span>
+        <nav class="footer-links" aria-label="Footer Navigation">
+          {
+            quickLinks.map((link) => (
+              <a
+                href={link.href}
+                class="quick-link tail-fade underscore-trigger"
+              >
+                <div
+                  class:list={[
+                    "route-marker tail-fade",
+                    { active: isCurrentPath(currentPath, link.href) },
+                  ]}
+                />
+                <span class="underscore">{link.label}</span>
+              </a>
+            ))
+          }
+        </nav>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="bottom-row">
+      <div class="copyright">
+        © {currentYear}
+        <a
+          class="tail-fade"
+          href="https://willlordwebdesigns.com"
+          target="_blank">Will Lord Web Designs LLC</a
+        >. All rights reserved.
+      </div>
+      <div class="legal">
+        <a href="/privacy-policy" class="privacy-policy">Privacy Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style lang="scss">
+  @use "../styles/breakpoints" as *;
+
+  footer {
+    border-top: var(--border);
+    padding-top: 104px;
+    display: flex;
+    justify-content: center;
+    color: var(--footer-text);
+    background-color: var(--footer-color);
+    --scheme-text-color: var(--footer-text);
+  }
+
+  hr {
+    margin-block: 0;
+  }
+
+  .main-content {
+    display: grid;
+    grid-template-columns: minmax(316px, 1fr) auto auto;
+    gap: 104px;
+    margin-bottom: 4rem;
+  }
+
+  .logo-and-description {
+    width: 100%;
+    max-width: var(--third-width);
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 2rem;
+  }
+
+  .menus {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 116px;
+  }
+
+  .footer-heading {
+    font-size: var(--size-footer-link);
+    font-family: var(--font-nav);
+    margin-bottom: 2rem;
+    display: block;
+  }
+
+  .description {
+    font-size: var(--size-body);
+  }
+
+  .contact-link span,
+  .quick-link,
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding-block: 2px;
+  }
+
+  .quick-link:hover .route-marker {
+    background-color: var(--footer-text);
+    opacity: 0.5;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem 1.5rem;
+    margin-bottom: 40px;
+  }
+
+  .footer-links a {
+    font-family: var(--font-body);
+    color: var(--footer-text);
+    font-size: var(--size-footer-link);
+    text-decoration: none;
+    white-space: nowrap;
+    padding-block: 2px;
+  }
+
+  .footer-links a span {
+    padding-block: 2px;
+  }
+
+  .footer-icon {
+    --size: 1rem;
+    aspect-ratio: 1;
+    fill: var(--footer-text);
+  }
+
+  .route-marker {
+    width: 5px;
+    aspect-ratio: 1;
+    border-radius: 3vmin;
+    background-color: transparent;
+
+    &.active {
+      background-color: var(--footer-text);
+    }
+  }
+
+  .bottom-row {
+    display: flex;
+    justify-content: space-between;
+    padding-block: 2.5rem;
+    font-size: 0.75rem;
+
+    a {
+      color: var(--footer-text);
+    }
+
+    a:hover {
+      opacity: 0.65;
+    }
+  }
+
+  @media screen and (max-width: $breakpoint-md) {
+    .main-content {
+      grid-template-columns: 1fr;
+      gap: 56px;
+    }
+
+    .footer-links {
+      flex-direction: row;
+      flex-wrap: wrap;
+      margin-bottom: 0;
+      gap: 0.5rem 1.5rem;
+    }
+
+    .contact-link,
+    .quick-link {
+      gap: 8px;
+    }
+
+    .footer-heading {
+      margin-bottom: 8px;
+    }
+
+    .bottom-row {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .footer-links {
+      width: auto;
+    }
+    .description {
+      max-width: 380px;
+    }
+    .main-content {
+      padding-bottom: 32px;
+    }
+  }
+
+  @media screen and (max-width: $breakpoint-sm) {
+    footer {
+      padding-top: var(--section-padding);
+    }
+  }
+</style>

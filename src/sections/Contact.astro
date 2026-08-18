@@ -1,0 +1,85 @@
+---
+import Icon from "../components/icon.astro";
+import bgImage from "../images/guy-painting-wall.jpg";
+import { paperPlane } from "../data/standard-icons";
+import { formKey } from "../data/constants";
+import CallNowButton from "../components/call-now-button.astro";
+import BigImage from "../components/big-image.astro";
+import TemplateFormRedirect from "../components/template-form-redirect.astro";
+---
+
+<div class="content-chapter">
+  <div class="content-container">
+    <section class="landscape-section">
+      <div class="img-card">
+        <BigImage src={bgImage} alt="alt" />
+      </div>
+      <div class="text-content">
+        <div class="image-section">
+          <!-- Form Section -->
+          <div class="form-section">
+            <div class="overview">
+              <h2 class="section-title">Get a Quote Today</h2>
+              <p class="subtle-text">
+                Not sure where to start? Send us a quick message and we'll help you figure out the next steps.
+              </p>
+            </div>
+            <form action="" id="contact-form">
+              <input type="hidden" name="access_key" value={formKey} />
+
+              <input
+                class="tail-fade"
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Name"
+                required
+              />
+              <input
+                class="tail-fade"
+                type="text"
+                id="email"
+                name="email"
+                placeholder="Email"
+                required
+              />
+              <input
+                class="tail-fade"
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="Phone"
+                required
+              />
+              <textarea
+                class="tail-fade"
+                id="message"
+                name="message"
+                rows="5"
+                placeholder="Message"
+                required></textarea>
+            </form>
+
+            <div class="button-row">
+              <button class="site-button" type="submit" form="contact-form">
+                Send Message
+                <Icon src={paperPlane} class="body-icon-sm" />
+              </button>
+              <CallNowButton />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<TemplateFormRedirect />
+
+<style lang="scss">
+  @use "../styles/landscape-section" as *;
+
+  form {
+    margin-bottom: 80px;
+  }
+</style>

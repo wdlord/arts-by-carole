@@ -1,0 +1,21 @@
+---
+import Icon from "./icon.astro";
+import { phoneIcon } from "../data/standard-icons";
+import { contactPhone } from "../data/constants";
+
+interface Props {
+  text?: string;
+  class?: string;
+}
+
+const {
+  text=`Call Now ${contactPhone}`,
+  class: className,
+  ...rest
+} = Astro.props;
+---
+
+<a class={className || "ghost"} href={`tel:${contactPhone}`} {...rest}>
+  <Icon src={phoneIcon} class="body-icon-sm" />
+  {text}
+</a>

@@ -1,0 +1,65 @@
+---
+import Icon from "../components/icon.astro";
+import { arrowRight } from "../data/standard-icons";
+import NavbarSiteLayout from "../layouts/NavbarSiteLayout.astro";
+---
+
+<NavbarSiteLayout
+  title="Page not found"
+  description="Whoops! The page you're looking for doesn't exist or has been moved."
+  noindex
+>
+  <div class="content-chapter">
+    <div class="content-container">
+      <section class="whoops">
+        <div class="error-code">404</div>
+        <div class="title">Whoops!</div>
+        <p class="desc">
+          The page you're looking for doesn't exist or has been moved.
+        </p>
+        <div class="button-row">
+          <a href="/" class="site-button">Go Home</a>
+          <button class="ghost" onclick="history.back()">
+            <Icon src={arrowRight} class="body-icon-sm back-icon" />
+            Go Back
+          </button>
+        </div>
+      </section>
+    </div>
+  </div>
+</NavbarSiteLayout>
+
+<style lang="scss">
+  @use "../styles/font-system" as *;
+
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .error-code {
+    @extend %heading-font;
+    font-size: 168px;
+    background: linear-gradient(to bottom, transparent, whitesmoke);
+    line-height: 1;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.2);
+  }
+
+  .title {
+    @extend %heading-font;
+    font-size: var(--size-h2);
+    margin-bottom: 1.5rem;
+  }
+
+  .desc {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .back-icon {
+    transform: rotate(180deg);
+  }
+</style>

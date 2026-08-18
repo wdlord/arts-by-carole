@@ -1,0 +1,86 @@
+
+:root {
+    $white: white;
+    $black: #212121;
+    $base-color: #FAFAFA;
+    $accent-1: #0D47A1;
+    $alt-color: rgba($accent-1, 0.03);
+
+  --base-color: #{$base-color};
+  --base-text: #{$black};
+
+  --alt-color: #{$alt-color};
+  --alt-text: #{$black};
+
+  --tertiary-color: #{$black};
+  --tertiary-text: #{$white};
+
+  --nav-color: #{$base-color};
+  --nav-text: #{$black};
+
+  --accent-1-color: #{$accent-1};
+  --accent-1-text: #{$white};
+
+  --selection-bg-color: #{$accent-1}80;
+
+  --footer-text: #{$black};
+  --footer-color: #{$alt-color};
+  --hero-text: #{$white};
+
+  --subtle-text: #{rgba($black, 0.7)};
+  --subheading-color: #{$black};
+  --border-color: #{rgba($accent-1, 0.1)};
+  --input-color: #{$alt-color};
+}
+
+@mixin color-scheme($bg, $text) {
+    background-color: $bg;
+    color: $text;
+    fill: $text;
+    --scheme-text-color: #{$text};
+}
+
+%primary-scheme {
+    @include color-scheme(var(--base-color), var(--base-text));
+}
+
+%secondary-scheme {
+    @include color-scheme(var(--alt-color), var(--alt-text));
+}
+
+%tertiary-scheme {
+    @include color-scheme(var(--tertiary-color), var(--tertiary-text));
+}
+
+%nav-scheme {
+    @include color-scheme(var(--nav-color), var(--nav-text));
+}
+
+%accent-1-scheme {
+    @include color-scheme(var(--accent-1-color), var(--accent-1-text));
+}
+
+.primary-scheme {
+    @extend %primary-scheme;
+}
+
+.secondary-scheme {
+    @extend %secondary-scheme;
+}
+
+.tertiary-scheme {
+    @extend %tertiary-scheme;
+}
+
+.nav-scheme {
+    @extend %nav-scheme;
+    --scheme-text-color: var(--accent-1-color);
+}
+
+.accent-1-scheme {
+    @extend %accent-1-scheme;
+}
+
+.accent-1-fill {
+    fill: var(--accent-1-color);
+}

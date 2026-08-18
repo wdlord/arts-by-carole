@@ -1,0 +1,88 @@
+---
+import Icon from "../components/icon.astro";
+import {chevronLeft} from "../data/standard-icons";
+interface Props {
+  question: string;
+  answer: string;
+}
+
+const { question, answer } = Astro.props;
+const controlId = `faq-${crypto.randomUUID()}`; // sets a unique ID for the ARIA control.
+---
+
+<div class="faq-item">
+  <button
+    class="faq-button tail-fade"
+    aria-expanded="false"
+    aria-controls={controlId}
+    onclick="toggleDrawer(this)"
+  >
+    {question}
+    <Icon src={chevronLeft} class="chevron tail-fade" />
+  </button>
+  <div class="drawer tail-fade">
+    <div class="intermediary">
+      <div class="answer" id={controlId}>{answer}</div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  function toggleDrawer(el) {
+    const drawer = el.nextElementSibling;
+    const icon = el.querySelector(".chevron");
+    const isExpanded = el.getAttribute("aria-expanded") === "true";
+    drawer.classList.toggle("open");
+    icon.classList.toggle("open");
+    el.setAttribute("aria-expanded", !isExpanded);
+  }
+</script>
+
+<style lang="scss">
+  @use "../styles/drawers" as *;
+  @use "../styles/font-system" as *;
+
+  .drawer {
+    @include drawer;
+  }
+
+  .faq-item {
+    padding-block: 1rem;
+    border-top: var(--border);
+  }
+
+  .faq-button {
+    @extend %heading-font;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: var(--standard-radius);
+    background-color: transparent;
+    width: 100%;
+    border: none;
+    font-size: var(--size-h3);
+    text-align: left;
+    gap: 16px;
+
+    &:hover {
+      background-color: var(--alt-color);
+    }
+  }
+
+  .answer {
+    color: var(--subtle-text);
+    padding: 0.5rem 8px;
+  }
+
+  .chevron {
+    --size: 1.25rem;
+    opacity: 0.5;
+    fill: var(--accent-1-color);
+
+    &.open {
+      opacity: 1;
+    }
+  }
+</style>

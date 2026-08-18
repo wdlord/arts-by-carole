@@ -1,0 +1,32 @@
+---
+interface Props {
+  src: string;
+  class?: string;
+}
+const { src, class: className, ...rest } = Astro.props;
+---
+
+<div class={`icon ${className}`} {...rest}>
+  <Fragment set:html={src} />
+</div>
+
+<style>
+  .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent !important;
+    background: transparent !important;
+    flex-shrink: 0;
+    flex-grow: 0;
+    width: var(--size);
+    height: var(--size);
+  }
+
+  :global(.icon svg) {
+    flex-shrink: 0;
+    flex-grow: 0;
+    max-height: 100%;
+    max-width: 100%;
+  }
+</style>

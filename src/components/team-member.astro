@@ -1,0 +1,35 @@
+---
+import Image from 'astro/components/Image.astro';
+
+interface Props {
+    name: string;
+    title: string;
+    img: ImageMetadata;
+}
+const {name, title, img} = Astro.props;
+---
+
+<div class="team-member underscore-trigger">
+    <div class="img-card">
+        <Image src={img} alt={`picture of ${name} | ${title}`} />
+    </div>
+    <div class="text-content underscore">
+        <div class="name">{name}</div>
+        <div class="title subtle-text">{title}</div>
+    </div>
+</div>
+
+<style>
+    .name, .title {
+        font-family: var(--font-accent);
+    }
+    
+    .text-content {
+        width: fit-content;
+        padding-bottom: 16px;
+    }
+
+    .img-card {
+        margin-bottom: 32px;
+    }
+</style>

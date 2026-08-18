@@ -1,0 +1,48 @@
+<div class="article-container">
+  <article class="article-layout">
+    <slot/>
+  </article>
+</div>
+
+<style>
+  
+  .article-container {
+    display: flex;
+    justify-content: center;
+    margin-inline: var(--side-margin);
+  }
+  article {
+    max-width: 800px;
+    padding-block: 168px;
+  }
+
+  :global(.article-layout) {
+    --paragraph-break: 1rem;
+
+    h1, h2, h3, h4, h5, h6 {
+      text-transform: unset;
+    }
+    h1 {
+      margin-bottom: 4rem;
+    }
+    h2 {
+      margin-top: 4.5rem;
+      margin-bottom: 1.5rem;
+    }
+    p {
+      margin-bottom: var(--paragraph-break);
+    }
+    ul {
+      list-style: disc;
+      padding-left: 24px;
+      margin-bottom: var(--paragraph-break);
+    }
+  }
+
+  @media screen and (max-width: 880px) {
+    article {
+      border-left: none;
+      padding-left: 0;
+    }
+  }
+</style>

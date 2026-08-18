@@ -1,0 +1,123 @@
+---
+import Image from "astro/components/Image.astro";
+import { labelToID } from "../scripts/navigation";
+
+const { name, description } = Astro.props;
+const id = labelToID(name);
+
+// Glob all images under /src/images/gallery/<id>/
+const allImages = import.meta.glob<{ default: ImageMetadata }>(
+  `/src/images/gallery/**/*.{jpg,jpeg,png,webp}`,
+  { eager: true }
+);
+
+// Filter to only files inside the exact folder for this id and keep path for alt generation
+const imageEntries = Object.entries(allImages)
+  .filter(([filePath]) =>
+    // ensure path starts with exact folder (avoids false positives)
+    filePath.startsWith(`/src/images/gallery/${id}/`)
+  )
+  // map to objects that include both ImageMetadata and original path
+  .map(([filePath, mod]) => ({
+    meta: (mod as any).default as ImageMetadata,
+    alt: filenameToAlt(filePath),
+  }));
+
+// helper to convert filename -> friendly alt text
+function filenameToAlt(filePath: string): string {
+  const file = filePath.split("/").pop() ?? "";
+  const base = file.replace(/\.[^/.]+$/, ""); // remove extension
+  // remove leading numeric prefixes like "01-" if you want:
+  const cleaned = base.replace(/^\d+-/, "");
+  // turn dashes/underscores into spaces and trim
+  return cleaned.replace(/[-_]+/g, " ").trim();
+}
+---
+
+<div id={id} class="content-chapter">
+  <div class="content-container">
+    <section class="gallery-section">
+      <div class="overview">
+        <h2>{name}</h2>
+        <p class="subtle-text">{description}</p>
+      </div>
+      <div class="gallery-layout">
+        {imageEntries.map(({ meta, alt }) => (
+          <button class="img-card" type="button">
+            <Image
+              class="tail-fade-long"
+              src={meta}
+              alt={alt}
+              format="webp"
+              quality={70}
+              width={640}
+            />
+          </button>
+        ))}
+      </div>
+    </section>
+  </div>
+</div>
+
+<script define:vars={{ imageEntries, id }}>
+  // setup to emit "open-gallery-modal" event when thumbnails are clicked
+
+  const imgButtons = document.querySelectorAll(`#${id} .img-card`);
+
+  imgButtons.forEach((btn, index) => {
+    btn.addEventListener("click", () => {
+      btn.dispatchEvent(
+        new CustomEvent("open-gallery-modal", {
+          detail: { imageEntries, index },
+          bubbles: true,
+        })
+      );
+    });
+  });
+</script>
+
+<style lang="scss">
+  @use "../styles/breakpoints" as *;
+
+  .img-card {
+    width: 100%;
+    box-shadow: none;
+    cursor: pointer;
+    border-width: 0;
+
+    &:hover img {
+      transform: scale(1.03);
+    }
+  }
+
+  .img-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .gallery-layout {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  @media screen and (max-width: $breakpoint-lg) {
+    .gallery-layout {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media screen and (max-width: $breakpoint-md) {
+    .gallery-layout {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: $breakpoint-sm) {
+    .gallery-layout {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+</style>

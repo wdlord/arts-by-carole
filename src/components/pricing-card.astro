@@ -1,0 +1,105 @@
+---
+import CtaButton from "./cta-button.astro";
+import Icon from "../components/icon.astro";
+import {check} from "../data/standard-icons";
+
+interface Props {
+    title: string;
+    description: string;
+    price: number;
+    paymentPeriod: string;
+    featured?: boolean;
+}
+
+const {
+    title,
+    description,
+    price,
+    paymentPeriod,
+    featured,
+} = Astro.props;
+
+const bullets = [];
+---
+
+<div class:list={['pricing-card card tail-fade-long', {featured: featured}]}>
+    <div class="upper-content">
+        <div class="title">{title}</div>
+        <p class="desc subtle-text">{description}</p>
+        <hr>
+        <div class="price-info">
+            <div class="amount">${price}</div>
+            <div class="period">/{paymentPeriod}</div>
+        </div>
+        <ul class="bullets">
+            <li class="simple-item">
+                <Icon class="body-icon accent-1-fill" src={check} /> 24/7 Support
+            </li>
+            <li class="simple-item">
+                <Icon class="body-icon accent-1-fill" src={check} /> Industry Veterans
+            </li>
+            <li class="simple-item">
+                <Icon class="body-icon accent-1-fill" src={check} /> 24/7 Support
+            </li>
+            <li class="simple-item">
+                <Icon class="body-icon accent-1-fill" src={check} /> Industry Veterans
+            </li>
+            <li class="simple-item">
+                <Icon class="body-icon accent-1-fill" src={check} /> 24/7 Support
+            </li>
+        </ul>
+    </div>
+    <CtaButton class={featured ? '' : 'secondary-button'}/>
+</div>
+
+<style lang="scss">
+    @use "../styles/font-system" as *;
+
+    .title {
+        @extend %heading-font;
+        font-size: var(--size-h3);
+        margin-bottom: 0.5rem;
+    }
+
+    .pricing-card {
+        padding: var(--card-padding);
+
+        &:hover {
+            transform: translateY(-0.5rem);
+        }
+    }
+
+    .upper-content {
+        width: 100%;
+    }
+
+    .price-info {
+        @extend %accent-font;
+        display: flex;
+        align-items: start;
+        line-height: 1;
+        margin-bottom: 24px;
+    }
+
+    .amount {
+        color: var(--accent-1-color);
+        font-size: var(--size-h2);
+    }
+
+    .period {
+        margin-left: 16px;
+        margin-top: 8px;
+    }
+
+    .bullets {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 40px;
+    }
+
+    .featured {
+        background: linear-gradient(white, white) padding-box, linear-gradient(var(--card-border-color), var(--accent-1-color)) border-box;
+        border: 2px solid transparent;
+    }
+</style>

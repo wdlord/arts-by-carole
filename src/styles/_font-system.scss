@@ -1,0 +1,99 @@
+@use "../styles/breakpoints" as *;
+
+:root {
+    // Font families
+    $font-body: 'Roboto', sans-serif;
+    $font-heading: 'Radio Canada Big', sans-serif;
+    $font-accent: 'Raleway', sans-serif;
+
+    --font-body: #{$font-body};
+    --font-heading: #{$font-heading};
+    --font-accent: #{$font-accent};
+    --font-subheading: #{$font-accent};
+    --font-nav: #{$font-accent};
+    --font-button: #{$font-accent};
+
+    // Line heights
+    --lh-body: 1.6;
+    --lh-h1: 1;
+    --lh-h2: 1;
+    --lh-h3: 1;
+    --lh-button: 1.2;
+    --lh-subheading: 1.3;
+
+    // Letter spacing
+    --ls-body: 0em;
+    --ls-h1: -0.02em;
+    --ls-h2: -0.02em;
+    --ls-h3: -0.01em;
+    --ls-button: 0em;
+    --ls-subheading: 0em;
+    --ls-nav: 0em;
+
+    // Font weights
+    --weight-body: 400;
+    --weight-heading: 700;
+    --weight-h3: 500;
+    --weight-button: 600;
+
+    // Text transforms
+    --transform-subheading: uppercase;
+    --transform-nav: unset;
+
+    // Sizes
+    --size-h1: 4rem;
+    --size-h2: 3rem;
+    --size-h3: 1.25rem;
+    --size-body: 1.1rem;
+    --size-subheading: var(--size-body);
+    --size-button: 1rem;
+    --size-nav: 1rem;
+    --size-footer-link: 1rem;
+}
+
+%accent-font {
+    font-family: var(--font-accent);
+    font-weight: var(--weight-accent);
+    text-transform: var(--transform-accent);
+    letter-spacing: var(--ls-accent);
+}
+
+%heading-font {
+    font-family: var(--font-heading);
+    font-weight: var(--weight-heading);
+    text-transform: var(--transform-heading);
+    letter-spacing: var(--ls-heading);
+}
+
+%body-font {
+    font-family: var(--font-body);
+    font-weight: var(--weight-body);
+    text-transform: var(--transform-body);
+    letter-spacing: var(--ls-body);
+    line-height: var(--lh-body);
+}
+
+%nav-link-font {
+    font-family: var(--font-nav);
+    font-size: var(--size-nav);
+    text-transform: var(--transform-nav);
+    color: var(--nav-text);
+}
+
+@media screen and (max-width: $breakpoint-md) {
+    :root {
+        --size-h2: 2.15rem;
+        --lh-h2: 1.1;
+    }
+}
+
+@media screen and (max-width: $breakpoint-sm) {
+    :root {
+        --size-h1: 2.15rem;
+        --size-h2: 2.15rem;
+        --size-h3: 1.15rem;
+        --size-body: 1rem;
+        --size-subheading: var(--size-body);
+        --size-button: 0.9rem;
+    }
+}

@@ -1,0 +1,48 @@
+---
+import CtaButton from "../components/cta-button.astro";
+---
+
+<div class="content-chapter secondary-scheme">
+    <div class="content-container">
+        <section class="benefits">
+            <div class="centered-overview">
+                <!-- overview content -->
+                <slot name="overview"/>
+            </div>
+            <div class="benefits-grid">
+                <!-- benefit cards -->
+                <slot name="cards"/>
+            </div>
+            <CtaButton />
+        </section>
+    </div>
+</div>
+
+<style lang="scss">
+    @use "../styles/breakpoints" as *;
+
+    .benefits {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: 1fr;
+        gap: 16px;
+        margin-bottom: 64px;
+    }
+
+    @media screen and (max-width: $breakpoint-lg) {
+        .benefits-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media screen and (max-width: $breakpoint-md) {
+        .benefits-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

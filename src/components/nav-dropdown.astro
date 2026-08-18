@@ -1,0 +1,81 @@
+---
+import { type NavLink, containsCurrentPath } from "../scripts/navigation";
+import Icon from "./icon.astro";
+import { chevronLeft } from "../data/standard-icons";
+
+interface Props {
+  label: string;
+  children: NavLink[];
+}
+const { label, children } = Astro.props;
+
+const currentPath = Astro.url.pathname;
+---
+
+<li
+  class:list={[
+    "dropdown-anchor nav-item-desktop",
+    { active: containsCurrentPath(currentPath, children) },
+  ]}
+>
+  <div class="touch-target">
+    <span class="">{label}</span>
+    <Icon class="chevron tail-fade-long" src={chevronLeft} />
+  </div>
+  <div class="dropdown tail-fade">
+    {
+      children.map((childLink) => (
+        <a class="menu-item tail-fade-long" href={childLink.href}>
+          {childLink.label}
+        </a>
+      ))
+    }
+  </div>
+</li>
+
+<style>
+
+  .dropdown-anchor {
+    position: relative;
+
+    &:hover .dropdown {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateY(0);
+    }
+  }
+
+
+  .dropdown {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: calc(var(--main-nav-height) + 0px);
+    left: 0;
+    background-color: var(--nav-color);
+    border-top: 4px solid var(--accent-1-color);
+    border-bottom-right-radius: var(--card-radius);
+    border-bottom-left-radius: var(--card-radius);
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-0.5rem);
+    box-shadow: var(--nav-dropdown-shadow);
+  }
+
+  .menu-item {
+    padding: 1rem;
+    padding-right: 104px;
+    line-height: 1;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      background-color: #efefef;
+    }
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+  }
+
+</style>

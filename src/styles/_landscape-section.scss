@@ -1,0 +1,55 @@
+// Defines behavior for a section that has text content on one side and a full-size image on the other.
+
+@use "./breakpoints" as *;
+
+.landscape-section {
+  display: flex;
+  align-items: center;
+  gap: var(--section-gap);
+}
+
+.landscape-section.reversed {
+  flex-direction: row-reverse;
+}
+
+.text-content {
+  flex: 1 1 50%;
+}
+
+.img-card {
+  flex: 1 1 50%;
+  aspect-ratio: 5/4;
+}
+
+.img-card picture {
+  width: 100%;
+  height: 100%;
+}
+
+.img-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media screen and (max-width: $breakpoint-md) {
+  .landscape-section, .landscape-section.reversed {
+    flex-direction: column;
+  }
+  .img-card {
+    max-width: 100%;
+    width: 100%;
+    aspect-ratio: 16/9;
+  }
+  .text-content {
+    width: 100%;
+    flex: auto;
+  }
+}
+
+@media screen and (max-width: $breakpoint-sm) {
+  .img-card {
+    aspect-ratio: 5/4;
+  }
+}

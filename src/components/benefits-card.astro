@@ -1,0 +1,113 @@
+---
+import Icon from "./icon.astro";
+import {arrowRight} from "../data/standard-icons";
+
+const {
+    title,
+    description,
+    icon,
+    link,
+} = Astro.props;
+---
+
+<div class="benefits-card card">
+    <div class="upper-content">
+        <div class="title">
+            <div class="icon-container">
+                <div class="icon-bg tail-fade-long"></div>
+                <Icon
+                src={icon}
+                class="title-icon accent-1-scheme"
+                />
+            </div>
+            {title}
+        </div>
+        <p class="desc subtle-text">
+            {description}
+        </p>
+    </div>
+    <a href="" class="card-link tail-fade-long">
+        <Icon
+          src={arrowRight}
+          class="accent-1-scheme body-icon-sm"
+        />
+        Read More
+    </a>
+</div>
+
+<style lang="scss">
+    @use "../styles/breakpoints" as *;
+    @use "../styles/font-system" as *;
+
+    .benefits-card {
+        padding: var(--card-padding);
+    }
+
+    .benefits-card:hover {
+        .icon-bg {
+            transform: rotate(135deg);
+            border-radius: 30%;
+        }
+    }
+
+    .title {
+        @extend %heading-font;
+        font-size: var(--size-h3);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .icon-container {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+        position: relative;
+    }
+
+    .icon-bg {
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        background-color: var(--accent-1-color);
+        border-radius: 50%;
+        transform: rotate(45deg);
+    }
+
+    .title-icon {
+        fill: var(--accent-1-text);
+        --size: 1.5rem;
+        z-index: 1;
+    }
+
+    .desc {
+        margin-bottom: 2rem;
+    }
+
+    .card-link {
+        @extend %accent-font;
+        color: var(--dark-heading);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .icon {
+            fill: var(--dark-heading);
+        }
+
+        &:hover {
+            margin-left: 4px;
+        }
+    }
+    
+    @media screen and (max-width: $breakpoint-sm) {
+        .benefits-card {
+            padding: 32px 24px;
+        }
+    }
+</style>

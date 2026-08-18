@@ -1,0 +1,24 @@
+<div class="content-chapter">
+    <div class="content-container">
+        <section class="faq-layout">
+            <div class="overview">
+              <h2>FAQs</h2>
+            </div>
+            <div class="faq-items">
+              <slot/>
+            </div>
+        </section>
+    </div>
+</div>
+
+<style>
+  .faq-layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .faq-items {
+    max-width: 800px;
+  }
+</style>

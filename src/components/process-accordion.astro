@@ -1,0 +1,87 @@
+---
+import Icon from "../components/icon.astro";
+import {chevronLeft} from "../data/standard-icons";
+interface Props {
+  label: string;
+  details: string;
+}
+
+const { label, details } = Astro.props;
+const controlId = `process-${crypto.randomUUID()}`; // sets a unique ID for the ARIA control.
+---
+
+<div class="process-item">
+  <button
+    class="process-button tail-fade"
+    aria-expanded="false"
+    aria-controls={controlId}
+    onclick="toggleDrawer(this)"
+  >
+    <div><span class="step-number"></span>{label}</div>
+    <Icon src={chevronLeft} class="chevron tail-fade" />
+  </button>
+  <div class="drawer tail-fade">
+    <div class="intermediary">
+      <div class="details" id={controlId}>{details}</div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  function toggleDrawer(el) {
+    const drawer = el.nextElementSibling;
+    const icon = el.querySelector(".chevron");
+    const isExpanded = el.getAttribute("aria-expanded") === "true";
+    drawer.classList.toggle("open");
+    icon.classList.toggle("open");
+    el.setAttribute("aria-expanded", !isExpanded);
+  }
+</script>
+
+<style lang="scss">
+  @use "../styles/drawers" as *;
+  @use "../styles/font-system" as *;
+
+  .drawer {
+    @include drawer;
+  }
+
+  .process-item {
+    padding-block: 1rem;
+    border-top: var(--border);
+  }
+
+  .process-button {
+    @extend %heading-font;
+    font-size: var(--size-body);
+    font-weight: var(--weight-h3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 8px 24px;
+    border-radius: var(--standard-radius);
+    background-color: transparent;
+    width: 100%;
+    border: none;
+    text-align: left;
+    gap: 16px;
+
+    &:hover {
+      background-color: var(--alt-color);
+    }
+  }
+
+  .details {
+    color: var(--subtle-text);
+    padding: 0.5rem 24px;
+  }
+
+  .chevron {
+    opacity: 0.5;
+
+    &.open {
+      opacity: 1;
+    }
+  }
+</style>

@@ -1,0 +1,84 @@
+---
+import Icon from "./icon.astro";
+import { starIcon } from "../data/standard-icons";
+
+interface Props {
+  text: string;
+  name: string;
+  gap: string;
+  subtext?: string;
+}
+
+const { text, name, gap, subtext = "Google Reviewer" } = Astro.props;
+
+---
+
+<li class="review-card card">
+  <div class="upper-content">
+    <div class="rating">
+      {
+        Array.from({length: 5}).map(_ => (
+          <Icon class="star" src={starIcon}/>
+        ))
+      }
+    </div>
+    <p class="text">{text}</p>
+  </div>
+  <div class="card-footer subtle-text">
+    <div class="name">{name}</div>
+    <div class="job-title subtle-text">{subtext}</div>
+  </div>
+</li>
+
+<style lang="scss" define:vars={{ carouselGap: gap }}>
+  @use "../styles/breakpoints" as *;
+  @use "../styles/font-system" as *;
+  @use "../styles/transitions" as *;
+
+  .review-card {
+    @include tail-fade(0.5s, 0.3s, transform);
+    padding: 32px 24px;
+    width: calc((100% - 2 * var(--carouselGap)) / 3);
+    flex-shrink: 0;
+    justify-content: space-between;
+    transform: translateZ(0);
+    background-color: var(--base-color);
+    border: var(--border);
+    border-radius: var(--standard-radius);
+
+    &:hover {
+      transform: translateY(-0.5rem);
+    }
+  }
+
+  .text {
+    margin-bottom: 1rem;
+  }
+
+  .rating {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 1rem;
+  }
+
+  .job-title {
+    font-size: 0.875rem;
+  }
+
+  .star {
+    --size: 1.5rem;
+    fill: #FBB004;
+  }
+
+  @media screen and (max-width: $breakpoint-lg) {
+    .review-card {
+      width: calc((100% - var(--carouselGap)) / 2);
+    }
+  }
+
+  @media screen and (max-width: $breakpoint-md) {
+    .review-card {
+      width: 100%;
+    }
+  }
+</style>

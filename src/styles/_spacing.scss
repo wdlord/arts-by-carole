@@ -1,0 +1,20 @@
+@use "../styles/breakpoints" as *;
+
+:root {
+  --section-gap: 104px;
+  --section-padding: 140px;
+}
+
+@media screen and (max-width: $breakpoint-lg) {
+  :root {
+    --section-gap: 80px;
+    --section-padding: 124px;
+  }
+}
+
+@media screen and (max-width: $breakpoint-sm) {
+  :root {
+    --section-padding: 80px;
+    --section-gap: 64px;
+  }
+}

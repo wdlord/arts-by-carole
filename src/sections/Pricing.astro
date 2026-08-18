@@ -1,0 +1,56 @@
+---
+import PricingCard from "../components/pricing-card.astro";
+---
+
+<div class="content-chapter">
+  <div class="content-container">
+    <section class="pricing">
+      <div class="centered-overview">
+        <span class="subheading">Pricing that Suits Your Needs</span>
+        <h2 class="uppercase">Pricing & Plans</h2>
+        <p class="desc subtle-text">
+          This is an example of a text blurb that complements this pricing
+          section. This is another sentence for the this pricing section.
+        </p>
+      </div>
+      <div class="pricing-layout">
+        <PricingCard
+          title="Basic"
+          description="This is pricing information on the plan."
+          price={240}
+          paymentPeriod="Month"
+        />
+        <PricingCard
+          title="Advanced"
+          description="This is pricing information on the plan."
+          price={240}
+          paymentPeriod="Month"
+          featured
+        />
+        <PricingCard
+          title="Plus"
+          description="This is pricing information on the plan."
+          price={240}
+          paymentPeriod="Month"
+        />
+      </div>
+    </section>
+  </div>
+</div>
+
+<style lang="scss">
+  @use "../styles/breakpoints" as *;
+  @use "../styles/grid-layouts" as *;
+
+  .pricing-layout {
+    @include three-item-grid(40px);
+  }
+
+  @media screen and (max-width: $breakpoint-md) {
+    .pricing {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>

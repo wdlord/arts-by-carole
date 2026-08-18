@@ -1,0 +1,51 @@
+---
+import { navLinks } from "../data/constants";
+import { isCurrentPath } from "../scripts/navigation";
+import NavDropdownMobile from "./nav-dropdown-mobile.astro";
+
+const currentPath = Astro.url.pathname;
+---
+
+<nav id="nav-drawer" class="nav-drawer nav-scheme">
+  <div class="intermediary">
+    <div class="nav-links generic-nav">
+      {
+        navLinks.map((item) =>
+          "children" in item ? (
+            <NavDropdownMobile label={item.label} children={item.children} />
+          ) : (
+            <div class="nav-item-mobile">
+              <a
+                class:list={[
+                  "underscore-trigger drawer-item",
+                  { active: isCurrentPath(currentPath, item.href) },
+                ]}
+                href={item.href}
+              >
+                <span class="underscore">{item.label}</span>
+              </a>
+            </div>
+          )
+        )
+      }
+    </div>
+  </div>
+</nav>
+
+<style lang="scss">
+  @use "../styles/breakpoints" as *;
+  @use "../styles/drawers" as *;
+
+  .nav-drawer {
+    @include drawer($nav-swap);
+  }
+
+  .nav-links {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding-block: 1rem;
+    overflow-y: auto;
+    max-height: calc(100dvh - var(--nav-height));
+  }
+</style>

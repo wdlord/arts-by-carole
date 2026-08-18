@@ -1,0 +1,275 @@
+
+@use "./buttons" as *;
+@use "./color-schemes" as *;
+@use "./font-system" as *;
+@use "./transitions" as *;
+@use "./drawers" as *;
+@use "./breakpoints" as *;
+@use "./forms" as *;
+@use "./images" as *;
+@use "./grid-layouts" as *;
+@use "./nav-generics" as *;
+@use "./column-layouts" as *;
+@use "./spacing" as *;
+
+:root {
+  /* misc */
+  --hero-height: calc(100vh - var(--nav-height));
+  --standard-radius: 2px;
+  --card-radius: var(--standard-radius);
+  --card-padding-y: 40px;
+  --card-padding-x: 32px;
+  --card-padding: var(--card-padding-y) var(--card-padding-x);
+  --card-shadow: none;
+  --border: 1px solid var(--border-color);
+
+  --content-margin: 64px;
+  --side-margin: max(calc((100vw - 1440px) / 2), var(--content-margin));
+  --content-width: calc(100vw - (2 * var(--content-margin)));
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  @extend %body-font;
+  font-size: var(--size-body);
+  color: var(--base-text);
+  background-color: var(--base-color);
+}
+
+/* defines the maximum width of content on a page */
+.chapter {
+  width: 100%;
+  max-width: calc(var(--chapter-width) - 240px);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @extend %heading-font;
+  color: var(--dark-heading);
+}
+
+h1 {
+  font-size: var(--size-h1);
+  line-height: var(--lh-h1);
+  letter-spacing: var(--ls-h1);
+  margin-bottom: 24px;
+}
+
+h2 {
+  font-size: var(--size-h2);
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-h2);
+}
+
+h2:has(+ p) {
+  margin-bottom: 24px;
+}
+
+p:has(+ p) {
+  margin-bottom: 16px;
+}
+
+h3 {
+  font-size: var(--size-h3);
+  line-height: var(--lh-h3);
+  letter-spacing: var(--ls-h3);
+  font-weight: var(--weight-h3);
+}
+
+h4 {
+  font-size: var(--size-h4);
+  line-height: var(--lh-h4);
+  letter-spacing: var(--ls-h4);
+}
+
+.subheading {
+  display: block;
+  font-family: var(--font-subheading);
+  font-size: var(--size-subheading);
+  letter-spacing: var(--ls-subheading);
+  line-height: var(--lh-subheading);
+  text-transform: var(--transform-subheading);
+  margin-bottom: 1rem;
+  color: var(--subheading-color);
+}
+
+.hyperlink {
+  @extend %tail-fade;
+  text-decoration: underline;
+  color: inherit;
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
+hr {
+  width: 100%;
+  background-color: var(--border-color);
+  height: 1px;
+  border: none;
+  margin-block: 32px;
+}
+
+.hero-height {
+  height: var(--hero-height);
+  max-height: 64rem;
+}
+
+.second-line {
+  display: block;
+}
+
+.subtle-text {
+  color: var(--subtle-text);
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+ul {
+  list-style: none;
+}
+
+.body-icon {
+  --size: 1.25rem;
+}
+
+.body-icon-sm {
+  --size: 1rem;
+}
+
+::selection {
+  background-color: var(--selection-bg-color);
+}
+
+button {
+  cursor: pointer;
+}
+
+@mixin shadow {
+  box-shadow: var(--card-shadow);
+}
+
+.shadow {
+  @include shadow;
+}
+
+.simple-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--font-accent);
+  color: var(--dark-heading);
+  white-space: nowrap;
+}
+
+.content-chapter {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.content-container {
+  width: 100%;
+  max-width: var(--chapter-width);
+  margin-inline: var(--side-margin);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 0;
+}
+
+.card {
+  @include shadow;
+  border-radius: var(--card-radius);
+  border: 1px solid var(--card-border-color);
+  background-color: var(--card-color);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.card:has(.upper-content) {
+  justify-content: space-between;
+}
+
+.centered-overview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 4rem;
+
+  .desc {
+    max-width: var(--half-width);
+  }
+}
+
+.overview {
+  margin-bottom: 4rem;
+
+  .desc {
+    max-width: var(--half-width);
+  }
+}
+
+section {
+  padding-block: var(--section-padding);
+  min-width: 100%;
+}
+
+section.half-section {
+  padding-block: calc(var(--section-padding) / 2);
+}
+
+@media screen and (max-width: $breakpoint-lg) {
+  .hero-height {
+    min-height: var(--hero-height);
+    height: auto;
+  }
+}
+
+@media screen and (max-width: $breakpoint-md) {
+  .simple-item {
+    gap: 8px;
+  }
+  :root {
+    --content-margin: 40px;
+  }
+}
+
+@media screen and (max-width: $breakpoint-sm) {
+  :root {
+    --content-margin: 24px;
+    --card-padding-y: 32px;
+    --card-padding-x: 24px;
+  }
+  .body-icon {
+    --size: 1.075rem;
+  }
+  .hero-height {
+    height: auto;
+    min-height: fit-content;
+  }
+}

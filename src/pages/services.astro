@@ -1,0 +1,97 @@
+---
+import NavbarSiteLayout from "../layouts/NavbarSiteLayout.astro";
+import ServiceSection from "../sections/ServiceSection.astro";
+import StatBanner from "../sections/StatBanner.astro";
+import CTA from "../sections/CTA.astro";
+import PageHeading from "../layouts/PageHeading.astro";
+import interiorPaintingImg from "../images/chandelier-interior.jpg";
+import exteriorPaintingImg from "../images/house-with-black-door.jpg";
+import cabinetFinishingImg from "../images/modern-kitchen-cabinets.jpg";
+import commercialPaintingImg from "../images/modern-exterior-building.jpg";
+import { SERVICE } from "../data/constants";
+---
+
+<NavbarSiteLayout
+  title="Services"
+  description="View the full list of our services including interior painting, exterior painting, cabinet finishing, and more."
+>
+  <PageHeading>
+    <h1>Services</h1>
+  </PageHeading>
+
+  <ServiceSection
+    title={SERVICE.INTERIOR}
+    img={interiorPaintingImg}
+    alt="Freshly painted and clean room with beige walls"
+  >
+    <p class="subtle-text">
+      Transform your home with clean lines, smooth finishes, and colors that
+      bring each room to life. Our team handles every step with care so you can
+      expect consistent, long-lasting results. We show up on time, keep your
+      space tidy, and communicate clearly throughout the project.
+    </p>
+    <p class="subtle-text">
+      Whether it's a single room or a full interior refresh, we focus on quality
+      craftsmanship and a stress-free experience from start to finish.
+    </p>
+  </ServiceSection>
+
+  <ServiceSection
+    title={SERVICE.EXTERIOR}
+    img={exteriorPaintingImg}
+    alt="Closeup of a cute house with painted white brick and black door"
+    isAlternate
+  >
+    <p class="subtle-text">
+      Give your property a fresh, lasting upgrade with professional exterior
+      painting. We prepare every surface carefully, use high-quality materials,
+      and apply finishes designed to stand up to sun, weather, and time.
+    </p>
+    <p class="subtle-text">
+      Our team works efficiently, keeps the job site clean, and communicates
+      clearly so you know exactly what to expect. The result is a smooth,
+      durable finish that boosts curb appeal and protects your home for years.
+    </p>
+  </ServiceSection>
+
+  <ServiceSection
+    title={SERVICE.CABINETS}
+    img={cabinetFinishingImg}
+    alt="Modern kitchen with fancy cabinets"
+  >
+    <p class="subtle-text">
+      Refresh your kitchen or storage spaces with cabinet finishing that looks
+      clean, modern, and professionally crafted. We handle each step with
+      precision, from prep and priming to smooth spraying or brush application.
+    </p>
+    <p class="subtle-text">
+      The goal is to give your cabinets a durable, factory-quality finish
+      without the cost or stress of a full replacement. You'll get a result that
+      feels new, holds up to daily use, and elevates the entire room.
+    </p>
+  </ServiceSection>
+
+  <ServiceSection
+    title={SERVICE.COMMERCIAL}
+    img={commercialPaintingImg}
+    alt="Modern building exterior"
+    isAlternate
+  >
+    <p class="subtle-text">
+      Create a professional, welcoming environment with commercial painting
+      services tailored to your business. We work around your schedule, maintain
+      clean and organized work areas, and use high-performance coatings that
+      deliver long-lasting results.
+    </p>
+    <p class="subtle-text">
+      Whether it's an office, storefront, or larger facility, our team focuses
+      on reliability, safety, and consistent communication. Your space ends up
+      looking polished and ready to support your customers and staff.
+    </p>
+  </ServiceSection>
+
+  <StatBanner />
+  <CTA />
+</NavbarSiteLayout>
+
+<style lang="scss"></style>

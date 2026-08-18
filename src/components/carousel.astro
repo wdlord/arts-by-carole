@@ -1,0 +1,184 @@
+---
+import {chevronLeft} from "../data/standard-icons";
+import Icon from "./icon.astro";
+
+interface Props {
+  gap?: string;
+  itemCount: number;
+}
+
+const {gap, itemCount} = Astro.props;
+---
+
+<ul class="simple-carousel">
+  <slot />
+</ul>
+<div class="dot-indicator">
+  {
+    Array.from({length: itemCount}).map(_ => (
+      <div class="dot tail-fade-long"></div>
+    ))
+  }
+</div>
+<div class="controls">
+  <button
+    onclick="handleClick('previous')"
+    class="left tail-fade shadow"
+    id="prev-btn"
+    aria-label="previous button"
+  >
+    <Icon src={chevronLeft} class="carousel-icon tail-fade-long body-icon-sm left" />
+  </button>
+  <button
+    onclick="handleClick('next')"
+    class="right tail-fade shadow"
+    id="next-btn"
+    aria-label="next button"
+  >
+    <Icon src={chevronLeft} class="carousel-icon tail-fade-long body-icon-sm left" />
+  </button>
+</div>
+
+<script is:inline>
+  const list = document.querySelector(".simple-carousel");
+  const items = list.querySelectorAll(":scope > li");
+  const dots = document.querySelectorAll(".dot-indicator .dot");
+  const style = getComputedStyle(list);
+  const gap = parseInt(style.gap) || 0;
+  var activeSlideIndex = 0;
+  setActiveDot();
+
+  // Apply necessary scroll snap style to <li> element.
+  // It's done this way because there was no way to dynamically include them in this file.
+  items.forEach((item) => {
+    item.style.scrollSnapAlign = "start";
+  });
+
+  // Determine carousel scroll amount
+  const itemWidth = items[0].offsetWidth + gap; // include gap
+
+  function handleClick(direction) {
+    if (direction === "previous") {
+      // check if at start, else allow scroll
+      if (list.scrollLeft === 0) {
+        bounce(-1);
+      } else {
+        list.scrollBy({ left: -itemWidth, behavior: "smooth" });
+      }
+    } else {
+      // check if at end, else allow scroll
+      if (isAtScrollEnd()) {
+        bounce(1);
+      } else {
+        list.scrollBy({ left: itemWidth, behavior: "smooth" });
+      }
+    }
+  }
+
+  function isAtScrollEnd() {
+    const listRect = list.getBoundingClientRect();
+    const lastItem = items[items.length - 1];
+    const lastItemRect = lastItem.getBoundingClientRect();
+    // If the right edge of the last item is <= right edge of container
+    return lastItemRect.right <= listRect.right + 1; // +1 for rounding errors
+  }
+
+  // Animation control for indicating end of scroll
+  function bounce(dir) {
+    const distance = 20;
+    list.style.transition = "transform 0.15s ease";
+    list.style.transform = `translateX(${dir * distance}px)`;
+
+    setTimeout(() => {
+      list.style.transform = "translateX(0)";
+      setTimeout(() => {
+        list.style.transition = "";
+      }, 150);
+    }, 150);
+  }
+
+  function setActiveDot() {
+    dots.forEach(dot => dot.classList.remove('active'));
+    dots[activeSlideIndex].classList.add('active');
+  }
+
+  // Monitor activeSlideIndex and update dot indicators where necessary
+  list.addEventListener('scroll', () => {
+    const scrollLeft = list.scrollLeft;
+    let index = Math.round(scrollLeft / itemWidth);
+    activeSlideIndex = Math.max(0, Math.min(index, items.length - 1));
+    setActiveDot();
+  });
+</script>
+
+<style define:vars={{carouselGap: gap}}>
+  .simple-carousel {
+    display: flex;
+    margin-bottom: 1.5rem;
+    gap: var(--carouselGap);
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-block: 1rem;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  
+  .simple-carousel.at-end {
+    animation: bounce-end 0.3s ease;
+  }
+
+  @keyframes bounce-end {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+  }
+
+  .dot-indicator {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .dot {
+    width: 16px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: var(--accent-1-color);
+    opacity: 0.1;
+    margin-bottom: 2.5rem;
+
+    &.active {
+      opacity: 0.5;
+    }
+  }
+
+  .controls {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  button {
+    border: var(--border);
+    background-color: var(--base-color);
+    border-radius: 50%;
+    padding: 12px;
+  }
+
+  button:hover .carousel-icon {
+    opacity: 1;
+  }
+
+  .carousel-icon {
+    fill: var(--subtle-text);
+    opacity: 0.75;
+  }
+
+  .right {
+    transform: rotate(180deg);
+  }
+</style>

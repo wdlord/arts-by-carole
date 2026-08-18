@@ -1,0 +1,96 @@
+@use "./transitions" as *;
+@use "./color-schemes" as *;
+
+%button-basics {
+  @extend %tail-fade-long;
+  font-family: var(--font-button);
+  font-size: var(--size-button);
+  font-weight: var(--weight-button);
+  letter-spacing: var(--ls-button);
+  border-radius: var(--standard-radius);
+  line-height: var(--lh-button);
+  text-transform: var(--transform-nav);
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  gap: 8px;
+  padding: 16px 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  .icon {
+    display: inline-block !important;
+  }
+}
+
+@mixin ghost($color) {
+  color: $color;
+  fill: $color;
+  border: 1px solid $color;
+  background-color: transparent;
+}
+
+.ghost {
+  @extend %button-basics;
+  @include ghost(var(--accent-1-color));
+
+  &:hover {
+    @extend %accent-1-scheme;
+  }
+}
+
+@mixin solid($bg-color, $text-color) {
+  @extend %button-basics;
+  background-color: $bg-color;
+  fill: $text-color;
+  color: $text-color;
+  border: 1px solid transparent;
+}
+
+.site-button {
+  --bg-color: var(--accent-1-color);
+  --text-color: var(--accent-1-text);
+  --hover-color: var(--accent-1-color);
+  @extend %button-basics;
+  @include solid(var(--bg-color), var(--text-color));
+  border: 1px solid transparent;
+
+  &:hover {
+    @include ghost(var(--hover-color));
+  }
+}
+
+.site-button.accent {
+  @extend %accent-1-scheme;
+
+  &:hover {
+    @include ghost(var(--alt-color));
+  }
+}
+
+.hero-secondary {
+  @extend %button-basics;
+  @include solid(white, var(--base-text));
+
+  &:hover {
+    @include ghost(white);
+  }
+}
+
+.secondary-button {
+  @extend %accent-1-scheme;
+  @include solid(var(--accent-1-color), var(--accent-1-text));
+  padding: 8px 16px;
+
+  &:hover {
+    @include ghost(var(--accent-1-color));
+  }
+}
+
+.button-row {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+}

@@ -1,0 +1,102 @@
+---
+import Image from "astro/components/Image.astro";
+import lowesLogo from "../images/partners/lowes-logo.png";
+import johnDeereLogo from "../images/partners/john-deere-logo.png";
+import caterpillarLogo from "../images/partners/caterpillar-logo.png";
+
+const partners = [
+    {
+        name: "Lowe's Foundation",
+        logo: lowesLogo,
+    },
+    {
+        name: "John Deere",
+        logo: johnDeereLogo,
+    },
+    {
+        name: "Caterpillar",
+        logo: caterpillarLogo,
+    },
+    {
+        name: "Lowe's Foundation",
+        logo: lowesLogo,
+    },
+    {
+        name: "John Deere",
+        logo: johnDeereLogo,
+    },
+    {
+        name: "Caterpillar",
+        logo: caterpillarLogo,
+    },
+];
+---
+
+<div class="content-chapter secondary-scheme">
+    <div class="content-container">
+        <section class="partners">
+            <div class="centered-overview">
+                <span class="subheading">Partners</span>
+                <h2>Clients we've worked with</h2>
+            </div>
+            <div class="partner-grid">
+                {
+                    partners.map(partner => (
+                        <div class="logo-card card tail-fade-long">
+                            <Image
+                              src={partner.logo}
+                              alt={`${partner.name} partner logo`}
+                            />
+                        </div>
+                    ))
+                }
+            </div>
+        </section>
+    </div>
+</div>
+
+<style lang="scss">
+    @use "../styles/breakpoints" as *;
+
+    .partners {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .partner-grid {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 24px;
+        max-width: var(--half-width);
+    }
+
+    .logo-card {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: var(--card-padding);
+        max-width: 220px;
+
+        &:hover {
+            box-shadow: none;
+        }
+    }
+
+    @media screen and (max-width: 640px) {
+        .partner-grid {
+            gap: 16px;
+        }
+        .logo-card {
+            max-width: 140px;
+            padding: 16px;
+        }
+    }
+
+    @media screen and (max-width: $breakpoint-sm) {
+        .partner-grid {
+            gap: 8px;
+        }
+    }
+</style>

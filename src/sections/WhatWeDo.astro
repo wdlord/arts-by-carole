@@ -1,0 +1,121 @@
+---
+import Image from "astro/components/Image.astro";
+import CtaButton from "../components/cta-button.astro";
+import Icon from "../components/icon.astro";
+import {check} from "../data/standard-icons";
+import whatWeDoImg from "../images/what-we-do-image.webp";
+---
+
+<div class="content-chapter">
+  <div class="content-container">
+    <section class="what-we-do">
+      <div class="img-card">
+        <Image
+          src={whatWeDoImg}
+          width=480
+          alt="" />
+      </div>
+      <div class="text-content">
+        <span class="subheading">What We Do</span>
+        <h2>We provide the best construction services in Los Angeles County</h2>
+        <p class="desc">
+          At Good Quality Construction, we provide the best construction
+          services in Los Angles county. We pride ourselves on our large and capable
+          client network, which helps you get qualified experts for any job you need.
+          At Good Quality Construction, we provide the best construction services in Los
+          Angles county.
+        </p>
+        <ul class="bullets">
+          <li class="simple-item">
+            <Icon class="body-icon accent-1-fill" src={check} /> Construction
+          </li>
+          <li class="simple-item">
+            <Icon class="body-icon accent-1-fill" src={check} /> 24/7 Support
+          </li>
+          <li class="simple-item">
+            <Icon class="body-icon accent-1-fill" src={check} /> Expert Contractors
+          </li>
+          <li class="simple-item">
+            <Icon class="body-icon accent-1-fill" src={check} /> Industry Veterans
+          </li>
+        </ul>
+        <CtaButton />
+      </div>
+    </section>
+  </div>
+</div>
+
+<style lang="scss">
+  @use "../styles/breakpoints" as *;
+
+  .what-we-do {
+    display: flex;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .img-card {
+    max-width: var(--third-width);
+  }
+
+  .text-content {
+    max-width: calc(2 * var(--third-width));
+  }
+
+  .desc {
+    margin-bottom: 40px;
+  }
+
+  .bullets {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 40px;
+    max-width: fit-content;
+    margin-bottom: 48px;
+  }
+
+  @media screen and (max-width: $breakpoint-lg) {
+    .what-we-do {
+      gap: 64px;
+    }
+    .img-card {
+      max-width: 304px;
+    }
+  }
+
+  @media screen and (max-width: 984px) {
+    .what-we-do {
+      gap: 48px;
+    }
+  }
+
+  @media screen and (max-width: $breakpoint-md) {
+    .what-we-do {
+      flex-direction: column;
+    }
+    .text-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  }
+
+  @media screen and (max-width: $breakpoint-sm) {
+    .bullets {
+      gap: 1rem 16px;
+    }
+    .bullets .simple-item {
+      white-space: wrap;
+      text-align: left;
+      line-height: 1;
+    }
+    .img-card {
+      max-width: 100%;
+    }
+    .text-content {
+      align-items: start;
+      text-align: left;
+    }
+  }
+</style>

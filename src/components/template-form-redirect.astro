@@ -1,0 +1,22 @@
+---
+import { isTemplate } from "../data/constants";
+// Includes form intercept only when this is not a real site with connected form inbox.
+---
+
+{
+  isTemplate &&
+  <script is:inline>
+    const form = document.getElementById("contact-form");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault(); // stop the real submission
+
+      // Optional: you can add fake delay or loading animation if you want
+      // setTimeout(() => {
+      //   window.location.href = "/thank-you";
+      // }, 300);
+
+      window.location.href = "/thanks"; // redirect instantly
+    });
+  </script>
+}

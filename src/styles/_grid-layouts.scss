@@ -1,0 +1,37 @@
+@use "sass:meta";
+@use "sass:list";
+@use "./breakpoints" as *;
+
+@mixin three-item-grid($gap) {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $gap;
+  width: 100%;
+
+  $h-gap: if(meta.type-of($gap) == "list", list.nth($gap, 1), $gap);
+
+  @media (max-width: 1320px) {
+    grid-template-columns: repeat(2, 1fr);
+
+    & > :global(:last-child) {
+      grid-column: 1 / -1;
+      width: calc(50% - (#{$h-gap} / 2));
+      justify-self: center;
+    }
+  }
+
+  @media (max-width: 880px) {
+    grid-template-columns: 1fr;
+    max-width: var(--third-width);
+
+    & > :global(:last-child) {
+      grid-column: 1;
+      width: 100%;
+      justify-self: start;
+    }
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    max-width: 100%;
+  }
+}

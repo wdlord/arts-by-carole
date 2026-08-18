@@ -1,0 +1,286 @@
+---
+import Icon from "./icon.astro";
+import { close, chevronLeft, chevronRight } from "../data/standard-icons";
+---
+
+<div
+  id="gallery-modal"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Image Viewer"
+>
+  <div class="top-controls">
+    <button id="gallery-close-button" aria-label="Close">
+      <Icon src={close} class="close-icon" />
+    </button>
+  </div>
+  <div class="img-container">
+    <div class="spinner"></div>
+    <img id="modal-image" class="hidden" src="" alt="" />
+  </div>
+  <div class="bottom-controls">
+    <button id="gallery-prev-button" aria-label="Previous">
+      <Icon src={chevronLeft} class="traversal-icon" />
+    </button>
+    <div id="slide-number" aria-live="polite"></div>
+    <button id="gallery-next-button" aria-label="Next">
+      <Icon src={chevronRight} class="traversal-icon" />
+    </button>
+  </div>
+</div>
+
+<script is:inline>
+  const galleryModal = document.getElementById("gallery-modal");
+  const modalImage = document.getElementById("modal-image");
+  const closeButton = document.getElementById("gallery-close-button");
+  const slideNumber = document.getElementById("slide-number");
+  const nextButton = document.getElementById("gallery-next-button");
+  const prevButton = document.getElementById("gallery-prev-button");
+  const spinner = document.querySelector(".spinner");
+  var galleryImages = [];
+  var galleryImageIndex = 0;
+  let lastFocusedButton = null;
+
+  // Do this on open
+  window.addEventListener("open-gallery-modal", (event) => {
+    const { imageEntries, index } = event.detail;
+
+    // Store the opener for refocusing later
+    lastFocusedButton = event.target;
+
+    // set image and slide number
+    galleryImages = imageEntries;
+    galleryImageIndex = index;
+    setSlide();
+
+    // show modal
+    galleryModal.style.display = "flex";
+
+    // toggle class to lock body scroll
+    document.body.classList.add("modal-open");
+
+    // Set focus to close button
+    closeButton.focus();
+
+    // Handle keypress events
+    window.addEventListener("keydown", handleKeydown);
+  });
+
+  // button event listeners
+  closeButton.addEventListener("click", closeModal);
+  nextButton.addEventListener("click", nextImage);
+  prevButton.addEventListener("click", prevImage);
+
+  // close on BG click
+  galleryModal.addEventListener("click", (e) => {
+    // Only close if user clicks on background, not the image itself
+    if (e.target === galleryModal) {
+      closeModal();
+    }
+  });
+
+  // actual close function
+  function closeModal() {
+    galleryModal.style.display = "none";
+    document.body.classList.remove("modal-open");
+    if (lastFocusedButton) lastFocusedButton.focus(); // Restore focus
+  }
+
+  function nextImage() {
+    galleryImageIndex = (galleryImageIndex + 1) % galleryImages.length;
+    setSlide();
+  }
+
+  function prevImage() {
+    galleryImageIndex = (galleryImageIndex - 1 + galleryImages.length) % galleryImages.length;
+    setSlide();
+  }
+
+  function setSlide() {
+    // hide image and show spinner
+    spinner.style.display = "block";
+    modalImage.classList.add("hidden");
+
+    // update src and content
+    modalImage.src = galleryImages[galleryImageIndex].meta.src; // image src
+    modalImage.alt = galleryImages[galleryImageIndex].alt;
+    slideNumber.innerHTML = `${galleryImageIndex + 1}/${galleryImages.length}`; // slide number
+
+    // queue image to show when load is done
+    modalImage.onload = () => {
+      spinner.style.display = "none";
+      modalImage.classList.remove("hidden");
+    };
+  }
+
+  // ===== Focus Trap Setup =====
+  const focusableSelectors = [
+    "button",
+    "[href]",
+    "input",
+    "select",
+    "textarea",
+    "[tabindex]:not([tabindex='-1'])",
+  ];
+
+  function handleKeydown(e) {
+    if (e.key == "Escape") {
+      closeModal();
+    } else if (e.key == "ArrowRight") {
+      nextImage();
+    } else if (e.key == "ArrowLeft") {
+      prevImage();
+    }
+
+    trapFocus(e);
+  }
+
+  function trapFocus(e) {
+    if (e.key !== "Tab") return;
+
+    const focusableElements = galleryModal.querySelectorAll(
+      focusableSelectors.join(",")
+    );
+    const focusable = Array.from(focusableElements);
+
+    if (focusable.length === 0) return;
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    // SHIFT + TAB = move backward
+    if (e.shiftKey) {
+      if (document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      }
+    }
+    // TAB = move forward
+    else {
+      if (document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  }
+</script>
+
+<style lang="scss">
+  @use "../styles/font-system" as *;
+  @use "../styles/breakpoints" as *;
+
+  :global(body.modal-open) {
+    overflow: hidden;
+  }
+
+  #gallery-modal {
+    display: none;
+    height: 100dvh;
+    height: 100svh; /* fallback for Safari */
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    fill: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 200;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem;
+  }
+
+  #modal-image {
+    max-width: 80vw;
+    max-height: 80vh;
+    object-fit: contain;
+    transition: opacity 0.3s ease;
+  }
+
+  .top-controls {
+    margin-left: auto;
+  }
+
+  #gallery-close-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+
+  .close-icon {
+    --size: 2rem;
+  }
+
+  .img-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-block: auto;
+  }
+
+  .bottom-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+  }
+
+  #gallery-prev-button,
+  #gallery-next-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+
+  .traversal-icon {
+    --size: 2rem;
+  }
+
+  #slide-number {
+    @extend %accent-font;
+    font-size: 1.5rem;
+  } 
+
+  .spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 48px;
+    border: 4px solid #ccc;
+    border-top-color: #444;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    transition: opacity 0.15s ease;
+    z-index: 2;
+  }
+
+  .hidden {
+    opacity: 0;
+  }
+
+  @keyframes spin {
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  @media screen and (max-width: $breakpoint-sm) {
+    #modal-image {
+      max-width: 100%;
+    }
+    #gallery-modal {
+      padding: 2rem 1.5rem;
+    }
+  }
+</style>

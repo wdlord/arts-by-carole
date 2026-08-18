@@ -1,0 +1,28 @@
+$column-width: 98px;
+$gutter-width: 24px;
+$content-margin: 64px;
+$side-margin: max(calc((100vw - 1440px) / 2), #{$content-margin});
+$content-width: calc(100vw - (2 * #{$side-margin}));
+$rel-col-width: calc(#{$content-width} / 12);
+
+
+@function col-width($columns) {
+  @return calc(#{$column-width} * #{$columns} + #{$gutter-width} * (#{$columns - 1}));
+}
+
+@function rel-col-width($columns) {
+  @return calc(#{$rel-col-width}* #{$columns});
+}
+
+:root {
+  --column-width: #{$column-width};
+  --gutter-width: #{$gutter-width};
+
+  --chapter-width: #{col-width(12)}; // 1440px
+  --half-width: #{col-width(6)};
+  --third-width: #{col-width(4)};
+  --quarter-width: #{col-width(3)};
+  --sixth-width: #{col-width(2)};
+
+  --content-width: calc(100vw - (2 * var(--content-margin)));
+}

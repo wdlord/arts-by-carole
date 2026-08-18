@@ -1,0 +1,87 @@
+---
+import ServiceCard from "../components/service-card.astro";
+import Icon from "../components/icon.astro";
+import {arrowRight} from "../data/standard-icons";
+import commercialPaintingImg from "../images/modern-exterior-building.jpg";
+import interiorPaintingImg from "../images/yellow-vaulted-living-room.jpg";
+import exteriorPaintingImg from "../images/blue-thatch-house.jpg";
+import { mainLocation, SERVICE, siteName } from "../data/constants";
+---
+
+<div class="content-chapter secondary-scheme">
+  <div class="content-container">
+    <section class="services">
+      <div class="services-header">
+        <div class="overview">
+        <h2>Expert Painting Services</h2>
+        <p class="subtle-text desc">
+          We're proud to offer long-lasting paint jobs to meet your unique needs with personalized attention. Check out our featured services below or <a class="hyperlink" href="/services">view the full list</a>.
+        </p>
+      </div>
+      <a href="/services" class="site-button">
+        View All Services
+        <Icon src={arrowRight} class="body-icon" />
+      </a>
+      </div>
+
+      <div class="card-layout">
+        <ServiceCard
+          title={SERVICE.COMMERCIAL}
+          img={commercialPaintingImg}
+          imgAlt="Modern building exterior"
+        >
+          Clean, reliable painting for offices, retail spaces, and commercial properties. We work around your schedule and deliver durable finishes that hold up to daily wear.
+        </ServiceCard>
+        <ServiceCard
+          title={SERVICE.INTERIOR}
+          img={interiorPaintingImg}
+          imgAlt="Newly painted interior room with green walls"
+          featureText="Free Quote"
+        >
+          Clean, precise interior painting with careful prep and attention to detail. We protect your space, help with color choices if needed, and leave your home looking sharp.
+        </ServiceCard>
+        <ServiceCard
+          title={SERVICE.EXTERIOR}
+          img={exteriorPaintingImg}
+          imgAlt="New home exterior with gray walls"
+        >
+          Exterior painting built to last in {mainLocation} conditions. Proper prep, quality materials, and a finish that stands up to sun, moisture, and everyday exposure.
+        </ServiceCard>
+      </div>
+    </section>
+  </div>
+</div>
+
+<style lang="scss">
+  @use "../styles/breakpoints" as *;
+  @use "../styles/grid-layouts" as *;
+
+  .overview {
+    margin-bottom: 0;
+  }
+
+  .services-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 64px;
+    margin-bottom: var(--section-gap);
+  }
+
+  .card-layout {
+    @include three-item-grid(80px 40px);
+  }
+
+  @media screen and (max-width: 880px) {
+    .services {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .services-header {
+      flex-direction: column;
+      justify-content: flex-start;
+      text-align: center;
+    }
+  }
+</style>

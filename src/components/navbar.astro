@@ -1,0 +1,243 @@
+---
+import Logo from "./logo.astro";
+import CtaButton from "./cta-button.astro";
+import {
+  contactEmail,
+  contactPhone,
+  navLinks,
+  businessHours,
+} from "../data/constants";
+import { type NavItem, isCurrentPath } from "../scripts/navigation";
+import NavDropdown from "./nav-dropdown.astro";
+import NavDrawer from "./nav-drawer.astro";
+import Icon from "./icon.astro";
+import { mailIcon, phoneIcon } from "../data/standard-icons";
+
+const currentPath = Astro.url.pathname;
+---
+
+<div class="nav-container">
+  <header id="navbar" class="nav-scheme tail-fade-long">
+    <nav class="upper-nav generic-nav accent-1-scheme">
+      <div class="left-side">{businessHours}</div>
+      <div class="right-side">
+        <a
+          class="contact-link email tail-fade underscore-trigger"
+          href={`mailto:${contactEmail}`}
+        >
+          <Icon src={mailIcon} class="body-icon tail-fade" />
+          <span class="underscore">
+            {contactEmail}
+          </span>
+        </a>
+        <div class="line"></div>
+        <a
+          class="contact-link tail-fade underscore-trigger"
+          href={`tel:${contactPhone}`}
+        >
+          <Icon src={phoneIcon} class="body-icon tail-fade" />
+          <span class="underscore">
+            {contactPhone}
+          </span>
+        </a>
+      </div>
+    </nav>
+
+    <nav class="main-navbar generic-nav">
+      <a href="/">
+        <Logo height={48}/>
+      </a>
+
+      <ul class="nav-links">
+        {
+          navLinks.map((item: NavItem) =>
+            "children" in item ? (
+              <NavDropdown label={item.label} children={item.children} />
+            ) : (
+              <li class="nav-item-desktop">
+                <a
+                  class:list={[
+                    "touch-target tail-fade-long",
+                    { active: isCurrentPath(currentPath, item.href) },
+                  ]}
+                  href={item.href}
+                >
+                  {item.label}
+                </a>
+              </li>
+            )
+          )
+        }
+      </ul>
+
+      <div class="header-button-container">
+        <CtaButton class="header-button accent-3-scheme" />
+      </div>
+      <button
+        id="menu-button"
+        class="tail-fade"
+        onclick="toggleMenu(this)"
+        aria-label="open/close navigation"
+      >
+        <div class="button-line"></div>
+        <div class="button-line"></div>
+        <div class="button-line"></div>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Mobile Nav items contained here -->
+  <NavDrawer />
+</div>
+
+<script is:inline>
+  const drawer = document.getElementsByClassName("nav-drawer")[0];
+
+  function toggleMenu(btn) {
+    drawer.classList.toggle("open");
+    btn.classList.toggle("open");
+  }
+</script>
+
+<style lang="scss">
+  @use "../styles/breakpoints" as *;
+  @use "../styles/font-system" as *;
+
+  .nav-container {
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    box-shadow: var(--nav-shadow);
+  }
+
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid var(--nav-color);
+  }
+
+  .nav-chapter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .upper-nav {
+    @extend %accent-font;
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: var(--upper-nav-height);
+  }
+
+  .upper-nav .right-side {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .upper-nav .line {
+    width: 1px;
+    height: 24px;
+    background-color: rgba(256, 256, 256, 0.5);
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    color: inherit;
+    text-decoration: none;
+    gap: 10px;
+  }
+
+  .main-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: var(--main-nav-height);
+  }
+
+  .nav-links {
+    height: 100%;
+    display: flex;
+    text-transform: var(--transform-nav);
+    letter-spacing: var(--ls-nav);
+    gap: 1px;
+  }
+
+  #menu-button {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    background-color: transparent;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  #menu-button .button-line {
+    width: 32px;
+    height: 3px;
+    border-radius: 3vmin;
+    background-color: var(--nav-text);
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    transition:
+      transform 0.3s ease,
+      opacity 0.2s ease,
+      background-color 0.3s ease;
+  }
+
+  #menu-button:hover {
+    opacity: 0.75;
+  }
+
+  /* --- OPEN STATE --- */
+  #menu-button.open .button-line:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+
+  #menu-button.open .button-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  #menu-button.open .button-line:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  @media screen and (max-width: $nav-swap) {
+    .nav-links {
+      display: none;
+    }
+    .header-button-container {
+      display: none;
+    }
+    #menu-button {
+      display: flex;
+    }
+  }
+
+  @media screen and (max-width: $breakpoint-md) {
+    .upper-nav {
+      justify-content: flex-end;
+    }
+    .upper-nav .left-side {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: $breakpoint-sm) {
+    .email, .line {
+      display: none;
+    }
+    .contact-link {
+      gap: 6px;
+    }
+  }
+</style>

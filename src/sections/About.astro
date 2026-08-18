@@ -1,0 +1,143 @@
+---
+import CtaButton from "../components/cta-button.astro";
+import Icon from "../components/icon.astro";
+import { brush, store } from "../data/standard-icons";
+import aboutImage from "../images/about-image.jpg";
+import PortraitImage from "../components/portrait-image.astro";
+import { mainLocation, yoe } from "../data/constants";
+---
+
+<div class="content-chapter">
+  <div class="content-container">
+    <section class="portrait-section">
+      <div class="img-card">
+        <PortraitImage 
+          src={aboutImage}
+          alt="The business owner painting a residential property with a roller"
+        />
+      </div>
+      <div class="text-content">
+        <div class="overview">
+          <h2>Serving {mainLocation} for {yoe}+ Years</h2>
+          <p class="desc subtle-text">
+            For over a decade, we've helped homeowners and businesses across San
+            Diego transform their spaces with quality painting and attention to
+            detail. Our team takes pride in craftsmanship, reliability, and
+            friendly service. Whether it's a fresh coat for your home or a full
+            commercial repaint, we bring color, care, and lasting results to
+            every project.
+          </p>
+        </div>
+        <div class="values">
+          <div class="value-card">
+            <div class="value-header">
+              <div class="icon-bg">
+                <Icon src={store} class="value-icon" />
+              </div>
+              Locally Owned
+            </div>
+            <p class="subtle-text">
+              We're a {mainLocation}-based team that understands the community and
+              takes pride in serving our neighbors.
+            </p>
+          </div>
+          <div class="value-card">
+            <div class="value-header">
+              <div class="icon-bg">
+                <Icon src={brush} class="value-icon" />
+              </div>
+              Premium Materials
+            </div>
+            <p class="subtle-text">
+              We use top-grade paints and supplies to ensure long-lasting color,
+              durability, and a finish that truly stands out.
+            </p>
+          </div>
+        </div>
+        <CtaButton />
+      </div>
+    </section>
+  </div>
+</div>
+
+<style lang="scss">
+  @use "../styles/breakpoints" as *;
+  @use "../styles/column-layouts" as *;
+  @use "../styles/font-system" as *;
+  @use "../styles/portrait-section" as *;
+
+  section::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: calc(var(--side-margin) + col-width(2));
+    background-color: var(--accent-1-color);
+    flex-shrink: 0;
+    z-index: -1;
+  }
+
+  .values {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 1fr;
+    gap: 32px;
+    margin-bottom: 4rem;
+  }
+
+  .value-card {
+    background-color: var(--alt-color);
+    padding: 32px 24px;
+    border: var(--border);
+    border-radius: var(--standard-radius);
+  }
+
+  .value-header {
+    @extend %heading-font;
+    font-size: var(--size-h3);
+    font-weight: var(--weight-h3);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .icon-bg {
+    width: 40px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--base-color);
+    border: var(--border);
+  }
+
+  .value-icon {
+    --size: 1.5rem;
+    fill: var(--accent-1-color);
+  }
+
+  @media screen and (max-width: 1200px) {
+    .values {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media screen and (max-width: $breakpoint-md) {
+    section::after {
+      display: none;
+    }
+    .values {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    .values {
+      grid-template-columns: 1fr;
+    }
+  }
+
+</style>

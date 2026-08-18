@@ -1,0 +1,63 @@
+// Defines behavior for a section with a portrait-oriented image on one side.
+// Ensures image size is always predictable on this layout style.
+
+@use "../styles/breakpoints" as *;
+
+.portrait-section {
+  display: flex;
+  align-items: center;
+  gap: var(--section-gap);
+}
+.portrait-section.reversed {
+  flex-direction: row-reverse;
+}
+
+.desc {
+  max-width: none;
+}
+
+.text-content {
+  flex: 1 1 0;
+}
+
+.img-card {
+  max-width: var(--third-width);
+  flex: 1 1 0;
+  aspect-ratio: 2/3;
+}
+
+.img-card picture {
+  width: 100%;
+  height: 100%;
+}
+
+.img-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media screen and (max-width: $breakpoint-lg) {
+  .img-card {
+    max-width: 33%;
+  }
+}
+
+@media screen and (max-width: $breakpoint-md) {
+  .portrait-section, .portrait-section.reversed {
+    flex-direction: column;
+  }
+  .img-card {
+    flex: auto;
+    max-width: var(--quarter-width);
+  }
+}
+
+@media screen and (max-width: $breakpoint-sm) {
+  .img-card {
+    width: 100%;
+    max-width: none;
+    max-height: 500px;
+  }
+}
