@@ -2,50 +2,20 @@
 import Logo from "./logo.astro";
 import CtaButton from "./cta-button.astro";
 import {
-  contactEmail,
-  contactPhone,
   navLinks,
-  businessHours,
 } from "../data/constants";
 import { type NavItem, isCurrentPath } from "../scripts/navigation";
 import NavDropdown from "./nav-dropdown.astro";
 import NavDrawer from "./nav-drawer.astro";
-import Icon from "./icon.astro";
-import { mailIcon, phoneIcon } from "../data/standard-icons";
 
 const currentPath = Astro.url.pathname;
 ---
 
 <div class="nav-container">
   <header id="navbar" class="nav-scheme tail-fade-long">
-    <nav class="upper-nav generic-nav accent-1-scheme">
-      <div class="left-side">{businessHours}</div>
-      <div class="right-side">
-        <a
-          class="contact-link email tail-fade underscore-trigger"
-          href={`mailto:${contactEmail}`}
-        >
-          <Icon src={mailIcon} class="body-icon tail-fade" />
-          <span class="underscore">
-            {contactEmail}
-          </span>
-        </a>
-        <div class="line"></div>
-        <a
-          class="contact-link tail-fade underscore-trigger"
-          href={`tel:${contactPhone}`}
-        >
-          <Icon src={phoneIcon} class="body-icon tail-fade" />
-          <span class="underscore">
-            {contactPhone}
-          </span>
-        </a>
-      </div>
-    </nav>
-
     <nav class="main-navbar generic-nav">
       <a href="/">
-        <Logo height={48}/>
+        <Logo height={57}/>
       </a>
 
       <ul class="nav-links">

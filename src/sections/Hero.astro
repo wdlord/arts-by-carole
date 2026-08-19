@@ -1,21 +1,19 @@
 ---
-import heroImg from "../images/contact-bg.jpg";
 import CtaButton from "../components/cta-button.astro";
 import Icon from "../components/icon.astro";
-import {arrowRight, check, starIcon} from "../data/standard-icons";
-import { mainLocation, yoe } from "../data/constants";
+import {arrowRight, starIcon} from "../data/standard-icons";
 import Picture from "astro/components/Picture.astro";
 ---
 
 <div class="hero-container hero-height">
   <div class="content-chapter hero">
-  <Picture
+  <!-- <Picture
     class="centered-bg"
     src={heroImg}
     formats={['avif', 'webp', 'jpg']}
     widths={[1920, 1200, 640, 400]}
-    alt={`picture of a house painted in ${mainLocation}`}
-  />
+    alt={`picture of a house painted in`}
+  /> -->
   <div class="content-container">
     <section class="hero-section">
       <div class="sh-container">
@@ -29,37 +27,20 @@ import Picture from "astro/components/Picture.astro";
         <span class="subheading">5.0 stars on Google (10+ reviews)</span>
       </div>
       <h1 class="title">
-        {mainLocation} Painting That's Clean, on Time, and Stress Free
+         Carole Quinn-Nylander
       </h1>
       <p class="desc">
-        Licensed & insured painters serving {mainLocation} and surround areas. Interior, exterior, and cabinet painting with clear pricing and consistent communication.
+        Licensed & insured painters serving and surround areas. Interior, exterior, and cabinet painting with clear pricing and consistent communication.
       </p>
 
       <div class="button-row">
-        <CtaButton text="Get a FREE Estimate" />
-        <a href="/services" class="site-button">
-          View Services
+        <CtaButton text="Get in Touch" />
+        <a href="/gallery/art/" class="site-button">
+          Explore Gallery
           <Icon src={arrowRight} class="body-icon" />
         </a>
       </div>
     </section>
-  </div>
-</div>
-<!-- info banner -->
-<div class="content-chapter tertiary-scheme info-banner-container">
-  <div class="content-container info-banner">
-    <div class="info-item">
-      <Icon src={check} class="body-icon"/>
-      {yoe}+ years of experience
-    </div>
-    <div class="info-item">
-      <Icon src={check} class="body-icon"/>
-      Locally owned & operated
-    </div>
-    <div class="info-item">
-      <Icon src={check} class="body-icon"/>
-      Licensed, bonded, & insured
-    </div>
   </div>
 </div>
 </div>

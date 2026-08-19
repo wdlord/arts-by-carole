@@ -1,17 +1,14 @@
 ---
 import Logo from "./logo.astro";
 import {
-  contactAddress,
   contactEmail,
   contactPhone,
   quickLinks,
-  businessHours,
-  mainLocation,
   ctaLink,
   ctaTarget
 } from "../data/constants";
 import { isCurrentPath } from "../scripts/navigation";
-import { mailIcon, phoneIcon, locationIcon, clockIcon, arrowRight } from "../data/standard-icons";
+import { mailIcon, phoneIcon, arrowRight } from "../data/standard-icons";
 import Icon from "./icon.astro";
 
 const currentYear = new Date().getFullYear();
@@ -26,7 +23,7 @@ const currentPath = Astro.url.pathname;
           <Logo height={40}/>
         </a>
         <div class="description">
-          We provide residential and commercial painting throughout {mainLocation}, focusing on clean work, clear communication, and jobs done on time.
+          We provide residential and commercial painting throughout X, focusing on clean work, clear communication, and jobs done on time.
         </div>
         <a href={ctaLink} target={ctaTarget} class="site-button">
           Get a Quote
@@ -53,18 +50,6 @@ const currentPath = Astro.url.pathname;
             <Icon src={phoneIcon} class="footer-icon tail-fade" />
             <span class="underscore">
               {contactPhone}
-            </span>
-          </a>
-          <a class="contact-link tail-fade underscore-trigger">
-            <Icon src={locationIcon} class="footer-icon tail-fade" />
-            <span class="underscore">
-              {contactAddress}
-            </span>
-          </a>
-          <a class="contact-link tail-fade underscore-trigger">
-            <Icon src={clockIcon} class="footer-icon tail-fade" />
-            <span class="underscore">
-              {businessHours}
             </span>
           </a>
         </nav>
