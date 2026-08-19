@@ -40,6 +40,17 @@
   }
 }
 
+.ghost-white {
+  @extend %button-basics;
+  @include ghost(white);
+
+  &:hover {
+    background-color: white;
+    color: black;
+    fill: black;
+  }
+}
+
 @mixin solid($bg-color, $text-color) {
   @extend %button-basics;
   background-color: $bg-color;

@@ -1,18 +1,18 @@
 ---
 import { Image } from "astro:assets";
-import logo from "../images/logos/CQN Logo.svg";
 import { siteName } from "../data/constants";
 
 interface Props {
+  src: ImageMetadata;
   height?: number;
 }
 
-const {height = 40 } = Astro.props;
+const {src, height = 40 } = Astro.props;
 ---
 
 <div>
   <Image
-    src={logo}
+    src={src}
     alt={`${siteName} logo`}
     class="logo"
     draggable="false"

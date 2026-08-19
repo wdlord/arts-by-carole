@@ -1,0 +1,12 @@
+---
+import LogoBase from './logo-base.astro';
+import logoStandard from '../images/logos/standard-logo.svg';
+
+interface Props {
+  height?: number;
+}
+
+const {height} = Astro.props;
+---
+
+<LogoBase src={logoStandard} height={height} />

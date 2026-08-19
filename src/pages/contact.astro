@@ -1,21 +1,12 @@
 ---
 import NavbarSiteLayout from "../layouts/NavbarSiteLayout.astro";
 import {
-  contactEmail,
-  contactPhone,
-  contactAddress,
   formKey,
 } from "../data/constants";
-import StatBanner from "../sections/StatBanner.astro";
 import Icon from "../components/icon.astro";
 import {
-  mailIcon,
-  phoneIcon,
-  locationIcon,
   paperPlane,
 } from "../data/standard-icons";
-import CallNowButton from "../components/call-now-button.astro";
-import MapEmbed from "../components/map-embed.astro";
 import TemplateFormRedirect from "../components/template-form-redirect.astro";
 ---
 
@@ -23,64 +14,15 @@ import TemplateFormRedirect from "../components/template-form-redirect.astro";
   title="Contact"
   description="Get in touch with us today for a free quote and get started transforming your space!"
 >
-  <StatBanner />
 
   <div class="content-chapter">
     <section>
-      <div class="contact-card secondary-scheme">
-        <!-- Contact Card -->
-        <div class="text-content">
-          <div class="card-title">We Value Our Customers</div>
-          <p class="subtle-text">
-            Reach out to our excellent team
-            and we'll get back to you as soon as we can.
-          </p>
-        </div>
-        <hr />
-        <div class="bullet-container">
-          <div class="contact-bullet">
-            <div class="contact-icon-container accent-1-scheme">
-              <Icon src={mailIcon} class="contact-icon accent-1-scheme" />
-            </div>
-            <div class="contact-info">
-              <div class="contact-type">Email</div>
-              <a class="tail-fade" href={`mailto:${contactEmail}`}
-                >{contactEmail}</a
-              >
-            </div>
-          </div>
-          <div class="contact-bullet">
-            <div class="contact-icon-container accent-1-scheme">
-              <Icon src={phoneIcon} class="contact-icon accent-1-scheme" />
-            </div>
-            <div class="contact-info">
-              <div class="contact-type">Phone</div>
-              <a class="tail-fade" href={`tel:${contactPhone}`}
-                >{contactPhone}</a
-              >
-            </div>
-          </div>
-          <div class="contact-bullet">
-            <div class="contact-icon-container accent-1-scheme">
-              <Icon src={locationIcon} class="contact-icon accent-1-scheme" />
-            </div>
-            <div class="contact-info">
-              <div class="contact-type">Address</div>
-              <a class="tail-fade" href="">{contactAddress}</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="map-embed-container secondary-scheme">
-        <MapEmbed class="contact-map-embed" />
-      </div>
 
       <div class="form-section">
         <div class="overview">
           <h1 class="section-title">Contact Us</h1>
           <p class="subtle-text">
-            Not sure where to start? Send us a quick message and we'll help you figure out the next steps.
+            To contact Carole or learn more about the artwork, fill out the form below or call/email directly.
           </p>
         </div>
         <form action="" id="contact-form">
@@ -124,7 +66,6 @@ import TemplateFormRedirect from "../components/template-form-redirect.astro";
             Send Message
             <Icon src={paperPlane} class="body-icon-sm" />
           </button>
-          <CallNowButton />
         </div>
       </div>
     </section>

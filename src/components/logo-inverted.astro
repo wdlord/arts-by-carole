@@ -1,0 +1,12 @@
+---
+import LogoBase from './logo-base.astro';
+import logoInverted from '../images/logos/logo-inverted.svg';
+
+interface Props {
+  height?: number;
+}
+
+const {height} = Astro.props;
+---
+
+<LogoBase src={logoInverted} height={height} />

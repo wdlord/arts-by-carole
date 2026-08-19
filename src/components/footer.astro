@@ -1,5 +1,5 @@
 ---
-import Logo from "./logo.astro";
+import LogoInverted from "./logo-inverted.astro";
 import {
   contactEmail,
   contactPhone,
@@ -20,13 +20,13 @@ const currentPath = Astro.url.pathname;
     <div class="main-content">
       <div class="logo-and-description">
         <a href="/">
-          <Logo height={40}/>
+          <LogoInverted height={56} />
         </a>
         <div class="description">
-          We provide residential and commercial painting throughout X, focusing on clean work, clear communication, and jobs done on time.
+          Creating art has been my main interest all of my life.  After working in several other professions, I always returned to art.
         </div>
-        <a href={ctaLink} target={ctaTarget} class="site-button">
-          Get a Quote
+        <a href={ctaLink} target={ctaTarget} class="ghost-white">
+          Get in Touch
           <Icon src={arrowRight} class="body-icon-sm"/>
         </a>
       </div>
@@ -105,12 +105,14 @@ const currentPath = Astro.url.pathname;
     display: flex;
     justify-content: center;
     color: var(--footer-text);
-    background-color: var(--footer-color);
+    background: linear-gradient(#212121, #111111);
     --scheme-text-color: var(--footer-text);
+    font-weight: 300;
   }
 
   hr {
     margin-block: 0;
+    background-color: rgba(256, 256, 256, 0.1);
   }
 
   .main-content {
@@ -126,7 +128,7 @@ const currentPath = Astro.url.pathname;
     display: flex;
     flex-direction: column;
     align-items: start;
-    gap: 2rem;
+    gap: 3rem;
   }
 
   .menus {

@@ -7,6 +7,14 @@
 }
 
 @font-face {
+    font-family: 'Roboto';
+    src: url('roboto-v51-latin-300.woff2') format('woff2');
+    font-weight: 300;
+    font-style: light;
+    font-display: swap;
+}
+
+@font-face {
     font-family: 'Playfair Display';
     src: url('playfair-display-v40-latin-regular.woff2') format('woff2');
     font-weight: 400;
