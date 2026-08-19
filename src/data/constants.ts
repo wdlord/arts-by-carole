@@ -32,7 +32,9 @@ export const navLinks: NavItem[] = [
     label: "Gallery",
     href: "/gallery",
     children: [
-      // ...serviceLinks,
+      { href: "/gallery/art-gallery", label: "Art Gallery" },
+      { href: "/gallery/autographs", label: "Autographs" },
+      { href: "/gallery/ephemera", label: "Ephemera" },
     ],
   },
   { href: "/exhibits-and-recognition", label: "Exhibits and Recognition" },
