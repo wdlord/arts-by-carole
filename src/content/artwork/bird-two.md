@@ -1,11 +1,11 @@
 ---
-title: "Wild Finch"
-size: "36\"x52\""
-medium: "Oil on Canvas"
+title: Wild Finch
+size: 36"x52"
+medium: Oil on Canvas
 category:
-- animals
+  - animals
 available: true
 featured: true
-image: "../../images/gallery/artwork/20260504_170503.jpg"
-description: ""
+image: ../../images/gallery/artwork/20260504_170503.jpg
+description: Painting of a wild finch with red head and yellow body.
 ---
