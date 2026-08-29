@@ -1,0 +1,114 @@
+---
+interface Props {
+  tags: string[];
+}
+
+const { tags } = Astro.props;
+---
+
+<div class="filter-menu">
+  <div class="label">Filters</div>
+  <div class="tag-container">
+    <div id="all-tag" class="tail-fade active">All</div>
+    {tags.map((tag) => <div class="filter-tag tail-fade">{tag}</div>)}
+  </div>
+</div>
+
+<script is:inline>
+  // Manages tag UX
+  const allTag = document.getElementById("all-tag");
+  const standardTags = document.getElementsByClassName("filter-tag");
+
+  // Emitting the current filter state
+  function emitSelectedFilters() {
+    const selectedFilters = Array.from(standardTags)
+      .filter((tag) => tag.classList.contains("active"))
+      .map((tag) => tag.innerHTML);
+
+    document.dispatchEvent(
+      new CustomEvent("gallery-filter-change", {
+        detail: selectedFilters,
+      }),
+    );
+  }
+
+  // Special logic for 'All' tag
+  allTag.addEventListener("click", () => {
+    if (!allTag.classList.contains("active")) {
+      Array.from(standardTags).forEach((tag) => tag.classList.remove("active"));
+      allTag.classList.add("active");
+      emitSelectedFilters();
+    }
+  });
+
+  // Normal tag toggling
+  function handleTagClick() {
+    this.classList.toggle("active");
+
+    // Turns of 'All' tag once any normal tag is active.
+    if (this.classList.contains("active")) {
+      allTag.classList.remove("active");
+    }
+
+    // Checks if any standard tags are still active.
+    let activeTags = Array.from(standardTags)
+      .filter((tag) => tag.classList.contains("active"));
+
+    // If not, turn 'All' tag back on.
+    if (activeTags.length == 0) {
+      allTag.classList.add("active");
+      emitSelectedFilters();
+    }
+
+    emitSelectedFilters();
+  }
+
+  // Assign handler function to tags
+  Array.from(standardTags).forEach((tag) => {
+    tag.onclick = handleTagClick;
+  });
+</script>
+
+<style lang="scss">
+  @use "../styles/font-system" as *;
+  @use "../styles/column-layouts" as *;
+
+  .filter-menu {
+    max-width: col-width(3);
+  }
+
+  .label {
+    @extend %accent-font;
+    text-align: right;
+    margin-bottom: 2rem;
+  }
+
+  .tag-container {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .filter-tag,
+  #all-tag {
+    border: 1px solid var(--accent-1-color);
+    border-radius: 2px;
+    padding: 0.25rem 1rem;
+    color: var(--accent-1-color);
+    text-align: center;
+    text-transform: capitalize;
+    opacity: 0.7;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &.active {
+      opacity: 1;
+      color: var(--white);
+      background-color: var(--accent-1-color);
+    }
+  }
+</style>

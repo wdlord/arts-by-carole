@@ -5,11 +5,15 @@ import GalleryArtworkCard from "../../components/gallery-artwork-card.astro";
 import { getCollection, type CollectionEntry } from 'astro:content';
 
 const artwork: CollectionEntry<'artwork'>[] = await getCollection('artwork');
-console.log(artwork);
+const tags = [
+  ...new Set(
+    artwork.flatMap((item) => item.data.categories)
+  ),
+].sort();
 ---
 
 <NavbarSiteLayout title="Artwork Gallery" description="View Carole Quinn-Nylander's oil painting works.">
-  <GalleryLayout title="Artwork Gallery">
+  <GalleryLayout title="Artwork Gallery" tags={tags}>
     <Fragment slot="gallery-description">
       <p>
         I started my autograph collection, now numbering about 200, while living in Beverly Hills in 1963 in a believe-it-or-not cheap apartment. In the 1970s as a stay-at-home mom I wrote letters to actors telling them what I liked best about their work, including their picture in an ad, then I included a SASE.
@@ -25,4 +29,8 @@ console.log(artwork);
       }
     </Fragment>
   </GalleryLayout>
+
+  <script>
+    import "../../scripts/gallery-filter.js";
+  </script>
 </NavbarSiteLayout>

@@ -1,16 +1,20 @@
 ---
+import ToTopButton from '../components/to-top-button.astro';
+import FilterMenu from '../components/filter-menu.astro';
+
 interface Props {
   title: string;
+  tags: string[];
 }
 
 const {
   title,
+  tags,
 } = Astro.props;
 ---
 
-<!-- To Top Button Here -->
-
 <div class="gallery-layout-container">
+  <ToTopButton />
   <div class="gallery-layout-content">
     <section class="gallery-overview">
       <h1 class="page-title">{title}</h1>
@@ -21,8 +25,8 @@ const {
 
     <hr>
 
-    <div class="filter-menu">
-
+    <div class="filter-menu-container">
+      <FilterMenu tags={tags} />
     </div>
 
     <div class="gallery-items">
@@ -69,6 +73,12 @@ const {
 
   .desc p {
     margin-bottom: 1rem;
+  }
+
+  .filter-menu-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
   }
 
   .gallery-items {

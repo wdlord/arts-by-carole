@@ -11,9 +11,10 @@ const {
 } = Astro.props;
 
 const availability = item.data.available ? 'Available' : 'Sold';
+const categoryString = item.data.categories.join(',');
 ---
 
-<div class="card">
+<div class="gallery-card" data-categories={categoryString}>
   <Image class="thumbnail img-card" src={item.data.image} alt=""/>
   <div class="title">{item.data.title}</div>
   <div class="medium-and-size">

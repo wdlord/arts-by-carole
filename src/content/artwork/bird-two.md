@@ -2,7 +2,7 @@
 title: Wild Finch
 size: 36"x52"
 medium: Oil on Canvas
-category:
+categories:
   - animals
 available: true
 featured: true

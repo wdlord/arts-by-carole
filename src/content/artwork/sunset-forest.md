@@ -2,7 +2,7 @@
 title: "Sunset Forest"
 size: "36\"x52\""
 medium: "Oil on Canvas"
-category:
+categories:
 - landscapes
 available: true
 featured: true

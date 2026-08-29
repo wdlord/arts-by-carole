@@ -11,7 +11,13 @@ const artwork = defineCollection({
     title: z.string(),
     size: z.string().optional(),
     medium: z.string().optional(),
-    categories: z.array(z.string()).default([]),
+    categories: z
+    .array(
+      z.string().transform(value =>
+        value.trim().toLowerCase()
+      )
+    )
+    .default([]),
     available: z.boolean().default(false),
     featured: z.boolean().default(false),
     image: image(),
