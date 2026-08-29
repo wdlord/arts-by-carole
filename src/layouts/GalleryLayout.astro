@@ -103,4 +103,16 @@ const {
     grid-template-columns: repeat(3, 1fr);
     gap: 4rem 5rem;
   }
+
+  @media screen and (max-width: $breakpoint-md) {
+    .gallery-items {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: $breakpoint-sm) {
+    .gallery-items {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
