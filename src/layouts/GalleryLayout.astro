@@ -1,6 +1,7 @@
 ---
 import ToTopButton from '../components/to-top-button.astro';
 import FilterMenu from '../components/filter-menu.astro';
+import Lightbox from '../components/lightbox.astro';
 
 interface Props {
   title: string;
@@ -15,6 +16,7 @@ const {
 
 <div class="gallery-layout-container">
   <ToTopButton />
+  <Lightbox />
   <div class="gallery-layout-content">
     <section class="gallery-overview">
       <h1 class="page-title">{title}</h1>
@@ -34,6 +36,21 @@ const {
     </div>
   </div>
 </div>
+
+<script is:inline>
+  // Set up cards to dispatch event
+  document.querySelectorAll('.gallery-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const data = JSON.parse(card.dataset.lightbox);
+
+      document.dispatchEvent(
+        new CustomEvent('open-gallery-modal', {
+          detail: data,
+        })
+      );
+    });
+  });
+</script>
 
 <style lang="scss">
   @use "../styles/breakpoints" as *;

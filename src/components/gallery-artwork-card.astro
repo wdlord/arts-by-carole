@@ -12,9 +12,18 @@ const {
 
 const availability = item.data.available ? 'Available' : 'Sold';
 const categoryString = item.data.categories.join(',');
+const lightboxData = {
+  image: item.data.image,
+  title: item.data.title,
+  description: item.data.description,
+}
 ---
 
-<div class="gallery-card" data-categories={categoryString}>
+<div
+  class="gallery-card"
+  data-categories={categoryString}
+  data-lightbox={JSON.stringify(lightboxData)}
+>
   <Image class="thumbnail img-card" src={item.data.image} alt=""/>
   <div class="title">{item.data.title}</div>
   <div class="medium-and-size">
@@ -24,7 +33,6 @@ const categoryString = item.data.categories.join(',');
   </div>
   <div class="availability">{availability}</div>
 </div>
-
 
 <style lang="scss">
   @use "../styles/font-system" as *;
