@@ -25,4 +25,43 @@ const artwork = defineCollection({
   }),
 });
 
-export const collections = { artwork };
+const ephemera = defineCollection({
+  loader: glob({
+    pattern: '**/*.md',
+    base: './src/content/ephemera',
+  }),
+  schema: ({ image }) => z.object({
+    title: z.string(),
+    categories: z
+    .array(
+      z.string().transform(value =>
+        value.trim().toLowerCase()
+      )
+    )
+    .default([]),
+    available: z.boolean().default(false),
+    image: image(),
+    description: z.string().optional(),
+  }),
+});
+
+const autograph = defineCollection({
+  loader: glob({
+    pattern: '**/*.md',
+    base: './src/content/autographs',
+  }),
+  schema: ({ image }) => z.object({
+    title: z.string(),
+    categories: z
+    .array(
+      z.string().transform(value =>
+        value.trim().toLowerCase()
+      )
+    )
+    .default([]),
+    image: image(),
+    description: z.string().optional(),
+  }),
+});
+
+export const collections = { artwork, ephemera, autograph };

@@ -1,0 +1,37 @@
+---
+import GalleryLayout from "../../layouts/GalleryLayout.astro";
+import NavbarSiteLayout from "../../layouts/NavbarSiteLayout.astro";
+import GalleryAutographCard from "../../components/gallery-autograph-card.astro";
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+const autographs: CollectionEntry<'autograph'>[] = await getCollection('autograph');
+const tags = [
+  ...new Set(
+    autographs.flatMap((item) => item.data.categories)
+  ),
+].sort();
+console.log(autographs)
+---
+
+<NavbarSiteLayout title="Autograph Gallery" description="View Carole Quinn-Nylander's oil painting works.">
+  <GalleryLayout pageHeading="Autograph Gallery" tags={tags}>
+    <Fragment slot="gallery-description">
+      <p>
+        I started my autograph collection, now numbering about 200, while living in Beverly Hills in 1963 in a believe-it-or-not cheap apartment. In the 1970s as a stay-at-home mom I wrote letters to actors telling them what I liked best about their work, including their picture in an ad, then I included a SASE.
+      </p>
+      <p>Everyone responded, some with personal messages! In the 1990s I met two older women in Utah, who had been teenage members of movie fan clubs. One of then traveled to Hollywood to meet her heart-throb Joel MacCrae. I purchased their collections.</p>
+      <p>Then I attended events where I personally obtained more autographs, always telling them I intended to make a full-room collection on my wall along with my artwork. I did just that. I'm fascinated about history and human nature. </p>
+    </Fragment>
+    <Fragment slot="gallery-items">
+      {
+        autographs.map(item => (
+          <GalleryAutographCard item={item} />
+        ))
+      }
+    </Fragment>
+  </GalleryLayout>
+
+  <script>
+    import "../../scripts/gallery-filter.js";
+  </script>
+</NavbarSiteLayout>

@@ -3,14 +3,13 @@ import type { CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
 
 interface Props {
-  item: CollectionEntry<'artwork'>;
+  item: CollectionEntry<'autograph'>;
 }
 
 const {
   item,
 } = Astro.props;
 
-const availability = item.data.available ? 'Available' : 'Sold';
 const categoryString = item.data.categories.join(',');
 const lightboxData = {
   image: item.data.image,
@@ -28,12 +27,6 @@ const lightboxData = {
     <Image class="thumbnail" src={item.data.image} alt=""/>
   </div>
   <div class="title">{item.data.title}</div>
-  <div class="medium-and-size">
-    <div class="medium">{item.data.medium}</div>
-    <div class="divider"></div>
-    <div class="size">{item.data.size}</div>
-  </div>
-  <div class="availability">{availability}</div>
 </div>
 
 <style lang="scss">

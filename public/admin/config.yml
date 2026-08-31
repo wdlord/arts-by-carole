@@ -33,3 +33,46 @@ collections:
         name: "image"
         widget: "image"
       - { label: "Description", name: "description", widget: "text", required: false }
+  
+  - name: "ephemera"
+    label: "Ephemera"
+    folder: "/src/content/ephemera"
+    media_folder: "/src/images/gallery/ephemera"
+    public_folder: "/src/images/gallery/ephemera"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields: &ephemera_fields
+      - { label: "Title", name: "title", widget: "string" }
+      - label: "Categories"
+        name: "categories"
+        widget: "list"
+        default: []
+        required: false
+      - { label: "Available", name: "available", widget: "boolean", default: false }
+      - label: "Image"
+        name: "image"
+        widget: "image"
+      - { label: "Description", name: "description", widget: "text", required: false }
+
+  - name: "autograph"
+    label: "Autographs"
+    folder: "/src/content/autographs"
+    media_folder: "/src/images/gallery/autographs"
+    public_folder: "/src/images/gallery/autographs"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields: &autograph_fields
+      - { label: "Title", name: "title", widget: "string" }
+      - label: "Categories"
+        name: "categories"
+        widget: "list"
+        default: []
+        required: false
+      - label: "Image"
+        name: "image"
+        widget: "image"
+      - { label: "Description", name: "description", widget: "text", required: false }

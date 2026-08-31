@@ -6,7 +6,7 @@ interface Props {
   class?: string;
 }
 
-const { text = "Get a Quote", class: className, ...rest } = Astro.props;
+const { text = "Get in Touch", class: className, ...rest } = Astro.props;
 
 // Only use noopener noreferrer if our CTA is using target _blank (prevents )
 const rel = ctaTarget == "_blank" ? "noopener noreferrer" : "";

@@ -4,12 +4,12 @@ import FilterMenu from '../components/filter-menu.astro';
 import Lightbox from '../components/lightbox.astro';
 
 interface Props {
-  title: string;
+  pageHeading: string;
   tags: string[];
 }
 
 const {
-  title,
+  pageHeading,
   tags,
 } = Astro.props;
 ---
@@ -19,7 +19,7 @@ const {
   <Lightbox />
   <div class="gallery-layout-content">
     <section class="gallery-overview">
-      <h1 class="page-title">{title}</h1>
+      <h1 class="page-title">{pageHeading}</h1>
       <div class="desc">
         <slot name="gallery-description"/>
       </div>
