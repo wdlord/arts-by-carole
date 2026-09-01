@@ -1,9 +1,12 @@
 
 backend:
-  name: git-gateway
+  name: github
+  repo: wdlord/arts-by-carole
   branch: main
+  base_url: https://decap-cms-proxy.vercel.app/
+  auth_endpoint: auth
 
-local_backend: true
+# local_backend: true
 
 media_folder: "/src/assets/images" # Location where files will be stored in the repo
 public_folder: "/src/assets/images" # The src attribute for uploaded media
