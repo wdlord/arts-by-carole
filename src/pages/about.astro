@@ -1,7 +1,9 @@
 ---
 import NavbarSiteLayout from "../layouts/NavbarSiteLayout.astro";
-import CTA from "../sections/CTA.astro";
 import StatBanner from "../sections/StatBanner.astro";
+import Biography from "../sections/Biography.astro";
+import SelectedAwards from "../sections/SelectedAwards.astro";
+import ArtistStatement from "../sections/ArtistStatement.astro";
 import PageHeading from "../layouts/PageHeading.astro";
 ---
 
@@ -9,6 +11,9 @@ import PageHeading from "../layouts/PageHeading.astro";
   title="About Us"
   description="Learn about our process, materials, and what sets us apart from the competition."
 >
-  <StatBanner />
-  <CTA />
+  <PageHeading><h1>About</h1></PageHeading>
+  <Biography />
+  <!-- <SelectedAwards />
+  <ArtistStatement />
+  <StatBanner /> -->
 </NavbarSiteLayout>

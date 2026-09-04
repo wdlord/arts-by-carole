@@ -1,19 +1,8 @@
 ---
 import Picture from "astro/components/Picture.astro";
-import bgImage from "../images/contact-bg.jpg";
 ---
 
-<div class="content-chapter page-heading">
-    <div class="bg-img-container blurred">
-      <Picture
-        src={bgImage}
-        alt=""
-        fit="cover"
-        formats={["avif", "webp", "jpeg"]}
-        widths={[400, 880, 1200]}
-        quality={30}
-      />
-    </div>
+<div class="content-chapter page-heading accent-1-scheme">
     <div class="content-container">
       <section class="heading-container half-section">
         <slot/>
@@ -22,10 +11,6 @@ import bgImage from "../images/contact-bg.jpg";
 </div>
 
 <style>
-  .content-chapter {
-    position: relative;
-    background: rgba(0, 0, 0, 0.6);
-  }
 
   .heading-container {
     display: flex;

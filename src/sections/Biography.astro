@@ -1,0 +1,128 @@
+---
+import { Image } from "astro:assets";
+import backgroundImage from "../images/bio-background-image.jpg";
+import bioImage from "../images/bio-image.jpg";
+---
+
+<section class="biography-section">
+  <div class="image-section-container">
+    <div class="background-image-container">
+      <Image class="background-image" src={backgroundImage} alt="Colorful painting of a horse and rider." format="avif" widths={[800, 400]} quality="50" />
+    </div>
+    <Image class="bio-image img-card" src={bioImage} alt="Carole Nylander leaning next to two of her oil paintings." format="avif" width={640} />
+  </div>
+  <div class="text-content-container">
+    <div class="text-content">
+      <div class="bio-heading">
+        <h2>Biography</h2>
+        <div class="line"></div>
+      </div>
+      <p>
+        I loved to paint and draw as a child in Iowa and Utah.  An art scholarship to Pepperdine University took me to California. After a semester at the University of Guadalajara, Mexico, I graduated from Weber State University, Ogden, Utah. My degree was in art education. Teaching art to children in middle and elementary school was fun and satisfying.
+      </p>
+      <p>
+        A midlife change in career was certainly different: I worked with court reporters in state and federal courts in Utah. People vary more than I’d ever guessed! The best of us and the worst is quite a range. Since I could write 160 wpm I later wrote about 25 people’s biographies. Interestingly, the top figures in the city of Ogden, Utah came to me to write their stories.  The last biography I wrote was of my long-time dentist.  I remembered so much about his life that the stories and events of his family took on special significance.
+      </p>
+      <p>
+        More in line with art, I next went to work with ephemera -- historical paper: periodicals, newspapers, letters, maps and photographs.  I got interested early in life by writing letters to Hollywood movie stars, sports people and political VIPs asking for their autographs.  They sent me photos, autographs and even an exercise book.  My oldest piece is a newspaper with an article about the death of George Washington in the London Times.  It seems that Londoners thought he was a hero of the people.  I’m guessing the king didn’t feel the same way about him.  I sell ephemera along with my artwork in a shop, or I take it to a show at a fair.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "../styles/column-layouts" as *;
+  @use "../styles/breakpoints" as *;
+
+  section {
+    padding-top: 0;
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+  }
+
+  .image-section-container {
+    padding-left: var(--side-margin);
+    padding-top: 140px;
+    position: relative;
+    display: flex;
+    justify-content: end;
+  }
+
+  .background-image-container {
+    position: absolute;
+    width: calc(100% - col-width(1));
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    overflow: hidden;
+  }
+
+  .background-image {
+    filter: blur(2px);
+    transform: scale(1.2);
+    height: 100%;
+  }
+
+  .bio-image {
+    max-width: col-width(4);
+    aspect-ratio: 3/4;
+    height: min-content;
+  }
+
+  .text-content-container {
+    padding-left: var(--section-gap);
+    padding-right: var(--side-margin);
+    padding-top: 312px;
+    width: 100%;
+  }
+
+  .text-content {
+    max-width: col-width(5);
+  }
+
+  .bio-heading {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    margin-bottom: 5rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .line {
+    width: 100%;
+    height: 1px;
+    background-color: var(--border-color);
+  }
+
+  p {
+    color: var(--subtle-text);
+    margin-bottom: 5rem;
+  }
+
+  @media screen and (max-width: $breakpoint-md) {
+    section {
+      grid-template-columns: 1fr;
+    }
+    .background-image-container {
+      width: 100%;
+    }
+    .background-image {
+      width: 100%;
+    }
+    .image-section-container {
+      padding-left: 0;
+      padding-top: 0;
+      justify-content: center;
+    }
+    .text-content-container {
+      display: flex;
+      justify-content: center;
+      padding-inline: var(--side-margin);
+      padding-top: var(--section-padding);
+    }
+  }
+</style>
