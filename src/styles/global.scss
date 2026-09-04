@@ -48,6 +48,8 @@ body {
   font-size: var(--size-body);
   color: var(--base-text);
   background-color: var(--base-color);
+  background-image: url('/bg-texture.webp');
+  background-size: 614px;
 }
 
 /* defines the maximum width of content on a page */

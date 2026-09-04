@@ -2,12 +2,18 @@
 import NavbarSiteLayout from "../layouts/NavbarSiteLayout.astro";
 import {
   formKey,
+  contactEmail,
+  contactPhone,
 } from "../data/constants";
 import Icon from "../components/icon.astro";
 import {
+mailIcon,
   paperPlane,
+phoneIcon,
 } from "../data/standard-icons";
 import TemplateFormRedirect from "../components/template-form-redirect.astro";
+import Image from "astro/components/Image.astro";
+import contactImage from "../images/contact-image.jpg";
 ---
 
 <NavbarSiteLayout
@@ -18,9 +24,14 @@ import TemplateFormRedirect from "../components/template-form-redirect.astro";
   <div class="content-chapter">
     <section>
 
+      <div class="image-section-container">
+        <Image class="background-image" src={contactImage} alt="" format="avif" quality={35} widths={[760, 310]} />
+        <Image class="contact-image" src={contactImage} alt="" format="avif" widths={[800, 480]} />
+      </div>
+
       <div class="form-section">
         <div class="overview">
-          <h1 class="section-title">Contact Us</h1>
+          <h1 class="section-title">Contact</h1>
           <p class="subtle-text">
             To contact Carole or learn more about the artwork, fill out the form below or call/email directly.
           </p>
@@ -61,11 +72,34 @@ import TemplateFormRedirect from "../components/template-form-redirect.astro";
             required></textarea>
         </form>
 
-        <div class="button-row">
-          <button class="site-button" type="submit" form="contact-form">
-            Send Message
-            <Icon src={paperPlane} class="body-icon-sm" />
-          </button>
+        <div class="bottom-row">
+          <div class="button-row">
+            <button class="site-button" type="submit" form="contact-form">
+              Send Message
+              <Icon src={paperPlane} class="body-icon-sm" />
+            </button>
+          </div>
+          <div class="divider"></div>
+          <div class="contact-links">
+            <a
+              class="contact-link tail-fade underscore-trigger"
+              href={`mailto:${contactEmail}`}
+            >
+              <Icon src={mailIcon} class="contact-icon tail-fade" />
+              <span class="underscore">
+                {contactEmail}
+              </span>
+            </a>
+            <a
+              class="contact-link tail-fade underscore-trigger"
+              href={`tel:${contactPhone}`}
+            >
+              <Icon src={phoneIcon} class="contact-icon tail-fade" />
+              <span class="underscore">
+                {contactPhone}
+              </span>
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -81,7 +115,7 @@ import TemplateFormRedirect from "../components/template-form-redirect.astro";
 
   section {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 5fr 7fr;
     padding-block: 0;
   }
 
@@ -98,112 +132,109 @@ import TemplateFormRedirect from "../components/template-form-redirect.astro";
     padding-right: var(--side-margin);
     padding-left: var(--section-gap);
     grid-column: 2;
-    grid-row: 1 / span 2;
   }
 
   h1 {
-    font-size: var(--size-h2);
+    color: var(--accent-1-color);
   }
 
-  /* Contact Card */
-  .contact-card {
-    padding-left: var(--side-margin);
-    padding-right: var(--section-gap);
-    padding-top: var(--section-padding);
-    padding-bottom: 104px;
+  .bottom-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .divider {
+    width: 1px;
+    height: 4rem;
+    background-color: var(--border-color);
+  }
+
+  .contact-links {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    border-right: var(--border);
+    gap: 0.25rem;
   }
 
-  .card-title {
+  .contact-link {
     @extend %accent-font;
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .bullet-container {
-    display: flex;
-    flex-direction: column;
-    gap: 24px 48px;
-  }
-
-  .contact-bullet {
-    display: flex;
+    color: var(--accent-1-color);
+    display: inline-flex;
     align-items: center;
-    gap: 16px;
-  }
+    gap: 1rem;
+    padding-block: 2px;
 
-  .contact-icon-container {
-    border-radius: 50%;
-    width: 40px;
-    aspect-ratio: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    &:hover {
+      opacity: 0.8;
+    }
   }
 
   .contact-icon {
     --size: 1.25rem;
+    fill: var(--accent-1-color);
   }
 
-  .contact-info {
-    color: var(--subtle-text);
-  }
-
-  .contact-info a {
-    color: var(--subtle-text);
-    text-decoration: none;
-
-    &:hover {
-      color: var(--dark-heading);
-    }
-  }
-
-  .contact-type {
-    @extend %accent-font;
-    font-size: 1rem;
-    color: var(--base-text);
-  }
-
-  // Map embed
-  .map-embed-container {
-    border-right: var(--border);
-    padding-left: var(--side-margin);
-    height: 500px;
-  }
-
-  .contact-map-embed {
+  .image-section-container {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.4);
     overflow: hidden;
-    border-radius: var(--standard-radius);
-    border: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: end;
   }
 
-  .map-embed img {
+  .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    filter: blur(16px);
+    transform: scale(1.2);
+    z-index: -1;
   }
 
-  .contact-info a:hover {
-    opacity: 0.65;
+  .contact-image {
+    width: col-width(3);
+    border-radius: var(--standard-radius);
+    margin-left: var(--side-margin);
+    margin-right: var(--section-gap);
   }
 
-  @media screen and (max-width: $breakpoint-md) {
+  @media screen and (max-width: 1200px) {
     section {
-      grid-template-columns: 1fr;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .form-section {
       grid-row: 1;
       grid-column: auto;
+      max-width: col-width(6);
     }
     .form-section,
     .contact-card {
       padding-inline: var(--side-margin);
     }
-    .map-embed-container {
-      padding-left: 0;
+    .image-section-container {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .contact-image {
+      margin: 0;
+    }
+  }
+
+  @media screen and (max-width: $breakpoint-sm) {
+    .bottom-row {
+      flex-direction: column;
+      align-items: start;
+    }
+    .divider {
+      height: 1px;
+      width: 75%;
+      margin-block: 4rem;
     }
   }
 </style>

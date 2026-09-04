@@ -100,7 +100,6 @@ const currentPath = Astro.url.pathname;
   @use "../styles/breakpoints" as *;
 
   footer {
-    border-top: var(--border);
     padding-top: 104px;
     display: flex;
     justify-content: center;
@@ -255,6 +254,10 @@ const currentPath = Astro.url.pathname;
   @media screen and (max-width: $breakpoint-sm) {
     footer {
       padding-top: var(--section-padding);
+    }
+    .footer-links {
+      flex-direction: column;
+      flex-wrap: nowrap;
     }
   }
 </style>
