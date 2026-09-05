@@ -15,11 +15,11 @@ import handshakeIcon from "../images/icons/handshake-solid-full.svg?raw";
 import headIcon from "../images/icons/head-side-gear-solid-full.svg?raw";
 import paperPlane from "../images/icons/paper-plane-top-sharp-solid-full.svg?raw";
 import commentHeart from "../images/icons/comment-heart-sharp-solid-full.svg?raw";
-import brush from "../images/icons/brush-solid-full.svg?raw";
 import store from "../images/icons/store-solid-full.svg?raw";
 import shieldCheck from "../images/icons/shield-check-sharp-solid-full.svg?raw";
 import close from "../images/icons/xmark-sharp-regular-full.svg?raw";
 import pinIcon from "../images/icons/map-pin-solid-full.svg?raw";
+import ribbon from "../images/icons/award-simple-sharp-solid-full.svg?raw";
 
 export {
   arrowRight,
@@ -37,9 +37,9 @@ export {
   headIcon,
   paperPlane,
   commentHeart,
-  brush,
   store,
   shieldCheck,
   close,
   pinIcon,
+  ribbon
 };
