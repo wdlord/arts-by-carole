@@ -1,26 +1,20 @@
 ---
+import { arrowRight } from "../data/standard-icons";
+import Icon from "../components/icon.astro";
 
 const stats = [
   {
-    stat: `X+`,
-    label: ["years of", "experience"],
+    stat: `24+`,
+    label: ["exhibitions"],
   },
   {
-    stat: "15+",
-    label: ["years in", "business"],
-  },
-  {
-    stat: "5/5",
-    label: ["perfect", "reviews"],
-  },
-  {
-    stat: "200+",
-    label: ["jobs", "completed"],
+    stat: "11+",
+    label: ["awards"],
   },
 ];
 ---
 
-<div class="content-chapter accent-1-scheme">
+<div class="content-chapter secondary-scheme">
   <div class="content-container">
     <section class="half-section stats">
       <div class="stat-container">
@@ -33,6 +27,10 @@ const stats = [
             </div>
           ))
         }
+        <a href="/gallery/art-gallery/" class="site-button">
+          View Full Gallery
+          <Icon src={arrowRight} class="body-icon" />
+        </a>
       </div>
     </section>
   </div>
@@ -42,40 +40,49 @@ const stats = [
   @use "../styles/breakpoints" as *;
   @use "../styles/font-system" as *;
 
+  section {
+    padding-block: 244px;
+  }
+
   .stats {
     display: flex;
     justify-content: center;
   }
+
   .stat-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 48px 96px;
+    display: flex;
+    align-items: center;
+    gap: 96px;
   }
+
   .stat {
     @extend %accent-font;
     line-height: 1.4;
     padding-block: 0.5rem;
-    font-size: 1rem;
+    font-size: 1.125rem;
+    border-right: 1px solid var(--border-color);
+    padding-right: 4rem;
   }
+
   .stat-heading {
     @extend %heading-font;
-    font-size: var(--size-h2);
+    font-size: 4rem;
     display: block;
     line-height: 1;
     margin-bottom: 0.5rem;
   }
 
-  @media screen and (max-width: $breakpoint-md) {
-    .stat-container {
-      // grid-template-columns: repeat(2, 1fr);
-      gap: 32px 64px;
+  @media screen and (max-width: 800px) {
+    section {
+      padding-block: var(--section-padding);
     }
-  }
-
-  @media screen and (max-width: $breakpoint-sm) {
     .stat-container {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 48px;
+      flex-direction: column;
+      gap: 3rem;
+    }
+    .stat {
+      padding-inline: 0;
+      border-right: none;
     }
   }
 </style>
