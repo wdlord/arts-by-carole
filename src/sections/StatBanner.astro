@@ -20,10 +20,12 @@ const stats = [
       <div class="stat-container">
         {
           stats.map((data) => (
-            <div class="stat tail-fade-long underscore-trigger accent underscore">
-              <span class="stat-heading">{data.stat}</span>
-              {data.label[0]}
-              <span class="second-line">{data.label[1]}</span>
+            <div class="stat-underscore underscore-trigger">
+              <div class="stat tail-fade-long accent underscore">
+                <span class="stat-heading">{data.stat}</span>
+                {data.label[0]}
+                <span class="second-line">{data.label[1]}</span>
+              </div>
             </div>
           ))
         }
@@ -55,13 +57,16 @@ const stats = [
     gap: 96px;
   }
 
+  .stat-underscore {
+    padding-right: 4rem;
+    border-right: 1px solid var(--border-color);
+    padding-block: 0.5rem;
+  }
+
   .stat {
     @extend %accent-font;
     line-height: 1.4;
-    padding-block: 0.5rem;
     font-size: 1.125rem;
-    border-right: 1px solid var(--border-color);
-    padding-right: 4rem;
   }
 
   .stat-heading {
@@ -80,7 +85,7 @@ const stats = [
       flex-direction: column;
       gap: 3rem;
     }
-    .stat {
+    .stat-underscore {
       padding-inline: 0;
       border-right: none;
     }
