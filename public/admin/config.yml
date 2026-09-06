@@ -12,6 +12,7 @@ media_folder: "/src/assets/images" # Location where files will be stored in the 
 public_folder: "/src/assets/images" # The src attribute for uploaded media
 
 collections:
+  # artwork
   - name: "artwork"
     label: "Artwork"
     folder: "/src/content/artwork"
@@ -37,6 +38,7 @@ collections:
         widget: "image"
       - { label: "Description", name: "description", widget: "text", required: false }
   
+  # ephemera
   - name: "ephemera"
     label: "Ephemera"
     folder: "/src/content/ephemera"
@@ -59,6 +61,7 @@ collections:
         widget: "image"
       - { label: "Description", name: "description", widget: "text", required: false }
 
+  # autograph
   - name: "autograph"
     label: "Autographs"
     folder: "/src/content/autographs"
@@ -79,3 +82,21 @@ collections:
         name: "image"
         widget: "image"
       - { label: "Description", name: "description", widget: "text", required: false }
+  
+  # past exhibits
+  - name: "past_exhibits"
+    label: "Past Exhibits"
+    files:
+      - name: "exhibits"
+        label: "Past Exhibits List"
+        file: "src/content/past-exhibits/exhibits.json"
+        fields:
+          - label: "Exhibits"
+            name: "exhibits"
+            widget: "list"
+            label_singular: "Exhibit"
+            summary: "{{title}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text", required: false }
+
