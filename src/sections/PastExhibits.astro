@@ -4,27 +4,10 @@ import awardsGreenRibbon from "../images/awards-green-ribbon.jpg";
 import awardsWearingRed from "../images/awards-wearing-red.jpg";
 import awardsWearingJacket from "../images/awards-wearing-jacket.jpg";
 import awardsBlueRibbon from "../images/awards-blue-ribbon.jpg";
-import pastExhibits from '../content/past-exhibits/exhibits.json';
 import { getCollection } from 'astro:content';
 
 const exhibits = (await getCollection('pastExhibits'))
   .sort((a, b) => Number(a.id) - Number(b.id));
-
-// const exhibits = [
-//   {
-//     title: "Brigham City Public Library",
-//     description: "Brigham City Public Library in Utah in the 1980's were my  first art exhibits. I showed oil, watercolor and acrylic paintings with a women's art  association in Ogden, Utah."
-//   },
-//   {
-//     title: "Brigham City Public Library",
-//     description: "Brigham City Public Library in Utah in the 1980's were my  first art exhibits. I showed oil, watercolor and acrylic paintings with a women's art  association in Ogden, Utah."
-//   },
-//   {
-//     title: "Brigham City Public Library",
-//     description: "Brigham City Public Library in Utah in the 1980's were my  first art exhibits. I showed oil, watercolor and acrylic paintings with a women's art  association in Ogden, Utah."
-//   }
-// ]
-
 ---
 
   <section class="past-exhibits">
@@ -42,13 +25,13 @@ const exhibits = (await getCollection('pastExhibits'))
       <h2>Past<span class="second-line">Exhibits</span></h2>
       <div class="timeline">
         {
-          pastExhibits.exhibits.map((exhibit: {title: string, description: string}) => (
+          exhibits.map(exhibit => (
             <div class="exhibit">
               <div class="exhibit-title">
-                {exhibit.title}
+                {exhibit.data.title}
               </div>
               <div class="exhibit-description subtle-text">
-                {exhibit.description}
+                {exhibit.data.description}
               </div>
             </div>
           ))
