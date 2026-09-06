@@ -32,7 +32,6 @@ import { close } from "../data/standard-icons";
   // Do this on open
   document.addEventListener("open-gallery-modal", (event) => {
     const lightboxData = event.detail;
-    console.log(lightboxData);
 
     // Show modal
     galleryModal.style.display = "flex";
@@ -58,8 +57,6 @@ import { close } from "../data/standard-icons";
       // hide image and show spinner
       spinner.style.display = "block";
       modalImage.classList.add("hidden");
-
-      console.log('setting slide', lightboxData.image.src);
 
       // update src and content
       modalImage.src = lightboxData.image.src;
