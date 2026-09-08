@@ -20,7 +20,7 @@
   --card-padding-y: 40px;
   --card-padding-x: 32px;
   --card-padding: var(--card-padding-y) var(--card-padding-x);
-  --card-shadow: none;
+  --card-shadow: box-shadow: inset 0px -5px 64px rgba(0, 0, 0, 0.25);
   --border: 1px solid var(--border-color);
 
   --content-margin: 64px;

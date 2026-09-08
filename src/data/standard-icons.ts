@@ -20,6 +20,7 @@ import shieldCheck from "../images/icons/shield-check-sharp-solid-full.svg?raw";
 import close from "../images/icons/xmark-sharp-regular-full.svg?raw";
 import pinIcon from "../images/icons/map-pin-solid-full.svg?raw";
 import ribbon from "../images/icons/award-simple-sharp-solid-full.svg?raw";
+import locationDot from "../images/icons/location-dot-sharp-solid-full.svg?raw";
 
 export {
   arrowRight,
@@ -41,5 +42,6 @@ export {
   shieldCheck,
   close,
   pinIcon,
-  ribbon
+  ribbon,
+  locationDot,
 };
