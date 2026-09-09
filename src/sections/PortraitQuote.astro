@@ -1,0 +1,117 @@
+---
+import { Image } from "astro:assets";
+import portrait from "../images/awards-green-ribbon.jpg";
+import quoteBackground from "../images/quote-bg.jpg";
+import Icon from "../components/icon.astro";
+import { arrowRight } from "../data/standard-icons";
+---
+
+<section class="portrait-quote">
+  <Image class="image-background" src={quoteBackground} alt="" />
+  <Image class="portrait img-shadow" src={portrait} alt="Picture of Carole Quinn-Nylander holding a painting of a native american woman, and a ribbon." />
+  <div class="text-content">
+    <div class="subheading">Hello, I’m Carole!</div>
+    <div class="quote">
+      “Creating art
+      <div class="highlight">has been my main interest</div>
+      all of my life.
+      <div class="highlight">After working in several other professions,</div>
+      I always returned to art.”
+    </div>
+    <a href="/about" class="site-button">
+      About Me
+      <Icon src={arrowRight} class="body-icon" />
+    </a>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "../styles/font-system" as *;
+  @use "../styles/column-layouts" as *;
+  @use "../styles/breakpoints" as *;
+
+  section {
+    padding-inline: var(--side-margin);
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+  }
+
+  .image-background {
+    position: absolute;
+    left: 0;
+    height: 100%;
+    z-index: -1;
+    width: calc(col-width(2) + var(--side-margin));
+  }
+
+  .portrait {
+    width: col-width(2);
+    aspect-ratio: 1;
+    border-radius: var(--standard-radius);
+    margin-left: calc(col-width(1) + var(--gutter-width));
+  }
+
+  .subheading {
+    @extend %accent-font;
+    text-transform: none;
+    color: #9D968F;
+    border-left: 0.25rem solid #9D968F;
+    font-style: italic;
+    padding: 2px 0.75rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .quote {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: 4rem;
+    letter-spacing: -0.06em;
+    line-height: 103%;
+    color: var(--accent-1-color);
+    margin-bottom: 5rem;
+  }
+
+  .quote .highlight {
+    display: inline;
+    color: #9D968F;
+  }
+
+  @media screen and (max-width: $breakpoint-md) {
+    section {
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .image-background {
+      width: 100%;
+      height: 200px;
+      top: 0;
+    }
+
+    .portrait {
+      margin: 0;
+    }
+
+    .text-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .quote {
+      font-size: 3rem;
+    }
+  }
+
+  @media screen and (max-width: $breakpoint-sm) {
+    .quote {
+      font-size: 2.15rem;
+      line-height: 110%;
+      letter-spacing: -0.04em;
+    }
+  }
+</style>
