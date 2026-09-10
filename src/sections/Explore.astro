@@ -1,0 +1,172 @@
+---
+import Icon from "../components/icon.astro";
+import { arrowRight } from "../data/standard-icons";
+import loneRider from "../images/explore-section-images/rider.jpg";
+import parrot from "../images/explore-section-images/parrot.jpg";
+import lighthouse from "../images/explore-section-images/lighthouse.jpg";
+import naples from "../images/explore-section-images/a-night-in-naples.jpg";
+import { Image } from "astro:assets";
+
+const menuItems = [
+  {
+    label: "Art Gallery",
+    href: "/gallery/art-gallery/",
+  },
+  {
+    label: "Autographs",
+    href: "/gallery/autographs/",
+  },
+  {
+    label: "Ephemera",
+    href: "/gallery/ephemera/",
+  },
+];
+
+const images = [
+  loneRider,
+  parrot,
+  lighthouse,
+  naples,
+]
+---
+
+<section class="explore">
+  <div class="menu-section">
+    <h2>Explore</h2>
+    <div class="menu">
+      {
+        menuItems.map((item, index) => (
+          <a class="menu-item tail-fade-long">
+            <div class="number">{`0${index + 1}`}</div>
+            <div class="label">{item.label}</div>
+            <Icon src={arrowRight} class="body-icon arrow-icon tail-fade" />
+          </a>
+        ))
+      }
+    </div>
+  </div>
+  <div class="image-layout">
+    <div class="tooltip subtle-text">
+      <Icon src={arrowRight} class="body-icon tooltip-icon" />
+      Choose any category to explore.
+    </div>
+    <div class="preview-images">
+      {
+        images.map(preview => (
+          <Image class="img-card" src={preview} alt="" />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "../styles/font-system" as *;
+  @use "../styles/column-layouts" as *;
+  @use "../styles/breakpoints" as *;
+
+  section {
+    padding-inline: var(--side-margin);
+    display: flex;
+    align-items: end;
+    gap: 15%;
+  }
+
+  h2 {
+    font-size: 6rem;
+    letter-spacing: -0.07em;
+    margin-bottom: var(--section-gap);
+  }
+
+  .menu {
+    width: 100%;
+    max-width: col-width(3);
+  }
+
+  .menu-item {
+    @extend %accent-font;
+    padding: 4rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    border-bottom: var(--border);
+    cursor: pointer;
+
+    &:first-of-type {
+      border-top: var(--border);
+    }
+
+    &:hover {
+      background-color: var(--alt-color);
+    }
+  }
+
+  .number {
+    font-size: 1.125rem;
+  }
+
+  .menu-item:hover .arrow-icon {
+    margin-left: 4px;
+  }
+
+  .label {
+    font-size: 1.25rem;
+  }
+
+  .tooltip {
+    @extend %accent-font;
+    max-width: col-width(2);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 4rem;
+  }
+
+  .tooltip-icon {
+    transform: rotate(180deg);
+    fill: var(--subtle-text);
+  }
+
+  .preview-images {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  .img-card {
+    aspect-ratio: 3/4;
+  }
+
+  @media screen and (max-width: 1200px) {
+    h2 {
+      font-size: var(--size-h1);
+    }
+
+    .label, .number {
+      font-size: var(--size-body);
+    }
+  }
+
+  @media screen and (max-width: $breakpoint-md) {
+    .preview-images {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: $breakpoint-sm) {
+    section {
+      flex-direction: column;
+      align-items: center;
+      gap: 4rem;
+    }
+
+    .menu-section {
+      width: 100%;
+    }
+
+    .menu {
+      width: 100%;
+      max-width: none;
+    }
+  }
+</style>
