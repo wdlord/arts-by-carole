@@ -36,7 +36,7 @@ const images = [
     <div class="menu">
       {
         menuItems.map((item, index) => (
-          <a class="menu-item tail-fade-long">
+          <a class="menu-item tail-fade-long" href={item.href}>
             <div class="number">{`0${index + 1}`}</div>
             <div class="label">{item.label}</div>
             <Icon src={arrowRight} class="body-icon arrow-icon tail-fade" />
@@ -53,7 +53,7 @@ const images = [
     <div class="preview-images">
       {
         images.map(preview => (
-          <Image class="img-card" src={preview} alt="" />
+          <Image class="img-card" src={preview} alt="" width={440} format="avif"/>
         ))
       }
     </div>
@@ -90,6 +90,8 @@ const images = [
     align-items: center;
     gap: 2rem;
     border-bottom: var(--border);
+    text-decoration: none;
+    color: inherit;
     cursor: pointer;
 
     &:first-of-type {
