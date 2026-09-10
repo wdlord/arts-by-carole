@@ -1,70 +1,94 @@
 ---
 import Icon from "../components/icon.astro";
-import { paperPlane } from "../data/standard-icons";
-import { formKey } from "../data/constants";
-import CallNowButton from "../components/call-now-button.astro";
-import BigImage from "../components/big-image.astro";
+import { paperPlane, mailIcon, phoneIcon } from "../data/standard-icons";
+import { formKey, contactEmail, contactPhone } from "../data/constants";
 import TemplateFormRedirect from "../components/template-form-redirect.astro";
+import { Image } from "astro:assets";
+import contactPortrait from "../images/contact-portrait.jpg";
 ---
 
-<div class="content-chapter">
+<div class="content-chapter secondary-scheme">
   <div class="content-container">
-    <section class="landscape-section">
-      <div class="img-card">
-        <!-- <BigImage src={bgImage} alt="alt" /> -->
-      </div>
+    <section class="contact-section">
+      
       <div class="text-content">
-        <div class="image-section">
-          <!-- Form Section -->
-          <div class="form-section">
-            <div class="overview">
-              <h2 class="section-title">Get in Touch</h2>
-              <p class="subtle-text">
-                To contact Carole or learn more about the artwork, fill out the form below or call/email directly.
-              </p>
+          <div class="image-heading">
+            <div class="portrait-container img-card">
+              <Image class="portrait" src={contactPortrait} alt="Picture of Carole smiling." />
             </div>
-            <form action="" id="contact-form">
-              <input type="hidden" name="access_key" value={formKey} />
+            <h2 class="section-title">Get in Touch</h2>
+          </div>
+          <p class="desc subtle-text">
+            To contact Carole or learn more about the artwork, fill out the form
+            below or call/email directly.
+          </p>
+      </div>
 
-              <input
-                class="tail-fade"
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Name"
-                required
-              />
-              <input
-                class="tail-fade"
-                type="text"
-                id="email"
-                name="email"
-                placeholder="Email"
-                required
-              />
-              <input
-                class="tail-fade"
-                type="tel"
-                id="phone"
-                name="phone"
-                placeholder="Phone"
-                required
-              />
-              <textarea
-                class="tail-fade"
-                id="message"
-                name="message"
-                rows="5"
-                placeholder="Message"
-                required></textarea>
-            </form>
+      <!-- Form Section -->
+      <div class="form-section">
+        <form action="" id="contact-form">
+          <input type="hidden" name="access_key" value={formKey} />
 
-            <div class="button-row">
-              <button class="site-button" type="submit" form="contact-form">
-                Send Message
-                <Icon src={paperPlane} class="body-icon-sm" />
-              </button>
-            </div>
+          <input
+            class="tail-fade"
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Name"
+            required
+          />
+          <input
+            class="tail-fade"
+            type="text"
+            id="email"
+            name="email"
+            placeholder="Email"
+            required
+          />
+          <input
+            class="tail-fade"
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="Phone"
+            required
+          />
+          <textarea
+            class="tail-fade"
+            id="message"
+            name="message"
+            rows="5"
+            placeholder="Message"
+            required></textarea>
+        </form>
+
+        <div class="bottom-row">
+          <div class="button-row">
+            <button class="site-button" type="submit" form="contact-form">
+              Send Message
+              <Icon src={paperPlane} class="body-icon-sm" />
+            </button>
+          </div>
+          <div class="divider"></div>
+          <div class="contact-links">
+            <a
+              class="contact-link tail-fade"
+              href={`mailto:${contactEmail}`}
+            >
+              <Icon src={mailIcon} class="contact-icon tail-fade" />
+              <span class="underscore">
+                {contactEmail}
+              </span>
+            </a>
+            <a
+              class="contact-link tail-fade"
+              href={`tel:${contactPhone}`}
+            >
+              <Icon src={phoneIcon} class="contact-icon tail-fade" />
+              <span class="underscore">
+                {contactPhone}
+              </span>
+            </a>
           </div>
         </div>
       </div>
@@ -75,9 +99,139 @@ import TemplateFormRedirect from "../components/template-form-redirect.astro";
 <TemplateFormRedirect />
 
 <style lang="scss">
-  @use "../styles/landscape-section" as *;
+  @use "../styles/column-layouts" as *;
+  @use "../styles/font-system" as *;
+  @use "../styles/breakpoints" as *;
+
+  section {
+    display: flex;
+    align-items: start;
+  }
+
+  .form-section {
+    width: 100%;
+    margin-right: calc(col-width(1) + var(--gutter-width));
+  }
 
   form {
     margin-bottom: 80px;
+  }
+
+  .text-content {
+    width: 100%;
+    max-width: col-width(4);
+    flex-shrink: 0;
+    margin-right: calc(col-width(1) + 2 * var(--gutter-width));
+    padding-bottom: 5rem;
+    border-bottom: var(--border);
+  }
+
+  .image-heading {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .portrait-container {
+    width: 5rem;
+    aspect-ratio: 1;
+    overflow: hidden;
+    flex: none;
+  }
+
+  .portrait {
+    transform: scale(1.5);
+  }
+
+  h2 {
+    font-size: 4rem;
+    letter-spacing: -0.07em;
+  }
+
+  input, textarea {
+    background-color: var(--base-color);
+  }
+
+  .bottom-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .divider {
+    width: 1px;
+    height: 4rem;
+    background-color: var(--border-color);
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .contact-link {
+    @extend %accent-font;
+    color: var(--accent-1-color);
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding-block: 2px;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .contact-icon {
+    --size: 1.25rem;
+    fill: var(--accent-1-color);
+  }
+
+  @media screen and (max-width: $breakpoint-lg) {
+    section {
+      gap: var(--section-gap);
+    }
+    .text-content {
+      margin-right: 0;
+    }
+    .form-section {
+      margin-right: 0;
+    }
+  }
+  
+  @media screen and (max-width: 1200px) {
+    section {
+      flex-direction: column;
+      align-items: center;
+    }
+    .form-section {
+      max-width: col-width(5);
+    }
+    .text-content {
+      max-width: col-width(5);
+    }
+  }
+
+  @media screen and (max-width: $breakpoint-sm) {
+    .bottom-row {
+      flex-direction: column;
+      align-items: start;
+    }
+    .divider {
+      height: 1px;
+      width: 75%;
+      margin-block: 4rem;
+    }
+    h2 {
+      font-size: 2.15rem;
+    }
+    .image-heading {
+      margin-bottom: 1.5rem;
+    }
+    .portrait-container {
+      width: 4rem;
+    }
   }
 </style>
