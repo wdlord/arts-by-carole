@@ -1,37 +1,49 @@
 ---
 import CtaButton from "../components/cta-button.astro";
 import Icon from "../components/icon.astro";
-import {arrowRight, starIcon} from "../data/standard-icons";
+import {arrowRight} from "../data/standard-icons";
 import Picture from "astro/components/Picture.astro";
+import portrait from "../images/main-pic.jpg";
 ---
 
 <div class="hero-container hero-height">
-  <div class="content-chapter hero">
-  <div class="content-container">
-    <section class="hero-section">
+  <section class="hero-section">
+    <div class="text-content">
       <span class="subheading">Fine Art & Ephemera</span>
       <h1 class="title">
-         Carole Quinn-Nylander
+        Carole <div class="second-line">Quinn-Nylander</div>
       </h1>
-      <p class="desc">
+      <p class="desc subtle-text">
         Through oil and watercolor, Carole seeks to capture more than what the eye sees, celebrating the beauty of our world while exploring the emotions, stories, and human experiences within it.
       </p>
 
       <div class="button-row">
         <CtaButton text="Get in Touch" />
-        <a href="/gallery/art/" class="site-button">
+        <a href="/gallery/art/" class="ghost">
           Explore Gallery
           <Icon src={arrowRight} class="body-icon" />
         </a>
       </div>
-    </section>
-  </div>
-</div>
+    </div>
+    <div class="image-container">
+      <Picture class="portrait" src={portrait} alt="A professional portrait of Carole Quinn-Nylander posing with a painting of a cowboy in a bar or saloon, pictured in her home." />
+    </div>
+  </section>
 </div>
 
 <style lang="scss">
   @use "../styles/font-system" as *;
   @use "../styles/breakpoints" as *;
+  @use "../styles/column-layouts" as *;
+
+  section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    padding-block: 0;
+    padding-inline: var(--side-margin);
+  }
 
   .hero-container {
     display: grid;
@@ -40,54 +52,34 @@ import Picture from "astro/components/Picture.astro";
   }
 
   .hero {
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.07));
     position: relative;
     overflow: hidden;
-    color: var(--hero-text);
-  }
-
-  .site-button:last-of-type {
-    --bg-color: white;
-    --text-color: var(--base-text);
-  }
-
-  .site-button {
-    --hover-color: white;
-  }
-
-  .sh-container {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.875rem;
-    margin-bottom: 1.25rem;
-  }
-
-  .sh-line {
-    background-color: var(--hero-text);
-    height: 1.5rem;
-    width: 0.25rem;
-  }
-
-  .stars {
-    display: flex;
-    gap: 4px;
-  }
-
-  .star {
-    --size: 1.5rem;
-    fill: #FBB004;
+    color: var(--accent-1-color);
   }
 
   .title {
     max-width: var(--half-width);
+    margin-bottom: 2rem;
+    position: relative;
+  }
+
+  .title::before {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 260px;
+    background-color: var(--border-color);
+    position: absolute;
+    right: 0;
+    top: -310px;
   }
 
   .subheading {
-    font-style: italic;
-    text-transform: unset;
-    letter-spacing: 0.03em;
-    margin-bottom: 0;
+    margin-bottom: 2rem;
+  }
+
+  h1 .second-line, .desc, .button-row {
+    margin-left: calc(col-width(1) + var(--gutter-width));
   }
 
   .content-container {
@@ -95,59 +87,83 @@ import Picture from "astro/components/Picture.astro";
     justify-content: left;
   }
 
-  .hero-section {
-    padding-block: 96px;
-    max-width: var(--half-width);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-  }
-
-  .subheading {
-    color: var(--light-heading);
-  }
-
   .desc {
+    position: relative;
     margin-bottom: 40px;
-    max-width: var(--half-width);
+    max-width: col-width(4);
   }
 
-  .info-banner-container {
-    align-self: start;
+  .desc::before {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 260px;
+    background-color: var(--border-color);
+    position: absolute;
+    top: 10px;
+    left: calc(-1 * (col-width(1) + var(--gutter-width)));
   }
 
-  .info-banner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.5rem 104px;
-    padding-block: 1rem;
-    flex-direction: row;
+  .image-container {
+    height: 100%;
+    width: col-width(5);
   }
 
-  .info-item {
-    @extend %accent-font;
-    font-size: 1.15rem;
-    display: flex;
-    align-items: center;
-    gap: 16px;
+  .portrait {
+    width: 100%;
+    height: 100%;
+    object-position: right;
+  }
+
+  @media screen and (max-width: $breakpoint-lg) {
+    section {
+      padding-right: 0;
+    }
+
+    .image-container {
+      width: col-width(4);
+    }
+  }
+
+  @media screen and (max-width: 1200px) {
+    h1 .second-line, .desc, .button-row {
+      margin-left: 0;
+    }
+
+    desc::before {
+      display: none;
+    }
+
+    .image-container {
+      width: col-width(3);
+    }
+  }
+
+  @media screen and (max-width: $breakpoint-md) {
+    section {
+      margin-block: var(--side-margin);
+      flex-direction: column;
+      gap: 4rem;
+      padding-inline: 0;
+    }
+
+    .image-container {
+      width: 100%;
+      height: 500px;
+    }
+
+    .portrait {
+      object-position: top;
+    }
+
+    .text-content {
+      margin-inline: var(--side-margin);
+    }
   }
 
   @media screen and (max-width: $breakpoint-sm) {
-    .hero {
-      background: linear-gradient(to right,rgba(0,0,0,0.7),rgba(0,0,0, 0.4));
-      text-align: center;
-    }
-    .info-item {
-      font-size: 1rem;
-    }
-    .button-row {
-      justify-content: center;
-    }
-    .sh-container {
-      justify-content: center;
+    section {
+      padding-block: 4rem;
     }
   }
 </style>

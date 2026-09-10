@@ -80,15 +80,6 @@
   }
 }
 
-.hero-secondary {
-  @extend %button-basics;
-  @include solid(white, var(--base-text));
-
-  &:hover {
-    @include ghost(white);
-  }
-}
-
 .secondary-button {
   @extend %accent-1-scheme;
   @include solid(var(--accent-1-color), var(--accent-1-text));

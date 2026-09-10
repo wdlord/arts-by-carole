@@ -106,11 +106,14 @@ h4 {
   display: block;
   font-family: var(--font-subheading);
   font-size: var(--size-subheading);
+  font-style: italic;
   letter-spacing: var(--ls-subheading);
   line-height: var(--lh-subheading);
   text-transform: var(--transform-subheading);
-  margin-bottom: 1rem;
+  margin-bottom: 2.5rem;
   color: var(--subheading-color);
+  border-left: 0.25rem solid var(--subheading-color);
+  padding: 2px 0.75rem;
 }
 
 .hyperlink {
