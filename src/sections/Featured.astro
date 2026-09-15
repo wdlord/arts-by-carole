@@ -1,0 +1,172 @@
+---
+import Image from "astro/components/Image.astro";
+import finch from "../images/featured-artwork/finch.jpg";
+import forest from "../images/featured-artwork/forest.jpg";
+import hills from "../images/featured-artwork/hills.jpg";
+import rider from "../images/featured-artwork/rider.jpg";
+import Lightbox from "../components/lightbox.astro";
+
+const features = [
+  {
+    src: finch,
+    title: "Finch",
+    description:
+      "Parks and Fairs in Ogden is held in the summer months; I did  shows and sold ephemera there for about 15 years.",
+  },
+  {
+    src: forest,
+    title: "Forest",
+    description:
+      "Parks and Fairs in Ogden is held in the summer months; I did  shows and sold ephemera there for about 15 years.",
+  },
+  {
+    src: hills,
+    title: "Hills",
+    description:
+      "Parks and Fairs in Ogden is held in the summer months; I did  shows and sold ephemera there for about 15 years.",
+  },
+  {
+    src: rider,
+    title: "Rider",
+    description:
+      "Parks and Fairs in Ogden is held in the summer months; I did  shows and sold ephemera there for about 15 years.",
+  },
+];
+---
+
+<div class="content-chapter secondary-scheme">
+  <Lightbox />
+  <section class="featured">
+    <div class="subheading">A Selection of Art</div>
+    <div class="heading">
+      <div class="line"></div>
+      <h2>Featured Artworks</h2>
+      <div class="line"></div>
+    </div>
+    <div class="artwork-grid">
+      {
+        features.map((feature) => (
+          <div
+            class="featured-artwork"
+            data-lightbox={JSON.stringify({
+              image: feature.src,
+              title: feature.title,
+            })}
+          >
+            <div class="image-container image-zoom img-card">
+              <Image class="thumbnail" src={feature.src} alt="" />
+            </div>
+            <div class="display-row">
+              <div class="artwork-title">{feature.title}</div>
+            </div>
+            <p class="desc subtle-text">
+              Parks and Fairs in Ogden is held in the summer months; I did shows
+              and sold ephemera there for about 15 years.
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</div>
+
+<script is:inline>
+  // Set up cards to dispatch event
+  document.querySelectorAll(".featured-artwork").forEach((card) => {
+    card.addEventListener("click", () => {
+      const data = JSON.parse(card.dataset.lightbox);
+
+      document.dispatchEvent(
+        new CustomEvent("open-gallery-modal", {
+          detail: data,
+        }),
+      );
+    });
+  });
+</script>
+
+<style lang="scss">
+  @use "../styles/column-layouts" as *;
+  @use "../styles/font-system" as *;
+  @use "../styles/breakpoints" as *;
+
+  .content-chapter {
+    padding-inline: var(--side-margin);
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: col-width(9);
+    min-width: 0;
+  }
+
+  .subheading {
+    margin-bottom: 1rem;
+    border: none;
+  }
+
+  .heading {
+    margin-bottom: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .line {
+    height: 1px;
+    flex: 1;
+    background-color: var(--border-color);
+  }
+
+  .artwork-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem 12%;
+  }
+
+  .featured-artwork:nth-of-type(even) {
+    margin-top: 8rem;
+  }
+
+  .artwork-title {
+    @extend %accent-font;
+    margin-bottom: 0.5rem;
+  }
+
+  .image-container {
+    margin-bottom: 2.5rem;
+    aspect-ratio: 1;
+    overflow: hidden;
+    cursor: zoom-in;
+  }
+
+  .thumbnail {
+    width: 100%;
+    height: 100%;
+  }
+
+  @media screen and (max-width: $breakpoint-sm) {
+    .heading {
+      margin-bottom: 4rem;
+    }
+
+    .line {
+      display: none;
+    }
+
+    .artwork-grid {
+      grid-template-columns: 1fr;
+      gap: 5rem;
+    }
+
+    .featured-artwork:nth-of-type(even) {
+      margin-top: 0;
+    }
+  }
+</style>
