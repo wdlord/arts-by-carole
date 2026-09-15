@@ -46,15 +46,21 @@ const features = [
     <div class="artwork-grid">
       {
         features.map((feature) => (
-          <div
-            class="featured-artwork"
-            data-lightbox={JSON.stringify({
-              image: feature.src,
-              title: feature.title,
-            })}
-          >
-            <div class="image-container image-zoom img-card">
-              <Image class="thumbnail" src={feature.src} alt="" />
+          <div class="featured-artwork">
+            <div
+              class="image-container image-zoom img-card"
+              data-lightbox={JSON.stringify({
+                image: feature.src,
+                title: feature.title,
+              })}
+            >
+              <Image
+                class="thumbnail"
+                src={feature.src}
+                alt=""
+                widths={[620, 380]}
+                format="avif"
+              />
             </div>
             <div class="display-row">
               <div class="artwork-title">{feature.title}</div>
@@ -72,7 +78,7 @@ const features = [
 
 <script is:inline>
   // Set up cards to dispatch event
-  document.querySelectorAll(".featured-artwork").forEach((card) => {
+  document.querySelectorAll(".image-container").forEach((card) => {
     card.addEventListener("click", () => {
       const data = JSON.parse(card.dataset.lightbox);
 

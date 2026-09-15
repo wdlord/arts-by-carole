@@ -5,6 +5,7 @@ import PortraitQuote from "../sections/PortraitQuote.astro";
 import Contact from "../sections/Contact.astro";
 import Explore from "../sections/Explore.astro";
 import Featured from "../sections/Featured.astro";
+import GalleryCTA from "../sections/GalleryCTA.astro";
 ---
 
 <NavbarSiteLayout
@@ -14,26 +15,11 @@ import Featured from "../sections/Featured.astro";
 	<Hero />
   <PortraitQuote />
   <Featured />
+  <GalleryCTA />
   <Explore />
 	<Contact />
   
 </NavbarSiteLayout>
 
 <style>
-	.map-embed-container {
-    border-right: var(--border);
-    height: 300px;
-  }
-
-  .contact-map-embed {
-    overflow: hidden;
-    border-radius: var(--standard-radius);
-    border: var(--border);
-  }
-
-  .map-embed img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
 </style>
