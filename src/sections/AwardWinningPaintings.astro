@@ -1,0 +1,160 @@
+---
+import { Image } from "astro:assets";
+import example from "../images/gallery/artwork/20260504_170503.jpg";
+import Icon from "../components/icon.astro";
+import { ribbon } from "../data/standard-icons";
+import Lightbox from "../components/lightbox.astro";
+
+const paintings = [
+  {
+    award: "First Place",
+    location: "Escondido Art Association",
+    title: "",
+    src: example,
+  },
+  {
+    award: "First Place",
+    location: "Escondido Art Association",
+    title: "",
+    src: example,
+  },
+  {
+    award: "First Place",
+    location: "Escondido Art Association",
+    title: "",
+    src: example,
+  },
+  {
+    award: "First Place",
+    location: "Escondido Art Association",
+    title: "",
+    src: example,
+  },
+  {
+    award: "First Place",
+    location: "Escondido Art Association",
+    title: "",
+    src: example,
+  },
+  {
+    award: "First Place",
+    location: "Escondido Art Association",
+    title: "",
+    src: example,
+  },
+];
+
+---
+
+<section class="secondary-scheme">
+  <Lightbox />
+  <h2>Awards & <span class="second-line">Recognition</span></h2>
+  <div class="card-layout">
+    {
+      paintings.map(painting => (
+        <div class="award-card">
+          <div
+            class="image-container img-card image-zoom"
+            data-lightbox={JSON.stringify({
+              image: painting.src,
+              title: painting.title,
+            })}
+          >
+            <Image class="thumbnail" src={painting.src} alt="" width={640} format="avif" />
+          </div>
+          <div class="award">
+            <Icon src={ribbon} class="award-icon" />
+            {painting.award}
+          </div>
+          <div class="location subtle-text">{painting.location}</div>
+          <div class="title subtle-text">{painting.title || 'Untitled'}</div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<script is:inline>
+  // Set up cards to dispatch event
+  document.querySelectorAll(".image-container").forEach((card) => {
+    card.addEventListener("click", () => {
+      const data = JSON.parse(card.dataset.lightbox);
+
+      document.dispatchEvent(
+        new CustomEvent("open-gallery-modal", {
+          detail: data,
+        }),
+      );
+    });
+  });
+</script>
+
+<style lang="scss">
+  @use "../styles/column-layouts" as *;
+  @use "../styles/font-system" as *;
+  @use "../styles/breakpoints" as *;
+
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-inline: var(--side-margin);
+  }
+
+  h2 {
+    margin-bottom: 8rem;
+    width: 100%;
+  }
+
+  .card-layout {
+    max-width: col-width(9);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8rem 4rem;
+  }
+
+  .image-container {
+    cursor: zoom-in;
+  }
+
+  .thumbnail {
+    aspect-ratio: 1;
+    width: 100%;
+    height: 100%;
+  }
+
+  .award {
+    @extend %accent-font;
+    color: var(--accent-1-color);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .award-icon {
+    fill: var(--accent-1-color);
+    --size: 1.5rem;
+  }
+
+  .title {
+    font-style: italic;
+  }
+
+  @media screen and (max-width: $breakpoint-md) {
+    .card-layout {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: $breakpoint-sm) {
+    h2 {
+      margin-bottom: 5rem;
+    }
+    .card-layout {
+      grid-template-columns: 1fr;
+      gap: 4rem;
+    }
+  }
+</style>
