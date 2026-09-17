@@ -30,8 +30,10 @@ import portrait from "../images/main-pic.jpg";
         class="portrait"
         src={portrait}
         alt="A professional portrait of Carole Quinn-Nylander posing with a painting of a cowboy in a bar or saloon, pictured in her home."
-        widths={[800, ]}
+        widths={[800, 600]}
         formats={['avif', 'webp']}
+        loading="eager"
+        fetchpriority="high"
       />
     </div>
   </section>

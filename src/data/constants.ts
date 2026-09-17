@@ -30,7 +30,6 @@ export const navLinks: NavItem[] = [
   { href: "/about", label: "About" },
   {
     label: "Gallery",
-    href: "/gallery",
     children: [
       { href: "/gallery/art-gallery", label: "Art Gallery" },
       { href: "/gallery/autographs", label: "Autographs" },
@@ -42,9 +41,15 @@ export const navLinks: NavItem[] = [
 ];
 
 // Filtered version of the above using only options with top level links.
-export const quickLinks = navLinks.filter(
-  (item) => ("href" in item)
-) as NavLink[];
+export const quickLinks = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/gallery/art-gallery", label: "Art Gallery" },
+  { href: "/gallery/autographs", label: "Autographs" },
+  { href: "/gallery/ephemera", label: "Ephemera" },
+  { href: "/exhibits-and-recognition", label: "Exhibits and Recognition" },
+  { href: "/contact", label: "Contact" },
+];
 
 // What is our funnel connected to?
 export const ctaLink = "/contact";
