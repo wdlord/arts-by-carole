@@ -1,0 +1,22 @@
+{
+  "exhibits": [
+    {
+      "title": "Escondido Art Show",
+      "location": "Escondido, CA",
+      "date": "Aug 1 – Aug 31, 2026",
+      "description": "Stop by the Escondido Art Show during the month of September to see a selection of my favorite artwork."
+    },
+    {
+      "title": "Carlsbad Village Faire",
+      "location": "Carlsbad, CA",
+      "date": "Sep 1 – Sep 30, 2026",
+      "description": "I'll be displaying art at the Carlsbad Village Faire during the month of September."
+    },
+    {
+      "title": "Carlsbad Village Faire",
+      "location": "Carlsbad, CA",
+      "date": "Oct 1 – Oct 31, 2026",
+      "description": "I'll be displaying art at the Carlsbad Village Faire during the month of October."
+    }
+  ]
+}

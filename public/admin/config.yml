@@ -6,6 +6,9 @@ backend:
   base_url: https://decap-cms-proxy.vercel.app/
   auth_endpoint: auth
 
+# backend:
+#   name: git-gateway
+#   branch: main
 # local_backend: true
 
 media_folder: "/src/assets/images" # Location where files will be stored in the repo
@@ -100,3 +103,21 @@ collections:
               - { label: "Title", name: "title", widget: "string" }
               - { label: "Description", name: "description", widget: "text", required: false }
 
+  # current/upcoming exhibits
+  - name: "current_exhibits"
+    label: "Current Exhibits"
+    files:
+      - name: "current-exhibits"
+        label: "Current Exhibits List"
+        file: "src/content/current-exhibits/exhibits.json"
+        fields:
+          - label: "Exhibits"
+            name: "exhibits"
+            widget: "list"
+            label_singular: "Exhibit"
+            summary: "{{title}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Location", name: "location", widget: "string" }
+              - { label: "Date", name: "date", widget: "string" }
+              - { label: "Description", name: "description", widget: "text", required: false }

@@ -3,28 +3,9 @@ import { Image } from "astro:assets";
 import Icon from "../components/icon.astro";
 import { locationDot } from "../data/standard-icons";
 import backgroundImage from "../images/exhibits-bg.jpg";
+import { getCollection } from "astro:content";
 
-const exhibitData = [
-  {
-    title: "Escondido Art Show",
-    location: "Escondido, CA",
-    date: "Aug 1 – Aug 31, 2026",
-    description: "Stop by the Carlsbad Village Faire during the month of September to see a selection of my favorite artwork."
-  },
-  {
-    title: "Escondido Art Show",
-    location: "Escondido, CA",
-    date: "Aug 1 – Aug 31, 2026",
-    description: "Stop by the Carlsbad Village Faire during the month of September to see a selection of my favorite artwork."
-  },
-  {
-    title: "Escondido Art Show",
-    location: "Escondido, CA",
-    date: "Aug 1 – Aug 31, 2026",
-    description: "Stop by the Carlsbad Village Faire during the month of September to see a selection of my favorite artwork."
-  }
-];
-
+const exhibits = (await getCollection('currentExhibits'));
 ---
 
 <section class="upcoming-exhibits">
@@ -52,19 +33,19 @@ const exhibitData = [
 
   <div class="card-layout">
     {
-      exhibitData.map(exhibit => (
+      exhibits.map(exhibit => (
         <div class="exhibit-card">
           <div class="card-header">
-            <div class="title">{exhibit.title}</div>
+            <div class="title">{exhibit.data.title}</div>
             <div class="line"></div>
           </div>
           <div class="location-row">
             <Icon src={locationDot} class="location-icon"/>
-            <div class="location">{exhibit.location}</div>
+            <div class="location">{exhibit.data.location}</div>
           </div>
-          <div class="date subtle-text">{exhibit.date}</div>
+          <div class="date subtle-text">{exhibit.data.date}</div>
           <div class="description subtle-text">
-            {exhibit.description}
+            {exhibit.data.description}
           </div>
         </div>
       ))

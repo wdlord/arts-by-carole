@@ -86,4 +86,24 @@ const pastExhibits = defineCollection({
   }),
 });
 
-export const collections = { artwork, ephemera, autograph, pastExhibits };
+// current/upcoming exhibits
+const currentExhibits = defineCollection({
+  loader: file('src/content/current-exhibits/exhibits.json', {
+    parser: (text) => {
+      const { exhibits } = JSON.parse(text) as {
+        exhibits: { title: string; description?: string }[];
+      };
+      return Object.fromEntries(
+        exhibits.map((entry, index) => [String(index), entry])
+      );
+    },
+  }),
+  schema: z.object({
+    title: z.string(),
+    location: z.string(),
+    date: z.string(),
+    description: z.string().optional(),
+  }),
+})
+
+export const collections = { artwork, ephemera, autograph, pastExhibits, currentExhibits };
