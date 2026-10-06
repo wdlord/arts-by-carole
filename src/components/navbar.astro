@@ -61,12 +61,39 @@ const currentPath = Astro.url.pathname;
 </div>
 
 <script is:inline>
+  // Mobile menu button script
+  // ---
   const drawer = document.getElementsByClassName("nav-drawer")[0];
 
   function toggleMenu(btn) {
     drawer.classList.toggle("open");
     btn.classList.toggle("open");
   }
+</script>
+
+<script is:inline>
+  // Automatic nav visibility toggle
+  // ---
+  const navbar = document.querySelector(".nav-container");
+  let lastScrollY = window.scrollY;
+  const hideThreshold = 140;
+
+  window.addEventListener("scroll", () => {
+      if (!navbar) return;
+
+      const currentScrollY = window.scrollY;
+      const difference = currentScrollY - lastScrollY;
+
+      if (currentScrollY < hideThreshold) {
+          navbar.classList.remove("navbar--hidden");
+      } else if (difference > 5) {
+          navbar.classList.add("navbar--hidden");
+      } else if (difference < -5) {
+          navbar.classList.remove("navbar--hidden");
+      }
+
+      lastScrollY = currentScrollY;
+  });
 </script>
 
 <style lang="scss">
@@ -78,6 +105,11 @@ const currentPath = Astro.url.pathname;
     z-index: 100;
     width: 100%;
     box-shadow: var(--nav-shadow);
+    transition: transform 250ms ease;
+  }
+
+  .navbar--hidden {
+    transform: translateY(-100%);
   }
 
   header {
